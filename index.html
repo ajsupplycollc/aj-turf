@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AJ Turf | Artificial Turf &amp; Putting Greens, Fort Myers to Naples</title>
+<meta name="description" content="Measured, concrete-bordered artificial turf and putting greens for Southwest Florida homes. Free onsite estimate, one exact price.">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+<style>
+:root{
+  --lanai:#121613;      /* deep charcoal: night lanai */
+  --limestone:#E8EAE5;  /* cool travertine, not cream */
+  --white:#FAFBF9;
+  --turf:#2D5B39;
+  --aqua:#4FB4C3;       /* pool water: the measuring line */
+  --stone:#8B918A;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--lanai)}
+body{background:var(--white);color:var(--lanai);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px clamp(18px,4vw,48px);color:var(--white)}
+.nav .mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none}
+.nav .mark span{color:var(--aqua)}
+.nav .mid{display:flex;gap:28px}
+.nav .mid a{text-decoration:none;opacity:.85}
+.nav .cta{justify-self:end;text-decoration:none;border-bottom:1px solid var(--aqua);padding-bottom:3px}
+.nav.solid{background:rgba(18,22,19,.86);backdrop-filter:blur(10px)}
+
+/* hero: before -> measured -> after */
+#hero{position:relative;height:420vh;background:var(--lanai)}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#after{opacity:0}
+.stage .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,22,19,.55) 0%,rgba(18,22,19,0) 30%,rgba(18,22,19,0) 55%,rgba(18,22,19,.78) 100%)}
+#plan{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#plan path,#plan line{fill:none;stroke:var(--aqua);stroke-width:3;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px rgba(79,180,195,.7))}
+#plan .tick{stroke-width:2}
+#plan text{fill:#e9fbff;paint-order:stroke;stroke:rgba(18,22,19,.75);stroke-width:5px;font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.06em;opacity:0}
+.copy{position:absolute;left:clamp(18px,5vw,64px);right:clamp(18px,5vw,64px);bottom:clamp(28px,7vh,72px);color:var(--white);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
+.copy h1{font-family:var(--display);font-weight:300;font-size:clamp(46px,8.2vw,132px);line-height:.92;letter-spacing:-.045em}
+.copy h1 b{font-weight:700;color:var(--white)}
+.beats{position:relative;min-height:150px}
+.beat{position:absolute;inset:auto 0 0 0;opacity:0;transform:translateY(12px)}
+.beat .mono{color:var(--aqua);display:block;margin-bottom:10px}
+.beat p{font-size:18px;max-width:380px;color:#dfe3dd}
+.beat.on{opacity:1;transform:none;transition:opacity .45s,transform .45s}
+.scrollhint{position:absolute;right:clamp(18px,4vw,48px);top:50%;writing-mode:vertical-rl;color:var(--white);opacity:.7}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:92vh}
+.intro .txt{padding:clamp(48px,9vw,140px) clamp(20px,6vw,90px);display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.intro h2{font-family:var(--display);font-weight:300;font-size:clamp(40px,5.4vw,84px);line-height:.95;letter-spacing:-.04em}
+.intro h2 b{font-weight:700}
+.intro p{max-width:440px;color:#3d443e}
+.intro figure{position:relative;overflow:hidden}
+.intro figure img{width:100%;height:100%;object-fit:cover}
+.intro figcaption,.cap{position:absolute;left:20px;bottom:18px;color:var(--white);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+
+/* method: a real sequence, so it is numbered */
+.method{background:var(--lanai);color:var(--white);padding:clamp(80px,12vw,170px) clamp(20px,6vw,90px)}
+.method h2{text-wrap:balance;font-family:var(--display);font-weight:300;font-size:clamp(38px,5vw,76px);letter-spacing:-.04em;line-height:.95;max-width:900px}
+.method h2 b{font-weight:700}
+.steps{margin-top:clamp(56px,8vw,110px);border-top:1px solid #2b322c}
+.step{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.2fr);gap:32px;padding:34px 0;border-bottom:1px solid #2b322c;align-items:baseline}
+.step .n{font-family:var(--mono);color:var(--aqua);font-size:13px}
+.step h3{font-family:var(--display);font-weight:500;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.02em}
+.step p{color:#aeb5ad;max-width:520px}
+.step .dim{display:block;margin-top:10px;color:var(--stone)}
+
+.reveal{margin-top:clamp(48px,7vw,90px);display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:end}
+.reveal .frame{position:relative;aspect-ratio:958/719;margin:0}
+.reveal img{width:100%;height:100%}
+.pin{position:absolute;width:30px;height:30px;transform:translate(-50%,-50%);border-radius:50%;border:1.5px solid var(--white);background:rgba(18,22,19,.35);backdrop-filter:blur(3px);color:var(--white);font:500 12px/27px var(--mono);text-align:center}
+.pin::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(250,251,249,.45);animation:ring 2.4s ease-out infinite}
+@keyframes ring{from{transform:scale(.7);opacity:1}to{transform:scale(1.35);opacity:0}}
+.legend{list-style:none;border-top:1px solid #2b322c}
+.legend li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:22px 0;border-bottom:1px solid #2b322c}
+.legend .k{font:500 12px var(--mono);color:var(--aqua);padding-top:8px}
+.legend h4{font-family:var(--display);font-weight:300;font-size:clamp(26px,2.3vw,36px);letter-spacing:-.03em;line-height:1}
+.legend h4 b{font-weight:700}
+.legend p{color:#aeb5ad;margin-top:8px;font-size:16px}
+.legend .note{display:block;border:0;color:var(--stone);padding-top:16px}
+@media (max-width:860px){.reveal{grid-template-columns:1fr}.pin{width:26px;height:26px;line-height:23px;font-size:11px}}
+@media (prefers-reduced-motion:reduce){.pin::after{animation:none}}
+/* work strip */
+.work{padding:clamp(80px,11vw,150px) 0 clamp(60px,8vw,110px)}
+.work header{display:flex;justify-content:space-between;align-items:end;gap:24px;padding:0 clamp(20px,6vw,90px);margin-bottom:40px}
+.work h2{font-family:var(--display);font-weight:300;font-size:clamp(38px,5vw,76px);letter-spacing:-.04em;line-height:.95}
+.work h2 b{font-weight:700}
+.strip{display:flex;gap:14px;overflow-x:auto;padding:0 clamp(20px,6vw,90px) 18px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.strip figure{position:relative;flex:0 0 auto;width:min(78vw,520px);aspect-ratio:4/5;overflow:hidden;scroll-snap-align:start}
+.strip figure.wide{width:min(88vw,780px);aspect-ratio:3/2}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.strip figure:hover img{transform:scale(1.03)}
+
+/* services: big type list, photo follows on hover */
+.services{padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px)}
+.svc-list{list-style:none;margin-top:28px;border-top:1px solid #d6d9d3}
+.svc-list li{position:relative;display:grid;grid-template-columns:140px minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:baseline;padding:30px 0;border-bottom:1px solid #d6d9d3;cursor:default}
+.svc-list .mono{color:var(--stone)}
+.svc-list h3{font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,72px);letter-spacing:-.045em;line-height:.95;transition:transform .5s cubic-bezier(.2,.7,.2,1),color .3s}
+.svc-list h3 b{font-weight:700}
+.svc-list p{color:#4a514b;max-width:360px}
+.svc-list img{position:absolute;left:43%;top:50%;width:240px;aspect-ratio:4/3;object-fit:cover;transform:translateY(-50%) scale(.92) rotate(-2deg);opacity:0;pointer-events:none;transition:opacity .35s,transform .5s cubic-bezier(.2,.7,.2,1);z-index:2;box-shadow:0 24px 60px rgba(18,22,19,.25)}
+.svc-list li:hover h3{transform:translateX(14px);color:var(--turf)}
+.svc-list li:hover img{opacity:1;transform:translateY(-50%) scale(1) rotate(-2deg)}
+@media (hover:none),(max-width:860px){.svc-list li{grid-template-columns:1fr;gap:6px}.svc-list img{display:none}}
+/* area + faq */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(40px,6vw,100px);padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px);background:var(--limestone)}
+.split h2{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.4vw,64px);letter-spacing:-.04em;line-height:.95}
+.split h2 b{font-weight:700}
+.towns{margin-top:28px;font-family:var(--display);font-size:clamp(22px,2.2vw,30px);font-weight:500;line-height:1.5;color:var(--turf)}
+details{border-top:1px solid #c9cdc6;padding:22px 0}
+details:last-child{border-bottom:1px solid #c9cdc6}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;font-family:var(--display);font-weight:500;font-size:21px}
+summary::after{content:"+";font-family:var(--mono);color:var(--turf)}
+details[open] summary::after{content:"−"}
+details p{margin-top:12px;color:#454c46;max-width:620px}
+
+/* close */
+.close{position:relative;min-height:90vh;display:flex;align-items:flex-end;color:var(--white)}
+.close img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.close::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,22,19,.88),rgba(18,22,19,.15) 70%);z-index:1}
+.close .in{position:relative;z-index:2;padding:clamp(40px,8vw,110px) clamp(20px,6vw,90px);width:100%;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:end}
+.close h2{font-family:var(--display);font-weight:300;font-size:clamp(44px,7vw,110px);letter-spacing:-.045em;line-height:.92}
+.close h2 b{font-weight:700}
+.book{display:inline-flex;align-items:center;gap:14px;background:var(--aqua);color:var(--lanai);text-decoration:none;font-weight:500;padding:18px 26px;font-size:18px}
+.book:hover{background:var(--white)}
+.alt{display:block;margin-top:16px;opacity:.85}
+footer{background:var(--lanai);color:var(--stone);padding:28px clamp(20px,6vw,90px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .nav{grid-template-columns:1fr auto}.nav .mid{display:none}
+  .copy{grid-template-columns:1fr;gap:18px}.beats{min-height:130px}
+  .scrollhint{display:none}
+  .intro,.split,.close .in{grid-template-columns:1fr}
+  .intro figure{min-height:60vh}
+  .step{grid-template-columns:1fr;gap:8px}
+  .services{grid-template-columns:1fr}.svc{border-right:0}
+  #plan text{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){
+  #hero{height:auto}.stage{position:relative}#after{opacity:1}#plan{display:none}
+  .beat{position:static;opacity:1;transform:none;margin-top:14px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"AJ Turf","telephone":"+1-305-762-9901","email":"ajsupplycollc@gmail.com",
+"areaServed":["Fort Myers FL","Cape Coral FL","Naples FL","Estero FL","Bonita Springs FL","Sanibel FL"],
+"openingHours":"Mo-Sa 09:00-17:00","sameAs":["https://www.instagram.com/aj.turf","https://www.facebook.com/aj.turf"]}
+</script>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a class="mark" href="#"><img src="img/mark.svg" alt="" width="34" height="34">AJ<span>/</span>TURF</a>
+  <div class="mid mono"><a href="#method">Method</a><a href="#work">Work</a><a href="#services">Services</a><a href="#faq">FAQ</a></div>
+  <a class="cta mono" href="#book">Free estimate</a>
+</nav>
+
+<section id="hero" aria-label="One AJ Turf install, before and after">
+  <div class="stage">
+    <img id="before" src="img/hero-before.webp" alt="Dockside yard before the install: bare sand inside a poured concrete border, next to a boat lift">
+    <img id="after" src="img/hero-after.webp" alt="The same yard after: green turf around the palm, between the dock and the pool">
+    <div class="shade"></div>
+    <svg id="plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path id="outline" d="M0 560 L230 430 L1180 405 L1600 545 L1600 900 L1180 900 Q700 650 0 640 Z"/>
+      <line class="tick" x1="230" y1="372" x2="1180" y2="348"/><line class="tick" x1="230" y1="356" x2="230" y2="388"/><line class="tick" x1="1180" y1="332" x2="1180" y2="364"/>
+      <line class="tick" x1="1540" y1="560" x2="1540" y2="860"/><line class="tick" x1="1524" y1="560" x2="1556" y2="560"/><line class="tick" x1="1524" y1="860" x2="1556" y2="860"/>
+      <text x="640" y="336" transform="rotate(-1.4 640 336)">38' 0"</text>
+      <text x="1500" y="740" transform="rotate(-90 1500 740)">16' 6"</text>
+      <text x="760" y="575">CONCRETE BORDER · POURED</text>
+      <text x="760" y="607">15' ROLLS · GLUED EDGE</text>
+    </svg>
+    <div class="copy">
+      <h1>Measured.<br>Bordered.<br><b>Finished.</b></h1>
+      <div class="beats">
+        <div class="beat on" data-to=".18"><span class="mono">Before · a dockside yard</span><p>Bare sand between the dock and the pool. The border is poured and the base is ready.</p></div>
+        <div class="beat" data-to=".5"><span class="mono">The estimate · on site</span><p>We measure every edge in person and give you one exact written price. No satellite guesses.</p></div>
+        <div class="beat" data-to=".78"><span class="mono">The install · built to last</span><p>Compacted base, weed barrier, and turf glued to a poured concrete border. No spikes.</p></div>
+        <div class="beat" data-to="1.01"><span class="mono">After · finished</span><p>Same yard, a few days later. Green year round, right up to the dock.</p></div>
+      </div>
+    </div>
+    <div class="scrollhint mono">Scroll</div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="txt">
+    <div><span class="mono" style="color:var(--turf)">AJ Turf · Southwest Florida</span>
+      <h2 style="margin-top:22px">Turf that looks<br>like it was <b>always there.</b></h2></div>
+    <p>We install artificial turf, pet turf and putting greens for homes from Fort Myers to Naples. Every job is measured by hand, built on a compacted base, and finished with a concrete border, so it still looks right years from now.</p>
+  </div>
+  <figure><img src="img/waterfront.webp" alt="Curved turf lawn beside a dock and boat lift" loading="lazy"><figcaption class="mono">Waterfront lawn · curved border</figcaption></figure>
+</section>
+
+<section class="method" id="method">
+  <span class="mono" style="color:var(--aqua)">The AJ Method</span>
+  <h2 style="margin-top:22px;max-width:1100px">Most turf fails from the ground&nbsp;up.<br><b>Ours is built from it.</b></h2>
+  <div class="reveal">
+    <figure class="frame">
+      <img src="img/method-reveal.webp" alt="An install in progress: white concrete border along the edge, black weed barrier, and turf laid and glued to the border" loading="lazy">
+      <span class="pin" style="left:82.2%;top:64.3%">1</span>
+      <span class="pin" style="left:56%;top:66%">2</span>
+      <span class="pin" style="left:66%;top:41%">3</span>
+    </figure>
+    <ol class="legend">
+      <li><span class="k">1</span><div><h4>Concrete <b>border</b></h4><p>3 x 3 x 3 inches, poured along the inside of 6-inch edging. Everything is anchored to this.</p></div></li>
+      <li><span class="k">2</span><div><h4>Weed <b>barrier</b></h4><p>Covers the whole area before a single roll goes down.</p></div></li>
+      <li><span class="k">3</span><div><h4>Turf, <b>glued</b></h4><p>Edges bonded to the border with 15-year-warrantied glue. No steel spikes.</p></div></li>
+      <li class="note mono">Mid-install, Southwest Florida</li>
+    </ol>
+  </div>
+  <div class="steps">
+    <div class="step"><span class="n">STEP 1</span><h3>Dig out and compact</h3><p>Old grass and soil come out. Screening sand goes in and is compacted hard, so water drains through instead of washing the base out into dips.<span class="dim mono">Screening sand base · compacted</span></p></div>
+    <div class="step"><span class="n">STEP 2</span><h3>Edge and pour the border</h3><p>We outline the install with 6-inch metal or plastic edging, then pour a 3 by 3 by 3 inch concrete border along the inside of it, around the whole perimeter.<span class="dim mono">6 in edging · 3x3x3 in concrete border</span></p></div>
+    <div class="step"><span class="n">STEP 3</span><h3>Weed barrier</h3><p>A weed barrier covers the entire area, so nothing grows up through your lawn to lift or pierce it.<span class="dim mono">Full coverage</span></p></div>
+    <div class="step"><span class="n">STEP 4</span><h3>Lay, seam and glue</h3><p>Turf comes in 15-foot-wide rolls, so we plan every cut to hide the seams. Then the edges are glued to the concrete border with turf glue that carries a 15-year warranty.<span class="dim mono">15 ft rolls · 15-yr warrantied glue</span></p></div>
+    <div class="step"><span class="n">WHY</span><h3>No spikes</h3><p>Most installers hold turf down with 6-inch steel spikes driven all through the lawn. Spikes work loose, can hurt bare feet and paws, and tear the backing over time. A glued edge is safer and lasts longer.<span class="dim mono">Instead of 6 in steel spikes throughout</span></p></div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <header><h2>Real yards.<br><b>Our installs.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>
+  <div class="strip">
+    <figure class="wide"><img src="img/green-canal.webp" alt="Putting green on a canal-front patio" loading="lazy"><figcaption class="cap mono">Putting green · canal patio</figcaption></figure>
+    <figure><img src="img/pool-side.webp" alt="Turf strip along a pool and wall" loading="lazy"><figcaption class="cap mono">Pool side yard</figcaption></figure>
+    <figure class="wide"><img src="img/pool-deck.webp" alt="Turf framing a pool deck by the water" loading="lazy"><figcaption class="cap mono">Pool deck by the water</figcaption></figure>
+    <figure><img src="img/pavers.webp" alt="Turf between stepping pavers" loading="lazy"><figcaption class="cap mono">Turf between pavers</figcaption></figure>
+    <figure class="wide"><img src="img/backyard-green.webp" alt="Backyard putting green" loading="lazy"><figcaption class="cap mono">Backyard putting green</figcaption></figure>
+    <figure><img src="img/palm-yard.webp" alt="Curved turf around a palm" loading="lazy"><figcaption class="cap mono">Curved front yard</figcaption></figure>
+    <figure class="wide"><img src="img/courtyard.webp" alt="Turf courtyard framed by white rock beds and an arched loggia" loading="lazy"><figcaption class="cap mono">Courtyard · rock-bed borders</figcaption></figure>
+    <figure class="wide"><img src="img/backyard-wide.webp" alt="Full backyard of turf beside a white house" loading="lazy"><figcaption class="cap mono">Full backyard</figcaption></figure>
+  </div>
+</section>
+
+<section class="services" id="services"><span class="mono" style="color:var(--turf)">What we install</span><ul class="svc-list"><li><span class="mono">Lawns</span><h3>Front &amp; back <b>yards</b></h3><p>Natural-looking, green through August, no mowing or watering.</p><img src="img/palm-yard.webp" alt="" loading="lazy"></li><li><span class="mono">Pets</span><h3>Pet <b>turf</b></h3><p>Built drainage-first. In Florida heat, the base decides whether a yard smells.</p><img src="img/side-garden.webp" alt="" loading="lazy"></li><li><span class="mono">Golf</span><h3>Putting <b>greens</b></h3><p>True-rolling greens with fringe, off the patio or out by the water.</p><img src="img/backyard-green.webp" alt="" loading="lazy"></li><li><span class="mono">Hardscape</span><h3>Pools &amp; <b>pavers</b></h3><p>Turf between pavers and clean borders around the pool deck.</p><img src="img/pavers.webp" alt="" loading="lazy"></li><li><span class="mono">Fixes</span><h3>Repairs &amp; <b>re-installs</b></h3><p>Ripples, open seams, washed-out bases. We fix turf other crews put in.</p><img src="img/pool-side.webp" alt="" loading="lazy"></li><li><span class="mono">HOA</span><h3>Approval <b>help</b></h3><p>Product specs and install details ready for your HOA review.</p><img src="img/waterfront.webp" alt="" loading="lazy"></li></ul></section>
+
+<section class="split" id="faq">
+  <div><span class="mono" style="color:var(--turf)">Where we work</span><h2 style="margin-top:18px">Fort Myers<br>to <b>Naples.</b></h2>
+    <p class="towns">Fort Myers · Cape Coral · Sanibel · Estero · Bonita Springs · Naples</p></div>
+  <div>
+    <details><summary>How do you price a yard?</summary><p>In person. We measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
+    <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
+    <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
+    <details><summary>Will my HOA allow it?</summary><p>Most HOAs want to review it first. We give you the product specs and install details they usually ask for.</p></details>
+    <details><summary>Does it get hot?</summary><p>Turf in full Florida sun gets hotter than grass. We'll show you samples and talk through shade, product choice and where it makes sense before you decide.</p></details>
+    <details><summary>What's the warranty?</summary><p>The turf carries its manufacturer's warranty, which depends on the product you pick, and our install labor is warrantied too. You'll see the exact terms before you sign.</p></details>
+  </div>
+</section>
+
+<section class="close" id="book">
+  <img src="img/green-canal.webp" alt="" loading="lazy">
+  <div class="in">
+    <h2>See it in<br><b>your yard.</b></h2>
+    <div><p style="max-width:380px;margin-bottom:24px">Book a free onsite estimate. We'll measure, bring samples you can feel, and leave you with one exact price.</p>
+      <a class="book" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a>
+      <a class="alt mono" href="tel:+13057629901">Or call 305-762-9901</a></div>
+  </div>
+</section>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span>Mon–Sat 9–5</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > innerHeight * 4), {passive: true});
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.registerPlugin(ScrollTrigger);
+  const lenis = new Lenis(); lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+
+  // measuring lines draw themselves (stroke-dashoffset), then the after photo takes over
+  const strokes = [...document.querySelectorAll('#plan path, #plan line')];
+  strokes.forEach(s => { const L = s.getTotalLength(); s.style.strokeDasharray = L; s.style.strokeDashoffset = L; });
+  const beats = [...document.querySelectorAll('.beat')];
+  const tl = gsap.timeline({scrollTrigger: {trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: .6,
+    onUpdate: s => { const k = beats.findIndex(b => s.progress < +b.dataset.to); beats.forEach((b, i) => b.classList.toggle('on', i === k)); }}});
+  tl.to('#before', {scale: 1.06, duration: 1, ease: 'none'}, 0)
+    .to(strokes, {strokeDashoffset: 0, duration: .9, stagger: .06, ease: 'none'}, .2)
+    .to('#plan text', {opacity: 1, duration: .2, stagger: .08}, .75)
+    .to('#after', {opacity: 1, duration: .5, ease: 'none'}, 1.5)
+    .to('#plan', {opacity: 0, duration: .4}, 1.75)
+    .fromTo('#after', {scale: 1.08}, {scale: 1, duration: .9, ease: 'none'}, 1.5);
+
+  gsap.utils.toArray('.intro h2, .method h2, .work h2, .split h2, .close h2').forEach(h =>
+    gsap.from(h, {y: 40, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: {trigger: h, start: 'top 85%'}}));
+}
+</script>
+</body>
+</html>
