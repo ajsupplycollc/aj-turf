@@ -1,6 +1,6 @@
 # Exits 0 only if every public page of the live AJ Turf site returns 200.
 import sys, urllib.request
-BASE = "https://ajsupplycollc.github.io/aj-turf/"
+BASE = "https://ajturffl.com/"
 PATHS = ["", "artificial-turf-installation/", "pet-turf/", "putting-greens/", "pool-and-paver-turf/", "turf-repair/",
          "fort-myers/", "cape-coral/", "naples/", "estero/", "bonita-springs/", "sanibel/", "privacy/",
          "sitemap.xml", "robots.txt", "llms.txt", "img/og/home.jpg"]

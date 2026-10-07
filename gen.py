@@ -3,7 +3,7 @@
 import json, os, datetime
 from PIL import Image
 
-BASE = "https://ajsupplycollc.github.io/aj-turf/"  # ponytail: swap to the real domain when it exists
+BASE = "https://ajturffl.com/"  # ponytail: swap to the real domain when it exists
 PHONE, PHONE_HREF = "305-762-9901", "+13057629901"
 EMAIL = "ajsupplycollc@gmail.com"
 BOOK = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax"

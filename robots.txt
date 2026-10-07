@@ -28,4 +28,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://ajsupplycollc.github.io/aj-turf/sitemap.xml
+Sitemap: https://ajturffl.com/sitemap.xml
