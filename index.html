@@ -5,162 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AJ Turf | Artificial Turf &amp; Putting Greens, Fort Myers to Naples</title>
 <meta name="description" content="Measured, concrete-bordered artificial turf and putting greens for Southwest Florida homes. Free onsite estimate, one exact price.">
+<link rel="canonical" href="https://ajsupplycollc.github.io/aj-turf/">
+<meta property="og:type" content="website"><meta property="og:title" content="AJ Turf | Artificial Turf &amp; Putting Greens, Fort Myers to Naples"><meta property="og:description" content="Measured, concrete-bordered artificial turf and putting greens for Southwest Florida homes. Free onsite estimate, one exact price."><meta property="og:url" content="https://ajsupplycollc.github.io/aj-turf/"><meta property="og:image" content="https://ajsupplycollc.github.io/aj-turf/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
-<style>
-:root{
-  --lanai:#121613;      /* deep charcoal: night lanai */
-  --limestone:#E8EAE5;  /* cool travertine, not cream */
-  --white:#FAFBF9;
-  --turf:#2D5B39;
-  --aqua:#4FB4C3;       /* pool water: the measuring line */
-  --stone:#8B918A;
-  --display:"Bricolage Grotesque",system-ui,sans-serif;
-  --body:"Hanken Grotesk",system-ui,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--lanai)}
-body{background:var(--white);color:var(--lanai);font:17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}
-.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-
-/* nav */
-.nav{position:fixed;inset:0 0 auto;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px clamp(18px,4vw,48px);color:var(--white)}
-.nav .mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none}
-.nav .mark span{color:var(--aqua)}
-.nav .mid{display:flex;gap:28px}
-.nav .mid a{text-decoration:none;opacity:.85}
-.nav .cta{justify-self:end;text-decoration:none;border-bottom:1px solid var(--aqua);padding-bottom:3px}
-.nav.solid{background:rgba(18,22,19,.86);backdrop-filter:blur(10px)}
-
-/* hero: before -> measured -> after */
-#hero{position:relative;height:420vh;background:var(--lanai)}
-.stage{position:sticky;top:0;height:100vh;overflow:hidden}
-.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-#after{opacity:0}
-.stage .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,22,19,.55) 0%,rgba(18,22,19,0) 30%,rgba(18,22,19,0) 55%,rgba(18,22,19,.78) 100%)}
-#plan{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-#plan path,#plan line{fill:none;stroke:var(--aqua);stroke-width:3;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px rgba(79,180,195,.7))}
-#plan .tick{stroke-width:2}
-#plan text{fill:#e9fbff;paint-order:stroke;stroke:rgba(18,22,19,.75);stroke-width:5px;font-family:var(--mono);font-size:17px;font-weight:500;letter-spacing:.06em;opacity:0}
-.copy{position:absolute;left:clamp(18px,5vw,64px);right:clamp(18px,5vw,64px);bottom:clamp(28px,7vh,72px);color:var(--white);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;align-items:end}
-.copy h1{font-family:var(--display);font-weight:300;font-size:clamp(46px,8.2vw,132px);line-height:.92;letter-spacing:-.045em}
-.copy h1 b{font-weight:700;color:var(--white)}
-.beats{position:relative;min-height:150px}
-.beat{position:absolute;inset:auto 0 0 0;opacity:0;transform:translateY(12px)}
-.beat .mono{color:var(--aqua);display:block;margin-bottom:10px}
-.beat p{font-size:18px;max-width:380px;color:#dfe3dd}
-.beat.on{opacity:1;transform:none;transition:opacity .45s,transform .45s}
-.scrollhint{position:absolute;right:clamp(18px,4vw,48px);top:50%;writing-mode:vertical-rl;color:var(--white);opacity:.7}
-
-/* intro */
-.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:92vh}
-.intro .txt{padding:clamp(48px,9vw,140px) clamp(20px,6vw,90px);display:flex;flex-direction:column;justify-content:space-between;gap:48px}
-.intro h2{font-family:var(--display);font-weight:300;font-size:clamp(40px,5.4vw,84px);line-height:.95;letter-spacing:-.04em}
-.intro h2 b{font-weight:700}
-.intro p{max-width:440px;color:#3d443e}
-.intro figure{position:relative;overflow:hidden}
-.intro figure img{width:100%;height:100%;object-fit:cover}
-.intro figcaption,.cap{position:absolute;left:20px;bottom:18px;color:var(--white);text-shadow:0 1px 8px rgba(0,0,0,.5)}
-
-/* method: a real sequence, so it is numbered */
-.method{background:var(--lanai);color:var(--white);padding:clamp(80px,12vw,170px) clamp(20px,6vw,90px)}
-.method h2{text-wrap:balance;font-family:var(--display);font-weight:300;font-size:clamp(38px,5vw,76px);letter-spacing:-.04em;line-height:.95;max-width:900px}
-.method h2 b{font-weight:700}
-.steps{margin-top:clamp(56px,8vw,110px);border-top:1px solid #2b322c}
-.step{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.2fr);gap:32px;padding:34px 0;border-bottom:1px solid #2b322c;align-items:baseline}
-.step .n{font-family:var(--mono);color:var(--aqua);font-size:13px}
-.step h3{font-family:var(--display);font-weight:500;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.02em}
-.step p{color:#aeb5ad;max-width:520px}
-.step .dim{display:block;margin-top:10px;color:var(--stone)}
-
-.reveal{margin-top:clamp(48px,7vw,90px);display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:end}
-.reveal .frame{position:relative;aspect-ratio:958/719;margin:0}
-.reveal img{width:100%;height:100%}
-.pin{position:absolute;width:30px;height:30px;transform:translate(-50%,-50%);border-radius:50%;border:1.5px solid var(--white);background:rgba(18,22,19,.35);backdrop-filter:blur(3px);color:var(--white);font:500 12px/27px var(--mono);text-align:center}
-.pin::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(250,251,249,.45);animation:ring 2.4s ease-out infinite}
-@keyframes ring{from{transform:scale(.7);opacity:1}to{transform:scale(1.35);opacity:0}}
-.legend{list-style:none;border-top:1px solid #2b322c}
-.legend li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:22px 0;border-bottom:1px solid #2b322c}
-.legend .k{font:500 12px var(--mono);color:var(--aqua);padding-top:8px}
-.legend h4{font-family:var(--display);font-weight:300;font-size:clamp(26px,2.3vw,36px);letter-spacing:-.03em;line-height:1}
-.legend h4 b{font-weight:700}
-.legend p{color:#aeb5ad;margin-top:8px;font-size:16px}
-.legend .note{display:block;border:0;color:var(--stone);padding-top:16px}
-@media (max-width:860px){.reveal{grid-template-columns:1fr}.pin{width:26px;height:26px;line-height:23px;font-size:11px}}
-@media (prefers-reduced-motion:reduce){.pin::after{animation:none}}
-/* work strip */
-.work{padding:clamp(80px,11vw,150px) 0 clamp(60px,8vw,110px)}
-.work header{display:flex;justify-content:space-between;align-items:end;gap:24px;padding:0 clamp(20px,6vw,90px);margin-bottom:40px}
-.work h2{font-family:var(--display);font-weight:300;font-size:clamp(38px,5vw,76px);letter-spacing:-.04em;line-height:.95}
-.work h2 b{font-weight:700}
-.strip{display:flex;gap:14px;overflow-x:auto;padding:0 clamp(20px,6vw,90px) 18px;scroll-snap-type:x mandatory;scrollbar-width:thin}
-.strip figure{position:relative;flex:0 0 auto;width:min(78vw,520px);aspect-ratio:4/5;overflow:hidden;scroll-snap-align:start}
-.strip figure.wide{width:min(88vw,780px);aspect-ratio:3/2}
-.strip img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
-.strip figure:hover img{transform:scale(1.03)}
-
-/* services: big type list, photo follows on hover */
-.services{padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px)}
-.svc-list{list-style:none;margin-top:28px;border-top:1px solid #d6d9d3}
-.svc-list li{position:relative;display:grid;grid-template-columns:140px minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:baseline;padding:30px 0;border-bottom:1px solid #d6d9d3;cursor:default}
-.svc-list .mono{color:var(--stone)}
-.svc-list h3{font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,72px);letter-spacing:-.045em;line-height:.95;transition:transform .5s cubic-bezier(.2,.7,.2,1),color .3s}
-.svc-list h3 b{font-weight:700}
-.svc-list p{color:#4a514b;max-width:360px}
-.svc-list img{position:absolute;left:43%;top:50%;width:240px;aspect-ratio:4/3;object-fit:cover;transform:translateY(-50%) scale(.92) rotate(-2deg);opacity:0;pointer-events:none;transition:opacity .35s,transform .5s cubic-bezier(.2,.7,.2,1);z-index:2;box-shadow:0 24px 60px rgba(18,22,19,.25)}
-.svc-list li:hover h3{transform:translateX(14px);color:var(--turf)}
-.svc-list li:hover img{opacity:1;transform:translateY(-50%) scale(1) rotate(-2deg)}
-@media (hover:none),(max-width:860px){.svc-list li{grid-template-columns:1fr;gap:6px}.svc-list img{display:none}}
-/* area + faq */
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(40px,6vw,100px);padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px);background:var(--limestone)}
-.split h2{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.4vw,64px);letter-spacing:-.04em;line-height:.95}
-.split h2 b{font-weight:700}
-.towns{margin-top:28px;font-family:var(--display);font-size:clamp(22px,2.2vw,30px);font-weight:500;line-height:1.5;color:var(--turf)}
-details{border-top:1px solid #c9cdc6;padding:22px 0}
-details:last-child{border-bottom:1px solid #c9cdc6}
-summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;font-family:var(--display);font-weight:500;font-size:21px}
-summary::after{content:"+";font-family:var(--mono);color:var(--turf)}
-details[open] summary::after{content:"−"}
-details p{margin-top:12px;color:#454c46;max-width:620px}
-
-/* close */
-.close{position:relative;min-height:90vh;display:flex;align-items:flex-end;color:var(--white)}
-.close img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.close::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,22,19,.88),rgba(18,22,19,.15) 70%);z-index:1}
-.close .in{position:relative;z-index:2;padding:clamp(40px,8vw,110px) clamp(20px,6vw,90px);width:100%;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:end}
-.close h2{font-family:var(--display);font-weight:300;font-size:clamp(44px,7vw,110px);letter-spacing:-.045em;line-height:.92}
-.close h2 b{font-weight:700}
-.book{display:inline-flex;align-items:center;gap:14px;background:var(--aqua);color:var(--lanai);text-decoration:none;font-weight:500;padding:18px 26px;font-size:18px}
-.book:hover{background:var(--white)}
-.alt{display:block;margin-top:16px;opacity:.85}
-footer{background:var(--lanai);color:var(--stone);padding:28px clamp(20px,6vw,90px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-
-@media (max-width:860px){
-  .nav{grid-template-columns:1fr auto}.nav .mid{display:none}
-  .copy{grid-template-columns:1fr;gap:18px}.beats{min-height:130px}
-  .scrollhint{display:none}
-  .intro,.split,.close .in{grid-template-columns:1fr}
-  .intro figure{min-height:60vh}
-  .step{grid-template-columns:1fr;gap:8px}
-  .services{grid-template-columns:1fr}.svc{border-right:0}
-  #plan text{font-size:11px}
-}
-@media (prefers-reduced-motion:reduce){
-  #hero{height:auto}.stage{position:relative}#after{opacity:1}#plan{display:none}
-  .beat{position:static;opacity:1;transform:none;margin-top:14px}
-}
-</style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"AJ Turf","telephone":"+1-305-762-9901","email":"ajsupplycollc@gmail.com",
-"areaServed":["Fort Myers FL","Cape Coral FL","Naples FL","Estero FL","Bonita Springs FL","Sanibel FL"],
-"openingHours":"Mo-Sa 09:00-17:00","sameAs":["https://www.instagram.com/aj.turf","https://www.facebook.com/aj.turf"]}
-</script>
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "HomeAndConstructionBusiness", "@id": "https://ajsupplycollc.github.io/aj-turf/#business", "name": "AJ Turf", "url": "https://ajsupplycollc.github.io/aj-turf/", "telephone": "+1-305-762-9901", "email": "ajsupplycollc@gmail.com", "image": "https://ajsupplycollc.github.io/aj-turf/img/og.jpg", "logo": "https://ajsupplycollc.github.io/aj-turf/img/mark.svg", "areaServed": [{"@type": "City", "name": "Fort Myers, FL"}, {"@type": "City", "name": "Cape Coral, FL"}, {"@type": "City", "name": "Naples, FL"}, {"@type": "City", "name": "Estero, FL"}, {"@type": "City", "name": "Bonita Springs, FL"}, {"@type": "City", "name": "Sanibel, FL"}], "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate", "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Turf services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Artificial turf installation", "url": "https://ajsupplycollc.github.io/aj-turf/artificial-turf-installation/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pet turf", "url": "https://ajsupplycollc.github.io/aj-turf/pet-turf/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Backyard putting greens", "url": "https://ajsupplycollc.github.io/aj-turf/putting-greens/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Turf for pools and pavers", "url": "https://ajsupplycollc.github.io/aj-turf/pool-and-paver-turf/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Artificial turf repair", "url": "https://ajsupplycollc.github.io/aj-turf/turf-repair/"}}]}}, {"@type": "WebSite", "@id": "https://ajsupplycollc.github.io/aj-turf/#site", "url": "https://ajsupplycollc.github.io/aj-turf/", "name": "AJ Turf"}]}</script>
 </head>
 <body>
 <nav class="nav" id="nav">
@@ -219,7 +71,7 @@ footer{background:var(--lanai);color:var(--stone);padding:28px clamp(20px,6vw,90
       <li><span class="k">1</span><div><h4>Concrete <b>border</b></h4><p>3 x 3 x 3 inches, poured along the inside of 6-inch edging. Everything is anchored to this.</p></div></li>
       <li><span class="k">2</span><div><h4>Weed <b>barrier</b></h4><p>Covers the whole area before a single roll goes down.</p></div></li>
       <li><span class="k">3</span><div><h4>Turf, <b>glued</b></h4><p>Edges bonded to the border with 15-year-warrantied glue. No steel spikes.</p></div></li>
-      <li class="note mono">Mid-install, Southwest Florida</li>
+      <li class="note mono">Mid-install: border poured, barrier down, turf going on</li>
     </ol>
   </div>
   <div class="steps">
@@ -245,11 +97,11 @@ footer{background:var(--lanai);color:var(--stone);padding:28px clamp(20px,6vw,90
   </div>
 </section>
 
-<section class="services" id="services"><span class="mono" style="color:var(--turf)">What we install</span><ul class="svc-list"><li><span class="mono">Lawns</span><h3>Front &amp; back <b>yards</b></h3><p>Natural-looking, green through August, no mowing or watering.</p><img src="img/palm-yard.webp" alt="" loading="lazy"></li><li><span class="mono">Pets</span><h3>Pet <b>turf</b></h3><p>Built drainage-first. In Florida heat, the base decides whether a yard smells.</p><img src="img/side-garden.webp" alt="" loading="lazy"></li><li><span class="mono">Golf</span><h3>Putting <b>greens</b></h3><p>True-rolling greens with fringe, off the patio or out by the water.</p><img src="img/backyard-green.webp" alt="" loading="lazy"></li><li><span class="mono">Hardscape</span><h3>Pools &amp; <b>pavers</b></h3><p>Turf between pavers and clean borders around the pool deck.</p><img src="img/pavers.webp" alt="" loading="lazy"></li><li><span class="mono">Fixes</span><h3>Repairs &amp; <b>re-installs</b></h3><p>Ripples, open seams, washed-out bases. We fix turf other crews put in.</p><img src="img/pool-side.webp" alt="" loading="lazy"></li><li><span class="mono">HOA</span><h3>Approval <b>help</b></h3><p>Product specs and install details ready for your HOA review.</p><img src="img/waterfront.webp" alt="" loading="lazy"></li></ul></section>
+<section class="services" id="services"><span class="mono" style="color:var(--turf)">What we install</span><ul class="svc-list"><li><span class="mono">Lawns</span><h3><a href="artificial-turf-installation/" style="text-decoration:none">Front &amp; back <b>yards</b></a></h3><p>Natural-looking, green through August, no mowing or watering.</p><img src="img/palm-yard.webp" alt="" loading="lazy"></li><li><span class="mono">Pets</span><h3><a href="pet-turf/" style="text-decoration:none">Pet <b>turf</b></a></h3><p>Built drainage-first. In Florida heat, the base decides whether a yard smells.</p><img src="img/side-garden.webp" alt="" loading="lazy"></li><li><span class="mono">Golf</span><h3><a href="putting-greens/" style="text-decoration:none">Putting <b>greens</b></a></h3><p>True-rolling greens with fringe, off the patio or out by the water.</p><img src="img/backyard-green.webp" alt="" loading="lazy"></li><li><span class="mono">Hardscape</span><h3><a href="pool-and-paver-turf/" style="text-decoration:none">Pools &amp; <b>pavers</b></a></h3><p>Turf between pavers and clean borders around the pool deck.</p><img src="img/pavers.webp" alt="" loading="lazy"></li><li><span class="mono">Fixes</span><h3><a href="turf-repair/" style="text-decoration:none">Repairs &amp; <b>re-installs</b></a></h3><p>Ripples, open seams, washed-out bases. We fix turf other crews put in.</p><img src="img/pool-side.webp" alt="" loading="lazy"></li><li><span class="mono">HOA</span><h3>Approval <b>help</b></h3><p>Product specs and install details ready for your HOA review.</p><img src="img/waterfront.webp" alt="" loading="lazy"></li></ul></section>
 
 <section class="split" id="faq">
   <div><span class="mono" style="color:var(--turf)">Where we work</span><h2 style="margin-top:18px">Fort Myers<br>to <b>Naples.</b></h2>
-    <p class="towns">Fort Myers · Cape Coral · Sanibel · Estero · Bonita Springs · Naples</p></div>
+    <p class="towns"><a href="fort-myers/" style="text-decoration:none">Fort Myers</a> · <a href="cape-coral/" style="text-decoration:none">Cape Coral</a> · <a href="sanibel/" style="text-decoration:none">Sanibel</a> · <a href="estero/" style="text-decoration:none">Estero</a> · <a href="bonita-springs/" style="text-decoration:none">Bonita Springs</a> · <a href="naples/" style="text-decoration:none">Naples</a></p></div>
   <div>
     <details><summary>How do you price a yard?</summary><p>In person. We measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
     <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
@@ -269,7 +121,7 @@ footer{background:var(--lanai);color:var(--stone);padding:28px clamp(20px,6vw,90
       <a class="alt mono" href="tel:+13057629901">Or call 305-762-9901</a></div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span>Mon–Sat 9–5</span></footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links"><a href="artificial-turf-installation/">Lawns</a><a href="pet-turf/">Pet turf</a><a href="putting-greens/">Putting greens</a><a href="pool-and-paver-turf/">Pools &amp; pavers</a><a href="turf-repair/">Repairs</a></span><span class="foot-links"><a href="fort-myers/">Fort Myers</a><a href="cape-coral/">Cape Coral</a><a href="naples/">Naples</a><a href="estero/">Estero</a><a href="bonita-springs/">Bonita Springs</a><a href="sanibel/">Sanibel</a></span><span class="foot-links"><a href="privacy/">Privacy</a><span>Mon–Sat 9–5</span></span></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
