@@ -5,7 +5,8 @@ from PIL import Image
 
 BASE = "https://ajturffl.com/"  # ponytail: swap to the real domain when it exists
 PHONE, PHONE_HREF = "305-762-9901", "+13057629901"
-EMAIL = "ajsupplycollc@gmail.com"
+EMAIL = "ajturffl@gmail.com"
+PUBLISH_GUIDE = False  # flip to True when Jereme approves the Turf Guide
 BOOK = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax"
 TODAY = datetime.date.today().isoformat()
 AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel"]
@@ -20,6 +21,7 @@ FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>In person.
 <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
 <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
+<details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact, and a quick run of water is an easy way to rinse and cool the turf on hot days.</p></details>
 <details><summary>What's the warranty?</summary><p>The turf carries its manufacturer's warranty, which depends on the product you pick, and our install labor is warrantied too. You'll see the exact terms before you sign.</p></details>
 """
 
@@ -124,7 +126,7 @@ def org():
             "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og/home.jpg", "logo": BASE + "img/mark.svg",
             "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS],
             "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate",
-            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf"]}
+            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/"]}
 
 def crumbs(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
@@ -185,6 +187,49 @@ for a in AREAS:
          img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])], rel, f"Artificial turf and putting greens in {a}", slug)
     urls.append(path)
 
+# Turf Guide
+from guide_content import GUIDES
+def article(g):
+    path = f"guide/{g['slug']}/"; r = "../../"
+    faq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": g["q"], "acceptedAnswer": {"@type": "Answer", "text": g["a"]}}]}
+    art = {"@type": "Article", "headline": g["title"], "description": g["desc"], "datePublished": TODAY, "dateModified": TODAY,
+           "author": {"@id": BASE + "#business"}, "publisher": {"@id": BASE + "#business"}, "mainEntityOfPage": BASE + path,
+           "image": BASE + f"img/og/guide-{g['slug']}.jpg"}
+    schema = {"@context": "https://schema.org", "@graph": [org(), art, faq, crumbs([("AJ Turf", ""), ("Turf Guide", "guide/"), (g["title"], path)])]}
+    others = "".join(f'<li><a href="{r}guide/{x["slug"]}/">{x["title"]}</a></li>' for x in GUIDES if x is not g)
+    src = "".join(f"<li>{x}</li>" for x in g["sources"])
+    html = head(g["seo"], g["desc"], path, 2, schema, g["title"], "guide-" + g["slug"]) + f"""
+<header class="sub-hero" style="min-height:62vh">
+  <img src="{r}img/{g['img']}.webp" alt="">
+  <div class="in"><span class="mono crumbs"><a href="{r}">AJ Turf</a> / <a href="{r}guide/">Turf Guide</a></span>
+    <h1 style="font-size:clamp(38px,5.6vw,84px)">{g['title']}</h1></div>
+</header>
+<div class="art-wrap"><main class="article">
+  <p class="mono" style="color:var(--turf)">The short answer</p>
+  <p class="short">{g['a']}</p>
+  <div class="art-body">{g['body']}</div>
+  <div class="sources"><p class="mono">Sources</p><ul>{src}</ul><p class="mono" style="margin-top:14px">Updated {TODAY}</p></div>
+</main>
+<aside class="toc"><p class="mono">In this guide</p><ol>{"".join(f"<li>{_re.sub(r'<[^>]+>','',t)}</li>" for t in _re.findall(r"<h2>(.*?)</h2>", g["body"]))}</ol>
+<a class="book" href="{BOOK}" target="_blank" rel="noopener" style="margin-top:26px;font-size:16px;padding:14px 20px">Free onsite estimate <span aria-hidden="true">→</span></a></aside></div>
+<section class="related"><span class="mono" style="color:var(--turf)">More from the Turf Guide</span><ul>{others}</ul></section>
+""" + close(2)
+    os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(html)
+    urls.append(path)
+for g in (GUIDES if PUBLISH_GUIDE else []): article(g)
+if PUBLISH_GUIDE:
+  os.makedirs("guide", exist_ok=True)
+items = "".join(f'<li><a href="{x["slug"]}/"><h3>{x["title"]}</h3><p>{x["desc"]}</p></a></li>' for x in GUIDES)
+if PUBLISH_GUIDE: open("guide/index.html", "w", encoding="utf-8").write(head("Turf Guide: Straight Answers About Artificial Turf | AJ Turf",
+    "Plain answers about artificial turf: how it's installed, what to ask an installer, heat, drainage, pets, HOAs and warranties.", "guide/", 1,
+    {"@context": "https://schema.org", "@graph": [org(), crumbs([("AJ Turf", ""), ("Turf Guide", "guide/")])]}, "The AJ Turf Guide", "home") + f"""
+<header class="sub-hero" style="min-height:58vh"><img src="../img/backyard-wide.webp" alt="">
+  <div class="in"><span class="mono crumbs"><a href="../">AJ Turf</a> / Turf Guide</span><h1>Straight answers<br>about <b>turf.</b></h1>
+  <p class="lede">What homeowners ask us most, answered plainly and backed by real product data and research.</p></div></header>
+<main class="guide-list"><ul>{items}</ul></main>
+""" + close(1))
+if PUBLISH_GUIDE: urls.append("guide/")
+
 # privacy
 os.makedirs("privacy", exist_ok=True)
 open("privacy/index.html", "w", encoding="utf-8").write(head("Privacy | AJ Turf", "How AJ Turf handles information you share with us.", "privacy/", 1,
@@ -223,6 +268,7 @@ from playwright.sync_api import sync_playwright
 cards = [("home", "hero-after", "Turf that looks like it<br>was <b>always there.</b>")]
 cards += [(x["slug"], x["img"], SEO[x["slug"]][3]) for x in SERVICES]
 cards += [(CITY[a][0], CITY[a][2], f"Artificial turf in<br><b>{a}.</b>") for a in AREAS]
+cards += [("guide-" + g["slug"], g["img"], g["title"]) for g in (GUIDES if PUBLISH_GUIDE else [])]
 os.makedirs("img/og", exist_ok=True)
 root = pathlib.Path(".").resolve().as_uri() + "/"
 with sync_playwright() as pw:
