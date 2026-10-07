@@ -16,6 +16,15 @@ METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area w
           "<p>Most installers pin turf down with 6-inch steel spikes driven through the whole lawn. Spikes work loose, can hurt "
           "bare feet and paws, and tear the backing over time. A glued edge is safer and lasts longer.</p>")
 
+FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>In person. We measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
+<details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
+<details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
+<details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
+<details><summary>What's the warranty?</summary><p>The turf carries its manufacturer's warranty, which depends on the product you pick, and our install labor is warrantied too. You'll see the exact terms before you sign.</p></details>
+"""
+
+SEO = {'artificial-turf-installation': ('Artificial Turf Lawns in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf lawns, built to last', 'Green year round with no mowing or watering. Installed on a compacted base with a glued concrete border, no spikes. Free onsite estimate.', 'Artificial turf<br><b>lawns.</b>'), 'pet-turf': ('Pet Turf Installation in Fort Myers &amp; Naples | AJ Turf', 'Pet turf that drains, not smells', "Built drainage-first so Florida heat doesn't trap odor. Pet-friendly infill and glued edges with no spikes for paws. Free onsite estimate.", 'Pet turf that<br><b>drains.</b>'), 'putting-greens': ('Backyard Putting Greens in Fort Myers &amp; Naples | AJ Turf', 'Backyard putting greens with a true roll', 'Putting surface plus fringe, cut and seamed by hand, off the lanai or out by the water. Free onsite estimate and one exact price.', 'Backyard<br><b>putting greens.</b>'), 'pool-and-paver-turf': ('Turf for Pools &amp; Pavers in Fort Myers &amp; Naples | AJ Turf', 'Turf for pools and pavers', 'Turf strips between pavers and tight, glued borders around pool decks. Clean lines that look designed, not patched in. Free onsite estimate.', 'Pools &amp;<br><b>pavers.</b>'), 'turf-repair': ('Artificial Turf Repair in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf repair and re-installs', 'Ripples, open seams, washouts and loose edges fixed, or a full re-install done right with a concrete border. Free onsite estimate.', 'Turf repair &amp;<br><b>re-installs.</b>')}
+
 SERVICES = [
  dict(slug="artificial-turf-installation", nav="Lawns", title="Artificial Turf Installation", h1="Artificial turf <b>lawns.</b>",
       img="palm-yard", kw="artificial turf installation",
@@ -65,7 +74,7 @@ CITY = {
    "On a barrier island, salt air, sandy soil and storm recovery shape what holds up. A glued edge with no spikes is a sturdy choice for island yards."),
 }
 
-def head(title, desc, path, depth, schema, img="hero-after"):
+def head(title, desc, path, depth, schema, og_title=None, og_slug="home"):
     r = "../" * depth
     return f'''<!doctype html>
 <html lang="en">
@@ -75,8 +84,11 @@ def head(title, desc, path, depth, schema, img="hero-after"):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{BASE}{path}">
-<meta property="og:type" content="website"><meta property="og:title" content="{title}"><meta property="og:description" content="{desc}">
-<meta property="og:url" content="{BASE}{path}"><meta property="og:image" content="{BASE}img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#121613">
+<meta property="og:site_name" content="AJ Turf"><meta property="og:locale" content="en_US"><meta property="og:type" content="website">
+<meta property="og:title" content="{og_title or title}"><meta property="og:description" content="{desc}"><meta property="og:url" content="{BASE}{path}">
+<meta property="og:image" content="{BASE}img/og/{og_slug}.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{(og_title or title)} by AJ Turf">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{og_title or title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="{BASE}img/og/{og_slug}.jpg">
 <link rel="icon" href="{r}img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -109,7 +121,7 @@ def close(depth):
 
 def org():
     return {"@type": "HomeAndConstructionBusiness", "@id": BASE + "#business", "name": "AJ Turf", "url": BASE,
-            "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og.jpg", "logo": BASE + "img/mark.svg",
+            "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og/home.jpg", "logo": BASE + "img/mark.svg",
             "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS],
             "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate",
             "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf"]}
@@ -118,13 +130,18 @@ def crumbs(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": BASE + u} for i, (n, u) in enumerate(items)]}
 
-def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related):
+import re as _re
+def faq_schema(html):
+    qa = _re.findall(r"<summary>(.*?)</summary><p>(.*?)</p>", html)
+    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}
+
+def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related, og_title=None, og_slug="home"):
     depth = path.count("/")
     r = "../" * depth
-    schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra}
+    schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra + [faq_schema(FAQ_BLOCK)]}
     secs = "".join(f'<section class="prose"><h2>{h}</h2><div class="body">{b}</div></section>' for h, b in sections)
     rel = "".join(f'<li><a href="{r}{u}">{n}</a></li>' for n, u in related)
-    html = head(title, desc, path, depth, schema) + f'''
+    html = head(title, desc, path, depth, schema, og_title, og_slug) + f'''
 <header class="sub-hero">
   <img src="{r}img/{img}.webp" alt="">
   <div class="in"><span class="mono crumbs"><a href="{r}">AJ Turf</a> / {kicker}</span>
@@ -133,12 +150,7 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
 </header>
 <main>{secs}
 <section class="split" style="grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)"><div><span class="mono" style="color:var(--turf)">Questions</span><h2 style="margin-top:18px">Good to<br><b>know.</b></h2></div><div>
-<details><summary>How do you price a yard?</summary><p>In person. We measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
-<details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
-<details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
-<details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
-<details><summary>What's the warranty?</summary><p>The turf carries its manufacturer's warranty, which depends on the product you pick, and our install labor is warrantied too. You'll see the exact terms before you sign.</p></details>
-</div></section>
+{FAQ_BLOCK}</div></section>
 <section class="related"><span class="mono" style="color:var(--turf)">Keep looking</span><ul>{rel}</ul></section>
 </main>
 ''' + close(depth)
@@ -149,11 +161,11 @@ urls = [""]
 for s in SERVICES:
     path = s["slug"] + "/"
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES if x is not s] + [(a, CITY[a][0] + "/") for a in AREAS[:3]]
-    desc = f'{s["title"]} in Fort Myers, Cape Coral, Naples and Southwest Florida. Concrete-bordered, glued installs with no spikes. Free onsite estimate.'
+    t, ogt, desc, _ = SEO[s["slug"]]
     svc = {"@type": "Service", "name": s["title"], "serviceType": s["kw"], "provider": {"@id": BASE + "#business"},
            "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS], "url": BASE + path}
-    page(path, f'{s["title"]} | Fort Myers to Naples | AJ Turf', desc, s["nav"], s["h1"], s["lede"], s["img"], s["sections"],
-         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])], rel)
+    page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], s["sections"],
+         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])], rel, ogt, s["slug"])
     urls.append(path)
 
 for a in AREAS:
@@ -167,10 +179,10 @@ for a in AREAS:
     ]
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
     biz = dict(org()); biz["@id"] = BASE + path + "#area"; biz["areaServed"] = {"@type": "City", "name": a + ", FL"}
-    page(path, f"Artificial Turf & Putting Greens in {a}, FL | AJ Turf",
-         f"Artificial turf, pet turf and putting greens in {a}, FL. Concrete-bordered, glued installs, no spikes. Free onsite estimate, one exact price.",
+    page(path, f"Artificial Turf & Putting Greens, {a} FL | AJ Turf",
+         f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate.",
          a, f"Turf in<br><b>{a}.</b>", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price.",
-         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])], rel)
+         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])], rel, f"Artificial turf and putting greens in {a}", slug)
     urls.append(path)
 
 # privacy
@@ -205,7 +217,29 @@ open("llms.txt", "w", encoding="utf-8").write(f"""# AJ Turf
 ## Pages
 """ + "".join(f"- {BASE}{u}\n" for u in urls))
 
-# og image
-im = Image.open("img/hero-after.webp").convert("RGB"); W, H = im.size; h = int(W * 630 / 1200)
-im.crop((0, (H - h) // 2, W, (H - h) // 2 + h)).resize((1200, 630)).save("img/og.jpg", quality=85)
-print(len(urls), "urls")
+# og images: one branded 1200x630 card per page, rendered from HTML so it matches the site type
+import pathlib
+from playwright.sync_api import sync_playwright
+cards = [("home", "hero-after", "Turf that looks like it<br>was <b>always there.</b>")]
+cards += [(x["slug"], x["img"], SEO[x["slug"]][3]) for x in SERVICES]
+cards += [(CITY[a][0], CITY[a][2], f"Artificial turf in<br><b>{a}.</b>") for a in AREAS]
+os.makedirs("img/og", exist_ok=True)
+root = pathlib.Path(".").resolve().as_uri() + "/"
+with sync_playwright() as pw:
+    b = pw.chromium.launch(); pg = b.new_page(viewport={"width": 1200, "height": 630})
+    for slug, img, h in cards:
+        open("_og.html","w",encoding="utf-8").write(f"""<html><head><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>body{{margin:0;width:1200px;height:630px;position:relative;overflow:hidden;font-family:'Bricolage Grotesque'}}img.bg{{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
+.g{{position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,22,19,.92) 0%,rgba(18,22,19,.55) 55%,rgba(18,22,19,.1) 100%)}}
+.in{{position:absolute;left:64px;top:56px;bottom:56px;right:64px;display:flex;flex-direction:column;justify-content:space-between;color:#FAFBF9}}
+.m{{display:flex;align-items:center;gap:14px;font-weight:700;font-size:30px;letter-spacing:-.02em}}.m span{{color:#4FB4C3}}
+h1{{margin:0;font-weight:300;font-size:78px;line-height:.95;letter-spacing:-.045em;max-width:900px}}h1 b{{font-weight:700}}
+p{{margin:0;font:500 17px 'JetBrains Mono';letter-spacing:.12em;color:#4FB4C3}}</style></head>
+<body><img class="bg" src="img/{img}.webp"><div class="g"></div><div class="in"><div class="m"><img src="img/mark.svg" width="54">AJ<span>/</span>TURF</div>
+<div><h1>{h}</h1><p style="margin-top:22px">FREE ONSITE ESTIMATE · FORT MYERS TO NAPLES</p></div></div></body></html>""")
+        pg.goto(root + "_og.html")
+        pg.wait_for_load_state("networkidle"); pg.evaluate("document.fonts.ready"); pg.wait_for_timeout(300)
+        pg.screenshot(path=f"img/og/{slug}.jpg", type="jpeg", quality=86)
+    b.close()
+os.remove("_og.html")
+print(len(urls), "urls,", len(cards), "og cards")
