@@ -83,6 +83,9 @@ def head(title, desc, path, depth, schema, og_title=None, og_slug="home"):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFM29XK9QK"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','G-EFM29XK9QK');
+document.addEventListener('click',e=>{{const a=e.target.closest('a');if(!a)return;if(a.href.includes('appointments/schedules'))gtag('event','generate_lead',{{method:'booking_link'}});else if(a.href.startsWith('tel:'))gtag('event','generate_lead',{{method:'phone_call'}});}});</script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{BASE}{path}">
@@ -236,7 +239,7 @@ open("privacy/index.html", "w", encoding="utf-8").write(head("Privacy | AJ Turf"
     {"@context": "https://schema.org", "@graph": [org()]}) + f'''
 <main style="padding:160px clamp(20px,6vw,90px) 100px;max-width:820px">
 <h1 style="font-family:var(--display);font-weight:300;font-size:56px;letter-spacing:-.04em">Privacy</h1>
-<p style="margin-top:24px">When you book an estimate, call, or message us, we use your name, phone, email and address only to schedule and complete your estimate and project. We don't sell or share your information. This site uses no advertising trackers. To ask about or remove your information, email <a href="mailto:{EMAIL}">{EMAIL}</a> or call {PHONE}.</p>
+<p style="margin-top:24px">When you book an estimate, call, or message us, we use your name, phone, email and address only to schedule and complete your estimate and project. We don't sell or share your information. This site uses Google Analytics to count visits and see which pages help people; it uses no advertising trackers. To ask about or remove your information, email <a href="mailto:{EMAIL}">{EMAIL}</a> or call {PHONE}.</p>
 <p style="margin-top:16px" class="mono">Updated {TODAY}</p>
 </main>''' + close(1))
 urls.append("privacy/")
