@@ -6,7 +6,7 @@ from PIL import Image
 BASE = "https://ajturffl.com/"  # ponytail: swap to the real domain when it exists
 PHONE, PHONE_HREF = "305-762-9901", "+13057629901"
 EMAIL = "ajturffl@gmail.com"
-PUBLISH_GUIDE = False  # flip to True when Jereme approves the Turf Guide
+PUBLISH_GUIDE = True   # flip to True when Jereme approves the Turf Guide
 BOOK = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax"
 TODAY = datetime.date.today().isoformat()
 AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel"]
@@ -100,7 +100,7 @@ def head(title, desc, path, depth, schema, og_title=None, og_slug="home"):
 <body>
 <nav class="nav solid" id="nav">
   <a class="mark" href="{r}"><img src="{r}img/mark.svg" alt="" width="34" height="34">AJ<span>/</span>TURF</a>
-  <div class="mid mono"><a href="{r}#method">Method</a><a href="{r}#work">Work</a><a href="{r}#services">Services</a><a href="{r}#faq">FAQ</a></div>
+  <div class="mid mono"><a href="{r}#method">Method</a><a href="{r}#work">Work</a><a href="{r}#services">Services</a><a href="{r}guide/">Turf Guide</a></div>
   <a class="cta mono" href="#book">Free estimate</a>
 </nav>'''
 
@@ -117,7 +117,7 @@ def close(depth):
       <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a></div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span></footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span></footer>
 </body>
 </html>'''
 
