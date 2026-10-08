@@ -129,6 +129,7 @@ details p{margin-top:12px;color:#454c46;max-width:620px}
 .book:hover{background:var(--white)}
 .alt{display:block;margin-top:16px;opacity:.85}
 footer{background:var(--lanai);color:var(--stone);padding:28px clamp(20px,6vw,90px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer{padding-bottom:96px}
 
 @media (max-width:860px){
   .nav{grid-template-columns:1fr auto}.nav .mid{display:none}

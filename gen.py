@@ -129,7 +129,7 @@ def close(depth):
       <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a></div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span></footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span><span class="foot-links"><a href="https://www.instagram.com/aj.turf" rel="me noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/aj.turf" rel="me noopener" target="_blank">Facebook</a><a href="https://www.youtube.com/@AJTurf" rel="me noopener" target="_blank">YouTube</a></span></footer>
 <script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
 </html>'''
@@ -139,7 +139,7 @@ def org():
             "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og/home.jpg", "logo": BASE + "img/mark.svg",
             "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS],
             "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate",
-            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/", "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"]}
+            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.youtube.com/@AJTurf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/", "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"]}
 
 def crumbs(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
