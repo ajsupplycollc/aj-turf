@@ -57,7 +57,7 @@ SERVICES = [
        ("How we <b>build it.</b>", METHOD)]),
  dict(slug="turf-repair", nav="Repairs", title="Artificial Turf Repair & Re-installs", h1="Repairs &amp; <b>re-installs.</b>", img="pool-side", kw="artificial turf repair",
       photos=[("repair-before","A worn, matted putting green along a pool deck before the repair","Before · worn green by the pool"),("repair-after","The same green after the repair, fresh and even","After · same green, repaired"),("repair-after-wide","The repaired green running the length of the pool deck","After · full length")],
-      lede="Ripples, open seams, washed-out bases and loose edges. We fix turf other crews put in, or pull it and do it right.",
+      lede="Ripples, open seams, washed-out bases and loose edges. We fix turf other crews put in, or pull it and do it right. Free onsite assessment, an exact price on the spot, and no minimum job size.",
       sections=[("What we <b>fix.</b>",
         "<ul><li><b>Ripples and wrinkles.</b> Re-stretched and re-secured.</li><li><b>Open or visible seams.</b> Re-cut and re-taped.</li><li><b>Dips and washouts.</b> Base rebuilt and compacted.</li><li><b>Loose edges.</b> Secured, or re-done with a concrete border.</li></ul>"
         "<p>Sometimes a repair isn't worth it. If the base or the turf itself has failed, we'll tell you straight and quote a full re-install instead.</p>"),
@@ -132,7 +132,7 @@ def org():
             "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og/home.jpg", "logo": BASE + "img/mark.svg",
             "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS],
             "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate",
-            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/"]}
+            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/", "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"]}
 
 def crumbs(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
