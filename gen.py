@@ -43,7 +43,7 @@ SERVICES = [
         "<ul><li><b>Drains fast.</b> Rinse the area and it washes through.</li><li><b>No spikes.</b> Nothing to work loose under running dogs.</li><li><b>No mud.</b> No dug-up patches or dirty paws after rain.</li></ul>"),
        ("How we <b>build it.</b>", METHOD)]),
  dict(slug="putting-greens", nav="Putting greens", title="Backyard Putting Greens", h1="Putting <b>greens.</b>", img="green-waterfront", kw="backyard putting green",
-      photos=[("green-waterfront-flag","Putting green with fringe behind a waterfront home","Putting green · waterfront yard"),("green-canal-tiki","Putting green on a canal-front patio beside a tiki hut","Putting green · canal patio"),("green-backyard","Backyard putting green with flags along a wood fence","Backyard green · three cups")],
+      photos=[("green-waterfront-flag","Putting green with fringe behind a waterfront home","Putting green · waterfront yard"),("green-canal-tiki","Putting green on a canal-front patio beside a tiki hut","Putting green · canal patio"),("green-backyard","Backyard putting green with flags along a wood fence","Backyard green · three cups"),("green-course","Backyard putting green with sand trap shaping, overlooking a golf course","Putting green · golf course view")],
       lede="True-rolling backyard greens with fringe, built off the patio, beside the pool or out by the water.",
       sections=[("Built like a <b>green.</b>",
         "<p>A good green is about the base. We shape and compact it so the ball rolls true, then install a short putting surface surrounded by a slightly taller fringe turf, the same way a course frames a green.</p>"
