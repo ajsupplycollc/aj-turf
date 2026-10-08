@@ -14,7 +14,7 @@ dict(
 <h2>1. <b>Dig out</b> the old lawn</h2>
 <p>Grass, roots and loose soil come out so the new base sits on firm ground. Leaving organic material underneath is what causes dips later, as it breaks down.</p>
 <h2>2. Build and <b>compact</b> the base</h2>
-<p>Screening sand goes in and is compacted hard, in layers, and graded so water moves through and away from the house. Poor compaction is the most common reason turf develops low spots: water washes the loose base out and the turf sinks into divots.</p>
+<p>Screening sand goes in and is compacted in layers, firm enough to hold its shape but still free-draining, and graded so water moves through and away from the house. Poor compaction is the most common reason turf develops low spots: water washes the loose base out and the turf sinks into divots.</p>
 <h2>3. Secure the <b>edges</b></h2>
 <p>This is where installs differ most. The common shortcut is to pin turf down with 6-inch steel spikes driven through the lawn. We outline the area with 6-inch metal or plastic edging and pour a 3 x 3 x 3 inch concrete border along the inside of it, so the turf has something solid to be glued to.</p>
 <h2>4. Lay the <b>weed barrier</b></h2>
