@@ -22,7 +22,7 @@ FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>In person.
 <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
 <details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact, and a quick run of water is an easy way to rinse and cool the turf on hot days.</p></details>
-<details><summary>What's the warranty?</summary><p>The turf carries its manufacturer's warranty, which depends on the product you pick, and our install labor is warrantied too. You'll see the exact terms before you sign.</p></details>
+<details><summary>What's the warranty?</summary><p>Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign.</p></details>
 """
 
 SEO = {'artificial-turf-installation': ('Artificial Turf Lawns in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf lawns, built to last', 'Green year round with no mowing or watering. Installed on a compacted base with a glued concrete border, no spikes. Free onsite estimate.', 'Artificial turf<br><b>lawns.</b>'), 'pet-turf': ('Pet Turf Installation in Fort Myers &amp; Naples | AJ Turf', 'Pet turf that drains, not smells', "Built drainage-first so Florida heat doesn't trap odor. Pet-friendly infill and glued edges with no spikes for paws. Free onsite estimate.", 'Pet turf that<br><b>drains.</b>'), 'putting-greens': ('Backyard Putting Greens in Fort Myers &amp; Naples | AJ Turf', 'Backyard putting greens with a true roll', 'Putting surface plus fringe, cut and seamed by hand, off the lanai or out by the water. Free onsite estimate and one exact price.', 'Backyard<br><b>putting greens.</b>'), 'pool-and-paver-turf': ('Turf for Pools &amp; Pavers in Fort Myers &amp; Naples | AJ Turf', 'Turf for pools and pavers', 'Turf strips between pavers and tight, glued borders around pool decks. Clean lines that look designed, not patched in. Free onsite estimate.', 'Pools &amp;<br><b>pavers.</b>'), 'turf-repair': ('Artificial Turf Repair in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf repair and re-installs', 'Ripples, open seams, washouts and loose edges fixed, or a full re-install done right with a concrete border. Free onsite estimate.', 'Turf repair &amp;<br><b>re-installs.</b>')}
@@ -36,12 +36,14 @@ SERVICES = [
         "<ul><li><b>No mowing or watering.</b> A rinse and a brush is the upkeep.</li><li><b>Stays green.</b> No brown patches from drought, grubs or chinch bugs.</li><li><b>Built to drain.</b> Rain goes through the turf and the compacted base, not across your patio.</li></ul>"),
        ("How we <b>build it.</b>", METHOD)]),
  dict(slug="pet-turf", nav="Pet turf", title="Pet Turf", h1="Pet <b>turf.</b>", img="side-garden", kw="pet turf",
+      photos=[("pet-dogs","Two dogs playing on pet turf","Pet turf · dog-tested"),("pet-dogs-corner","Dogs on a fenced pet turf area","Fenced pet area")],
       lede="Turf built for dogs: drainage first, pet-friendly infill, and a glued edge with no spikes for paws to find.",
       sections=[("Odor is a <b>base problem.</b>",
         "<p>In Florida heat and humidity, pet odor comes from what happens under the turf, not the blades. When urine can't drain, it sits in the base and smells. That's why we start with a compacted screening-sand base that drains, then add pet-friendly infill.</p>"
         "<ul><li><b>Drains fast.</b> Rinse the area and it washes through.</li><li><b>No spikes.</b> Nothing to work loose under running dogs.</li><li><b>No mud.</b> No dug-up patches or dirty paws after rain.</li></ul>"),
        ("How we <b>build it.</b>", METHOD)]),
- dict(slug="putting-greens", nav="Putting greens", title="Backyard Putting Greens", h1="Putting <b>greens.</b>", img="green-canal", kw="backyard putting green",
+ dict(slug="putting-greens", nav="Putting greens", title="Backyard Putting Greens", h1="Putting <b>greens.</b>", img="green-waterfront", kw="backyard putting green",
+      photos=[("green-waterfront-flag","Putting green with fringe behind a waterfront home","Putting green · waterfront yard"),("green-canal-tiki","Putting green on a canal-front patio beside a tiki hut","Putting green · canal patio"),("green-backyard","Backyard putting green with flags along a wood fence","Backyard green · three cups")],
       lede="True-rolling backyard greens with fringe, built off the patio, beside the pool or out by the water.",
       sections=[("Built like a <b>green.</b>",
         "<p>A good green is about the base. We shape and compact it so the ball rolls true, then install a short putting surface surrounded by a slightly taller fringe turf, the same way a course frames a green.</p>"
@@ -54,6 +56,7 @@ SERVICES = [
         "<ul><li><b>Paver strips.</b> Grass-look joints that never need trimming.</li><li><b>Pool surrounds.</b> A soft green border that drains after every swim.</li><li><b>No spikes near the pool.</b> Glued edges hold without anything sticking up.</li></ul>"),
        ("How we <b>build it.</b>", METHOD)]),
  dict(slug="turf-repair", nav="Repairs", title="Artificial Turf Repair & Re-installs", h1="Repairs &amp; <b>re-installs.</b>", img="pool-side", kw="artificial turf repair",
+      photos=[("repair-before","A worn, matted putting green along a pool deck before the repair","Before · worn green by the pool"),("repair-after","The same green after the repair, fresh and even","After · same green, repaired"),("repair-after-wide","The repaired green running the length of the pool deck","After · full length")],
       lede="Ripples, open seams, washed-out bases and loose edges. We fix turf other crews put in, or pull it and do it right.",
       sections=[("What we <b>fix.</b>",
         "<ul><li><b>Ripples and wrinkles.</b> Re-stretched and re-secured.</li><li><b>Open or visible seams.</b> Re-cut and re-taped.</li><li><b>Dips and washouts.</b> Base rebuilt and compacted.</li><li><b>Loose edges.</b> Secured, or re-done with a concrete border.</li></ul>"
@@ -140,12 +143,14 @@ def faq_schema(html):
     qa = _re.findall(r"<summary>(.*?)</summary><p>(.*?)</p>", html)
     return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}
 
-def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related, og_title=None, og_slug="home"):
+def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related, og_title=None, og_slug="home", photos=()):
     depth = path.count("/")
     r = "../" * depth
     schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra + [faq_schema(FAQ_BLOCK)]}
     secs = "".join(f'<section class="prose"><h2>{h}</h2><div class="body">{b}</div></section>' for h, b in sections)
     rel = "".join(f'<li><a href="{r}{u}">{n}</a></li>' for n, u in related)
+    if photos: secs += '<section class="work" style="padding-top:clamp(70px,10vw,140px)"><header><h2>Real <b>jobs.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header><div class="strip">' + "".join(
+        f'<figure class="{"wide" if Image.open(f"img/{i}.webp").width > Image.open(f"img/{i}.webp").height else ""}"><img src="{r}img/{i}.webp" alt="{a}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>' for i, a, c in photos) + '</div></section>'
     html = head(title, desc, path, depth, schema, og_title, og_slug) + f'''
 <header class="sub-hero">
   <img src="{r}img/{img}.webp" alt="">
@@ -170,7 +175,7 @@ for s in SERVICES:
     svc = {"@type": "Service", "name": s["title"], "serviceType": s["kw"], "provider": {"@id": BASE + "#business"},
            "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS], "url": BASE + path}
     page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], s["sections"],
-         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])], rel, ogt, s["slug"])
+         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])], rel, ogt, s["slug"], s.get("photos", ()))
     urls.append(path)
 
 for a in AREAS:
