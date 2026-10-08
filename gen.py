@@ -9,7 +9,7 @@ EMAIL = "ajturffl@gmail.com"
 PUBLISH_GUIDE = True   # flip to True when Jereme approves the Turf Guide
 BOOK = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax"
 TODAY = datetime.date.today().isoformat()
-AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel"]
+AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel", "Lehigh Acres"]
 
 METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area with 6-inch metal or plastic edging, "
           "pour a 3 x 3 x 3 inch concrete border along the inside of it, lay a weed barrier over everything, then glue the "
@@ -34,7 +34,11 @@ SERVICES = [
       sections=[("Why homeowners <b>switch.</b>",
         "<p>Southwest Florida lawns fight heat, sandy soil, shade from palms and oaks, and watering restrictions. Turf ends the cycle of resodding, fertilizing and mowing, and it looks the same in March as it does in September.</p>"
         "<ul><li><b>No mowing or watering.</b> A rinse and a brush is the upkeep.</li><li><b>Stays green.</b> No brown patches from drought, grubs or chinch bugs.</li><li><b>Built to drain.</b> Rain goes through the turf and the compacted base, not across your patio.</li></ul>"),
-       ("How we <b>build it.</b>", METHOD)]),
+       ("Commercial &amp; <b>event lawns.</b>",
+        "<p>The same build works beyond the backyard: storefronts, offices, rental properties and event spaces that need to look green and finished every day, with no mowing crew and no muddy patches after rain.</p>"
+        "<p>One event venue went from bare ground and a temporary floor to a full turf lawn around the tent. See it in the photos below.</p>"),
+       ("How we <b>build it.</b>", METHOD)],
+      photos=[("event-before","An event tent on bare ground and a temporary floor before the install","Before · event space"),("event-after","The same event space with a full turf lawn around the tent","After · event lawn")]),
  dict(slug="pet-turf", nav="Pet turf", title="Pet Turf", h1="Pet <b>turf.</b>", img="side-garden", kw="pet turf",
       photos=[("pet-dogs","Two dogs playing on pet turf","Pet turf · dog-tested"),("pet-dogs-corner","Dogs on a fenced pet turf area","Fenced pet area")],
       lede="Turf built for dogs: drainage first, pet-friendly infill, and a glued edge with no spikes for paws to find.",
@@ -75,6 +79,8 @@ CITY = {
    "Estero's newer communities often mean HOA review before anything changes in the yard. We help you put the approval request together."),
  "Bonita Springs": ("bonita-springs", "Lee County", "pool-deck",
    "Between Fort Myers and Naples, Bonita Springs yards range from golf communities to waterfront lots, both a natural fit for putting greens and pool-side turf."),
+ "Lehigh Acres": ("lehigh-acres", "Lee County", "backyard-wide",
+   "Just east of Fort Myers, Lehigh Acres yards sit on sandy soil where keeping grass green through summer is a constant fight. Turf on a compacted, draining base ends that."),
  "Sanibel": ("sanibel", "Lee County", "palm-yard",
    "On a barrier island, salt air, sandy soil and storm recovery shape what holds up. A glued edge with no spikes is a sturdy choice for island yards."),
 }
@@ -260,7 +266,7 @@ open("llms.txt", "w", encoding="utf-8").write(f"""# AJ Turf
 > Artificial turf, pet turf, putting greens, pool and paver turf, and turf repair for homes in Southwest Florida: {", ".join(AREAS)}.
 
 ## Key facts
-- Service: residential artificial turf installation, pet turf, backyard putting greens with fringe, turf around pools and pavers, turf repair and re-installs.
+- Service: residential artificial turf installation, commercial and event lawns, pet turf, backyard putting greens with fringe, turf around pools and pavers, turf repair and re-installs.
 - Install method: 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, full weed barrier, turf glued to the border with 15-year-warrantied glue. No 6-inch steel spikes through the lawn.
 - Pricing: free onsite estimate, measured in person, one exact written price. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
 - Payments: 30% to schedule, 35% on the first day on site, 35% at completion.
