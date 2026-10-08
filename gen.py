@@ -184,7 +184,7 @@ for a in AREAS:
     secs = [
       (f"Turf in <b>{a}.</b>", f"<p>{local}</p><p>AJ Turf installs artificial turf lawns, pet turf, putting greens and turf around pools and pavers for homes in {a} and across {county}. Every job starts with a free onsite estimate: we measure in person and give you one exact written price.</p>"
          "<ul>" + "".join(f'<li><b><a href="../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>"),
-      ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the state to set standards for synthetic turf on single-family lots of an acre or less, and limits local governments from banning turf that meets them. Many HOAs still ask for architectural review before you install. We'll give you the product specs and install details your HOA usually asks for.</p>"),
+      ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. Many HOAs still ask for architectural review before you install. We'll give you the product specs and install details your HOA usually asks for.</p>"),
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
     ]
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
