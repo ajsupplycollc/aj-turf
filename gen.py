@@ -124,6 +124,7 @@ def close(depth):
   </div>
 </section>
 <footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span></footer>
+<script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
 </html>'''
 
@@ -244,7 +245,7 @@ open("privacy/index.html", "w", encoding="utf-8").write(head("Privacy | AJ Turf"
     {"@context": "https://schema.org", "@graph": [org()]}) + f'''
 <main style="padding:160px clamp(20px,6vw,90px) 100px;max-width:820px">
 <h1 style="font-family:var(--display);font-weight:300;font-size:56px;letter-spacing:-.04em">Privacy</h1>
-<p style="margin-top:24px">When you book an estimate, call, or message us, we use your name, phone, email and address only to schedule and complete your estimate and project. We don't sell or share your information. This site uses Google Analytics to count visits and see which pages help people; it uses no advertising trackers. To ask about or remove your information, email <a href="mailto:{EMAIL}">{EMAIL}</a> or call {PHONE}.</p>
+<p style="margin-top:24px">When you book an estimate, call, or message us, we use your name, phone, email and address only to schedule and complete your estimate and project. We don't sell or share your information. This site uses Google Analytics to count visits and see which pages help people; it uses no advertising trackers. The chat assistant on this site is an AI; your chat messages are kept for 90 days so we can follow up, so please don't share anything sensitive in it. To ask about or remove your information, email <a href="mailto:{EMAIL}">{EMAIL}</a> or call {PHONE}.</p>
 <p style="margin-top:16px" class="mono">Updated {TODAY}</p>
 </main>''' + close(1))
 urls.append("privacy/")
