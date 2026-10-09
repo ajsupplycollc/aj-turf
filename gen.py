@@ -45,6 +45,35 @@ def vobj(v):
 HOME_VIDEOS = ["4j__CUFYhnQ", "3yovFZ8U0ns", "aATUhfArpEY"]  # embedded by hand in index.html
 PAGE_VIDEOS = {"": HOME_VIDEOS}  # path -> video ids, for the video sitemap
 
+import photo_content as PC
+SRC = ["../website-photos-processed/{}.jpg", "../website-photos/hero/hero-{}.jpg", "../website-photos/raw/{}.jpg", "../website-photos/greens/{}.jpg"]
+def pfile(i):
+    # right-sized webp, built once: 800w always, 1600w when the source is big enough (the 2400px hero pulls)
+    out = f"img/p/{i}-800.webp"
+    if not os.path.exists(out):
+        src = next(x.format(i) for x in SRC if os.path.exists(x.format(i)))
+        im = Image.open(src).convert("RGB"); os.makedirs("img/p", exist_ok=True)
+        for w in (800, 1600):
+            if w == 800 or im.width >= 1600:
+                im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(f"img/p/{i}-{w}.webp", quality=78)
+    im = Image.open(out); big = os.path.exists(f"img/p/{i}-1600.webp")
+    return im.width, im.height, big
+
+def fig(item, r):
+    if isinstance(item, tuple) and item[0] != "pair":  # an existing site image: (slug, alt, caption)
+        i, a, c = item; im = Image.open(f"img/{i}.webp")
+        return f'<figure class="{"wide" if im.width > im.height else ""}"><img src="{r}img/{i}.webp" alt="{a}" width="{im.width}" height="{im.height}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>'
+    if isinstance(item, tuple):
+        return fig(item[1], r) + fig(item[2], r)
+    a, c = PC.PHOTOS[item]; w, h, big = pfile(item)
+    ss = f' srcset="{r}img/p/{item}-800.webp 800w, {r}img/p/{item}-1600.webp 1600w" sizes="(max-width:860px) 88vw, 780px"' if big else ""
+    return f'<figure class="{"wide" if w > h else ""}"><img src="{r}img/p/{item}-800.webp"{ss} alt="{a}" width="{w}" height="{h}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>'
+
+def pstrip(items, r, h2="Real <b>jobs.</b>", style=' style="padding-top:clamp(70px,10vw,140px)"'):
+    # every photo gallery ends at the booking CTA
+    return (f'<section class="work"{style}><header><h2>{h2}</h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>'
+            f'<div class="strip">' + "".join(fig(x, r) for x in items) + "</div>" + vcta() + "</section>")
+
 METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area with 6-inch metal or plastic edging, "
           "pour a 3 x 3 x 3 inch concrete border along the inside of it, lay a weed barrier over everything, then glue the "
           "turf edges to the concrete with turf glue that carries a 15-year warranty.</p>"
@@ -81,7 +110,8 @@ SERVICES = [
         "<ul><li><b>Drains fast.</b> Rinse the area and it washes through.</li><li><b>No spikes.</b> Nothing to work loose under running dogs.</li><li><b>No mud.</b> No dug-up patches or dirty paws after rain.</li></ul>"),
        ("How we <b>build it.</b>", METHOD)]),
  dict(slug="putting-greens", nav="Putting greens", title="Backyard Putting Greens", h1="Putting <b>greens.</b>", img="green-waterfront", kw="backyard putting green",
-      photos=[("green-waterfront-flag","Putting green with fringe behind a waterfront home","Putting green · waterfront yard"),("green-canal-tiki","Putting green on a canal-front patio beside a tiki hut","Putting green · canal patio"),("green-backyard","Backyard putting green with flags along a wood fence","Backyard green · three cups"),("green-course","Backyard putting green overlooking a golf course","Putting green · golf course view")],
+      # green-course.webp OFF the site 10/9: Jereme — "not my work", origin unknown (maybe a sub's job elsewhere). Never re-add.
+      # Strip = Muse's plan set (photo_content.SERVICE); the old copies duplicated those files.
       lede="True-rolling backyard greens with fringe, built off the patio, beside the pool or out by the water.",
       sections=[("Built like a <b>green.</b>",
         "<p>A good green is about the base. We shape and compact it so the ball rolls true, then install a short putting surface surrounded by a slightly taller fringe turf, the same way a course frames a green.</p>"
@@ -190,8 +220,7 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
     schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra + [faq_schema(FAQ_BLOCK)]}
     secs = "".join(x if isinstance(x, str) else f'<section class="prose"><h2>{x[0]}</h2><div class="body">{x[1]}</div></section>' for x in sections)
     rel = "".join(f'<li><a href="{r}{u}">{n}</a></li>' for n, u in related)
-    if photos: secs += '<section class="work" style="padding-top:clamp(70px,10vw,140px)"><header><h2>Real <b>jobs.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header><div class="strip">' + "".join(
-        f'<figure class="{"wide" if Image.open(f"img/{i}.webp").width > Image.open(f"img/{i}.webp").height else ""}"><img src="{r}img/{i}.webp" alt="{a}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>' for i, a, c in photos) + '</div></section>'
+    if photos: secs += pstrip(photos, r)
     html = head(title, desc, path, depth, schema, og_title, og_slug) + f'''
 <header class="sub-hero">
   <img src="{r}img/{img}.webp" alt="">
@@ -219,7 +248,7 @@ for s in SERVICES:
     if s["slug"] in SERVICE_VIDEOS:
         vids, h = SERVICE_VIDEOS[s["slug"]]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
     page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], secs,
-         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], s.get("photos", ()))
+         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], list(s.get("photos", ())) + PC.SERVICE.get(s["slug"], []))
     urls.append(path)
 
 for a in AREAS:
@@ -239,7 +268,7 @@ for a in AREAS:
     page(path, f"Artificial Turf & Putting Greens, {a} FL | AJ Turf",
          f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate.",
          a, f"Turf in<br><b>{a}.</b>", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price.",
-         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug)
+         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug, PC.CITY[a])
     urls.append(path)
 
 # Our Work: the proof hub YouTube descriptions and bios point to. A CTA band follows every 3 cards.
@@ -247,7 +276,7 @@ OW_TITLE, OW_H = "Recent Work — Watch Our Installs | AJ Turf, Southwest Florid
 groups = [OUR_WORK[i:i + 3] for i in range(0, len(OUR_WORK), 3)]
 page("our-work/", OW_TITLE, "Watch real AJ Turf installs: whole-property tours, a putting green built start to finish, and the install method on the job. Free onsite estimate.",
      "Our work", OW_H, "Walk finished yards and watch the method on real jobs. When you're ready, we'll measure yours for free.", "green-canal-tiki",
-     [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>"])],
+     [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>"])] + [pstrip(ids, "../", h) for h, ids in PC.OUR_WORK_RAILS],
      [crumbs([("AJ Turf", ""), ("Our work", "our-work/")])] + [vobj(v) for v in OUR_WORK],
      [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, CITY[a][0] + "/") for a in AREAS[:3]], "Real AJ Turf installs, on video", "our-work")
 PAGE_VIDEOS["our-work/"] = OUR_WORK
@@ -278,6 +307,7 @@ def article(g):
 </main>
 <aside class="toc"><p class="mono">In this guide</p><ol>{"".join(f"<li>{_re.sub(r'<[^>]+>','',t)}</li>" for t in _re.findall(r"<h2>(.*?)</h2>", g["body"]))}</ol>
 <a class="book" href="{BOOK}" target="_blank" rel="noopener" style="margin-top:26px;font-size:16px;padding:14px 20px">Free onsite estimate <span aria-hidden="true">→</span></a></aside></div>
+{pstrip(PC.GUIDE[g["slug"]], r, "From real <b>jobs.</b>") if g["slug"] in PC.GUIDE else ""}
 <section class="related"><span class="mono" style="color:var(--turf)">More from the Turf Guide</span><ul>{others}</ul></section>
 """ + close(2)
     os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(html)
