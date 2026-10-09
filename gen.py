@@ -11,6 +11,40 @@ BOOK = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2D
 TODAY = datetime.date.today().isoformat()
 AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel", "Lehigh Acres"]
 
+# YouTube videos (@AJTurf). Thumbs are self-hosted crops in img/vid/; add new uploads here, then to a page or OUR_WORK.
+# id: (YouTube title, schema description, seconds, upload date, vertical?, card caption)
+VIDEOS = {
+ "4j__CUFYhnQ": ("Whole-Yard Artificial Turf Transformation — Finished Property Tour", "A full walkthrough of a finished whole-property artificial turf install: front yard, both side yards and around the pool.", 134, "2026-10-09", True, "Whole-property tour · front, sides, pool"),
+ "3yovFZ8U0ns": ("Artificial Turf Lawn Walkthrough in Fort Myers, FL", "A finished AJ Turf lawn in Fort Myers, Florida: curved lawn, palms and planters, no mowing or watering.", 12, "2026-10-08", False, "Fort Myers · finished lawn"),
+ "IhduTxos9As": ("My First Job: Building a Backyard Putting Green Start to Finish", "A backyard putting green filmed day by day across seven visits, from the bare yard through excavation, base and weed barrier to the finished green.", 549, "2026-10-08", True, "Putting green · start to finish"),
+ "aATUhfArpEY": ("The AJ Method: How We Install Artificial Turf", "Jereme walks through the AJ Turf install method on a real Florida Keys job: excavation, base compaction, weed barrier and the turf going down.", 138, "2026-10-08", True, "The AJ Method · on a real job"),
+ "LgpH3u-eJ6A": ("Duck Key, FL Project Walkthrough — Whole-Property Turf & Landscaping", "A canal-front, whole-property turf and landscaping project in progress in Duck Key, in the Florida Keys.", 32, "2026-10-08", True, "Duck Key · canal-front, in progress"),
+ "HgPybt3IXWA": ("Coral Gables, FL Project Recap: New Fence, Privacy Hedges & Finished Turf", "A full-property recap in the Coral Gables area: new chain-link fence, a Clusia privacy hedge and finished artificial turf.", 53, "2026-10-08", True, "Coral Gables · fence, hedge, turf"),
+}
+OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA"]
+CITY_VIDEOS = {"Fort Myers": (["3yovFZ8U0ns"], "A finished Fort Myers <b>lawn.</b>")}  # geo-matched only: the video's city = the page's city
+SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A"], "Waterfront, <b>on the job.</b>")}
+
+def vcard(v, r):
+    t, _, _, _, tall, cap = VIDEOS[v]
+    return (f'<figure class="vid{"" if tall else " wide"}"><button class="yt" data-id="{v}" data-title="{t}" aria-label="Play video: {t}">'
+            f'<img src="{r}img/vid/{v}.webp" alt="" loading="lazy"><span class="play"></span></button><figcaption class="cap mono">{cap}</figcaption></figure>')
+
+def vcta():
+    return f'<p class="vid-cta"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a><a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a></p>'
+
+def vblock(ids, r, h2):
+    # no orphan video: the booking CTA sits directly under every player
+    return (f'<section class="work"><header><h2>{h2}</h2></header><div class="strip">' + "".join(vcard(v, r) for v in ids) + "</div>" + vcta() + "</section>")
+
+def vobj(v):
+    t, d, s, date, _, _ = VIDEOS[v]
+    return {"@type": "VideoObject", "name": t, "description": d, "thumbnailUrl": BASE + f"img/vid/{v}.webp", "uploadDate": date,
+            "duration": f"PT{s // 60}M{s % 60}S", "embedUrl": f"https://www.youtube.com/embed/{v}"}
+
+HOME_VIDEOS = ["4j__CUFYhnQ", "3yovFZ8U0ns", "aATUhfArpEY"]  # embedded by hand in index.html
+PAGE_VIDEOS = {"": HOME_VIDEOS}  # path -> video ids, for the video sitemap
+
 METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area with 6-inch metal or plastic edging, "
           "pour a 3 x 3 x 3 inch concrete border along the inside of it, lay a weed barrier over everything, then glue the "
           "turf edges to the concrete with turf glue that carries a 15-year warranty.</p>"
@@ -94,7 +128,7 @@ def head(title, desc, path, depth, schema, og_title=None, og_slug="home"):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFM29XK9QK"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','G-EFM29XK9QK');
-document.addEventListener('click',e=>{{const a=e.target.closest('a');if(!a)return;if(a.href.includes('appointments/schedules'))gtag('event','generate_lead',{{method:'booking_link'}});else if(a.href.startsWith('tel:'))gtag('event','generate_lead',{{method:'phone_call'}});}});</script>
+document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+y.dataset.id+'?autoplay=1&playsinline=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=y.dataset.title;y.replaceWith(f);gtag('event','video_play',{{video_title:y.dataset.title}});return}}const a=e.target.closest('a');if(!a)return;if(a.href.includes('appointments/schedules'))gtag('event','generate_lead',{{method:'booking_link'}});else if(a.href.startsWith('tel:'))gtag('event','generate_lead',{{method:'phone_call'}});}});</script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{BASE}{path}">
@@ -129,7 +163,7 @@ def close(depth):
       <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a></div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span><span class="foot-links"><a href="https://www.instagram.com/aj.turf" rel="me noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/aj.turf" rel="me noopener" target="_blank">Facebook</a><a href="https://www.youtube.com/@AJTurf" rel="me noopener" target="_blank">YouTube</a></span></footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span><span class="foot-links"><a href="https://www.instagram.com/aj.turf" rel="me noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/aj.turf" rel="me noopener" target="_blank">Facebook</a><a href="https://www.youtube.com/@AJTurf" rel="me noopener" target="_blank">YouTube</a></span></footer>
 <script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
 </html>'''
@@ -154,7 +188,7 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
     depth = path.count("/")
     r = "../" * depth
     schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra + [faq_schema(FAQ_BLOCK)]}
-    secs = "".join(f'<section class="prose"><h2>{h}</h2><div class="body">{b}</div></section>' for h, b in sections)
+    secs = "".join(x if isinstance(x, str) else f'<section class="prose"><h2>{x[0]}</h2><div class="body">{x[1]}</div></section>' for x in sections)
     rel = "".join(f'<li><a href="{r}{u}">{n}</a></li>' for n, u in related)
     if photos: secs += '<section class="work" style="padding-top:clamp(70px,10vw,140px)"><header><h2>Real <b>jobs.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header><div class="strip">' + "".join(
         f'<figure class="{"wide" if Image.open(f"img/{i}.webp").width > Image.open(f"img/{i}.webp").height else ""}"><img src="{r}img/{i}.webp" alt="{a}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>' for i, a, c in photos) + '</div></section>'
@@ -181,8 +215,11 @@ for s in SERVICES:
     t, ogt, desc, _ = SEO[s["slug"]]
     svc = {"@type": "Service", "name": s["title"], "serviceType": s["kw"], "provider": {"@id": BASE + "#business"},
            "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS], "url": BASE + path}
-    page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], s["sections"],
-         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])], rel, ogt, s["slug"], s.get("photos", ()))
+    secs, vids = list(s["sections"]), []
+    if s["slug"] in SERVICE_VIDEOS:
+        vids, h = SERVICE_VIDEOS[s["slug"]]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
+    page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], secs,
+         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], s.get("photos", ()))
     urls.append(path)
 
 for a in AREAS:
@@ -194,13 +231,27 @@ for a in AREAS:
       ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. Many HOAs still ask for architectural review before you install. We'll give you the product specs and install details your HOA usually asks for.</p>"),
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
     ]
+    vids = []
+    if a in CITY_VIDEOS:
+        vids, h = CITY_VIDEOS[a]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
     biz = dict(org()); biz["@id"] = BASE + path + "#area"; biz["areaServed"] = {"@type": "City", "name": a + ", FL"}
     page(path, f"Artificial Turf & Putting Greens, {a} FL | AJ Turf",
          f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate.",
          a, f"Turf in<br><b>{a}.</b>", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price.",
-         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])], rel, f"Artificial turf and putting greens in {a}", slug)
+         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug)
     urls.append(path)
+
+# Our Work: the proof hub YouTube descriptions and bios point to. A CTA band follows every 3 cards.
+OW_TITLE, OW_H = "Recent Work — Watch Our Installs | AJ Turf, Southwest Florida", "Real installs,<br><b>on video.</b>"
+groups = [OUR_WORK[i:i + 3] for i in range(0, len(OUR_WORK), 3)]
+page("our-work/", OW_TITLE, "Watch real AJ Turf installs: whole-property tours, a putting green built start to finish, and the install method on the job. Free onsite estimate.",
+     "Our work", OW_H, "Walk finished yards and watch the method on real jobs. When you're ready, we'll measure yours for free.", "green-canal-tiki",
+     [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>"])],
+     [crumbs([("AJ Turf", ""), ("Our work", "our-work/")])] + [vobj(v) for v in OUR_WORK],
+     [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, CITY[a][0] + "/") for a in AREAS[:3]], "Real AJ Turf installs, on video", "our-work")
+PAGE_VIDEOS["our-work/"] = OUR_WORK
+urls.append("our-work/")
 
 # Turf Guide
 from guide_content import GUIDES
@@ -256,8 +307,14 @@ open("privacy/index.html", "w", encoding="utf-8").write(head("Privacy | AJ Turf"
 </main>''' + close(1))
 urls.append("privacy/")
 
-open("sitemap.xml", "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + "</urlset>\n")
+from html import escape as _esc
+def vsite(v):
+    t, d, sec, date, _, _ = VIDEOS[v]
+    return (f"<video:video><video:thumbnail_loc>{BASE}img/vid/{v}.webp</video:thumbnail_loc><video:title>{_esc(t)}</video:title>"
+            f"<video:description>{_esc(d)}</video:description><video:player_loc>https://www.youtube.com/embed/{v}</video:player_loc>"
+            f"<video:duration>{sec}</video:duration><video:publication_date>{date}</video:publication_date></video:video>")
+open("sitemap.xml", "w", encoding="utf-8").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n' +
+    "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod>{''.join(vsite(v) for v in PAGE_VIDEOS.get(u, []))}</url>\n" for u in urls) + "</urlset>\n")
 open("robots.txt", "w").write("User-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in
     ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "PerplexityBot", "Google-Extended", "Applebot-Extended", "Bingbot"]) +
     f"Sitemap: {BASE}sitemap.xml\n")
@@ -283,6 +340,7 @@ from playwright.sync_api import sync_playwright
 cards = [("home", "hero-after", "Turf that looks like it<br>was <b>always there.</b>")]
 cards += [(x["slug"], x["img"], SEO[x["slug"]][3]) for x in SERVICES]
 cards += [(CITY[a][0], CITY[a][2], f"Artificial turf in<br><b>{a}.</b>") for a in AREAS]
+cards += [("our-work", "green-canal-tiki", OW_H)]
 cards += [("guide-" + g["slug"], g["img"], g["title"]) for g in (GUIDES if PUBLISH_GUIDE else [])]
 os.makedirs("img/og", exist_ok=True)
 root = pathlib.Path(".").resolve().as_uri() + "/"
