@@ -1,6 +1,6 @@
 # Generates service + city pages, sitemap, robots, llms.txt for the AJ Turf site.
 # Run: python gen.py   (home page index.html is hand-built; this only writes the rest)
-import json, os, datetime
+import json, os, datetime, re
 from PIL import Image
 
 BASE = "https://ajturffl.com/"  # ponytail: swap to the real domain when it exists
@@ -74,6 +74,72 @@ def pstrip(items, r, h2="Real <b>jobs.</b>", style=' style="padding-top:clamp(70
     return (f'<section class="work"{style}><header><h2>{h2}</h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>'
             f'<div class="strip">' + "".join(fig(x, r) for x in items) + "</div>" + vcta() + "</section>")
 
+# Project pages (projects.py, from Muse's staging manifest). Masters are HEIC/MOV; only web derivatives ship.
+# Re-saving through PIL drops EXIF, so no GPS from clients' homes leaves this machine.
+import projects as PJ
+try:
+    import pillow_heif; pillow_heif.register_heif_opener()
+except ImportError:
+    pass
+from PIL import ImageOps, ImageFilter, ImageStat
+# P-07: the house number plaque beside the door, painted out in every frame that shows it (rects in source pixels)
+PATCH = {"018.jpg": (500,135,518,170), "122.jpg": (646,222,664,252), "168.jpg": (491,316,510,360), "247.jpg": (592,113,609,145),
+         "204.jpg": (935,257,957,308), "133.jpg": (410,141,428,184), "IMG_3440.HEIC": (1070,680,1135,860)}
+def _patch(im, r):
+    x0, y0, x1, y1 = r; m = max(4, (x1 - x0) // 3)
+    ring = [im.crop((x0 - m, y0, x0, y1)), im.crop((x1, y0, x1 + m, y1))]
+    im.paste(tuple(int(sum(ImageStat.Stat(c).median[i] for c in ring) / 2) for i in range(3)), r)
+    reg = im.crop((x0 - m, y0 - m, x1 + m, y1 + m)).filter(ImageFilter.GaussianBlur(m / 3))
+    im.paste(reg.crop((m // 2, m // 2, reg.width - m // 2, reg.height - m // 2)), (x0 - m + m // 2, y0 - m + m // 2))
+
+def wfile(p, f, n):
+    # img/w/<project-slug>-NN-800.webp (+1600): descriptive names, built once
+    base = f"img/w/{p['slug']}-{n:02d}"
+    if not os.path.exists(base + "-800.webp"):
+        im = ImageOps.exif_transpose(Image.open(os.path.join(PJ.STAGE, p["dir"], f))).convert("RGB")
+        if p["dir"].endswith("P-07-south-miami-lawn") and f in PATCH: _patch(im, PATCH[f])
+        os.makedirs("img/w", exist_ok=True)
+        for w in (800, 1600):
+            if w == 800 or im.width >= 1600:
+                im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(f"{base}-{w}.webp", quality=76)
+    im = Image.open(base + "-800.webp")
+    return base, im.width, im.height, os.path.exists(base + "-1600.webp")
+
+import subprocess
+def poster(p):
+    base = f"img/w/{p['slug']}-poster"
+    if not os.path.exists(base + "-800.webp"):
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", f"vid/w/{p['slug']}.mp4", "-frames:v", "1", "-vf", "scale='min(800,iw)':-2", base + "-800.webp"], check=True)
+    im = Image.open(base + "-800.webp")
+    return base, im.width, im.height, False, "F"
+
+KIND = {"F": "Finished", "D": "Finished · detail", "B": "Before", "P": "During the install"}
+for p in PJ.PROJECTS:
+    p["imgs"] = []
+    for n, (f, k) in enumerate(p["photos"], 1):
+        base, w, h, big = wfile(p, f, n); p["imgs"].append((base, w, h, big, k))
+    if p.get("slider"):
+        p["ba"] = [wfile(p, f, 90 + i) for i, f in enumerate(p["slider"][:2])]
+    p["hero"] = next((i for i in p["imgs"] if i[4] == "F"), None) or poster(p)  # no finished still: the finished video's frame
+    p["path"] = f"work/{p['slug']}/"
+
+def pfig(p, i, r, n, total):
+    base, w, h, big, k = i
+    t = re.sub(r"<[^>]+>", "", p["title"]).replace("&amp;", "&")
+    alt = f"{KIND[k]}: {t.lower()} in {p['city']}" + ("" if k in "BP" else f", photo {n} of {total}")
+    ss = f' srcset="{r}{base}-800.webp 800w, {r}{base}-1600.webp 1600w" sizes="(max-width:860px) 88vw, 780px"' if big else ""
+    return (f'<figure class="{"wide" if w > h else ""}"><img src="{r}{base}-800.webp"{ss} alt="{alt}" width="{w}" height="{h}" loading="lazy">'
+            f'<figcaption class="cap mono">{KIND[k]} · {p["city"]}</figcaption></figure>')
+
+def card(p, r):
+    base, w, h, big, _ = p["hero"]
+    return (f'<li><a href="{r}{p["path"]}"><img src="{r}{base}-800.webp" alt="" width="{w}" height="{h}" loading="lazy">'
+            f'<span class="mono">{p["city"]}</span><h3>{p["title"]}</h3></a></li>')
+
+def cards(ps, r, h2, kicker="Projects"):
+    return (f'<section class="pcards"><header><span class="mono" style="color:var(--turf)">{kicker}</span><h2>{h2}</h2></header>'
+            f'<ul>{"".join(card(p, r) for p in ps)}</ul>{vcta()}</section>')
+
 METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area with 6-inch metal or plastic edging, "
           "pour a 3 x 3 x 3 inch concrete border along the inside of it, lay a weed barrier over everything, then glue the "
           "turf edges to the concrete with turf glue that carries a 15-year warranty.</p>"
@@ -136,7 +202,7 @@ CITY = {
  "Fort Myers": ("fort-myers", "Lee County", "hero-after",
    "Fort Myers yards deal with sandy soil, summer downpours and shade from mature trees. Turf on a compacted, draining base handles all three."),
  "Cape Coral": ("cape-coral", "Lee County", "waterfront",
-   "Cape Coral is canal country. Waterfront lots, seawalls and pool cages are where turf and putting greens make the biggest difference."),
+   "Cape Coral is canal country. Waterfront lots and pool cages are where turf and putting greens make the biggest difference."),
  "Naples": ("naples", "Collier County", "courtyard",
    "Naples homes and HOA communities expect a finished, high-end look. Tight edges, hidden seams and a natural-looking turf matter here."),
  "Estero": ("estero", "Lee County", "backyard-green",
@@ -158,6 +224,7 @@ def head(title, desc, path, depth, schema, og_title=None, og_slug="home"):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFM29XK9QK"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','G-EFM29XK9QK');
+document.addEventListener('input',e=>{{const b=e.target.closest('.ba');if(b)b.style.setProperty('--p',e.target.value+'%')}});
 document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+y.dataset.id+'?autoplay=1&playsinline=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=y.dataset.title;y.replaceWith(f);gtag('event','video_play',{{video_title:y.dataset.title}});return}}const a=e.target.closest('a');if(!a)return;if(a.href.includes('appointments/schedules'))gtag('event','generate_lead',{{method:'booking_link'}});else if(a.href.startsWith('tel:'))gtag('event','generate_lead',{{method:'phone_call'}});}});</script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -245,6 +312,8 @@ for s in SERVICES:
     svc = {"@type": "Service", "name": s["title"], "serviceType": s["kw"], "provider": {"@id": BASE + "#business"},
            "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS], "url": BASE + path}
     secs, vids = list(s["sections"]), []
+    ps = [p for p in PJ.PROJECTS if any(svc == s["slug"] and a in (p["app"], p.get("also")) for a, _, svc in PJ.APPS)]
+    if ps: secs.append(cards(ps, "../", "Real projects, <b>start to finish.</b>"))
     if s["slug"] in SERVICE_VIDEOS:
         vids, h = SERVICE_VIDEOS[s["slug"]]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
     page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], secs,
@@ -261,6 +330,8 @@ for a in AREAS:
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
     ]
     vids = []
+    ps = [p for p in PJ.PROJECTS if p["city"].startswith(a + ",")]
+    if ps: secs.insert(1, cards(ps, "../", f"Projects in <b>{a}.</b>"))
     if a in CITY_VIDEOS:
         vids, h = CITY_VIDEOS[a]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
@@ -276,11 +347,68 @@ OW_TITLE, OW_H = "Recent Work — Watch Our Installs | AJ Turf, Southwest Florid
 groups = [OUR_WORK[i:i + 3] for i in range(0, len(OUR_WORK), 3)]
 page("our-work/", OW_TITLE, "Watch real AJ Turf installs: whole-property tours, a putting green built start to finish, and the install method on the job. Free onsite estimate.",
      "Our work", OW_H, "Walk finished yards and watch the method on real jobs. When you're ready, we'll measure yours for free.", "green-canal-tiki",
-     [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>"])] + [pstrip(ids, "../", h) for h, ids in PC.OUR_WORK_RAILS],
+     [cards([p for p in PJ.PROJECTS if a in (p["app"], p.get("also"))], "../", h, "By type of job") for a, h, _ in PJ.APPS] + [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>"])] + [pstrip(ids, "../", h) for h, ids in PC.OUR_WORK_RAILS],
      [crumbs([("AJ Turf", ""), ("Our work", "our-work/")])] + [vobj(v) for v in OUR_WORK],
      [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, CITY[a][0] + "/") for a in AREAS[:3]], "Real AJ Turf installs, on video", "our-work")
 PAGE_VIDEOS["our-work/"] = OUR_WORK
 urls.append("our-work/")
+
+# Project pages: one per staged set, application first, city as a label
+def vmeta(p):
+    # self-hosted clip (vid/w/<slug>.mp4, encoded from the staged master); poster + duration for the player and VideoObject
+    mp4 = f"vid/w/{p['slug']}.mp4"; base, w, h, _, _ = poster(p)
+    d = float(subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", mp4], capture_output=True, text=True).stdout)
+    return mp4, base + "-800.webp", round(d), w, h
+
+def project_page(p):
+    r, path = "../../", p["path"]
+    t = re.sub(r"<[^>]+>", "", p["title"]).replace("&amp;", "&")
+    app = next(h for a, h, _ in PJ.APPS if a == p["app"]); app_txt = re.sub(r"<[^>]+>", "", app).replace("&amp;", "&").rstrip(".")
+    svc = next(x for a, _, x in PJ.APPS if a == p["app"])
+    fin = [i for i in p["imgs"] if i[4] in "FD"]; pre = [i for i in p["imgs"] if i[4] in "BP"]
+    graph = [org(), crumbs([("AJ Turf", ""), ("Our work", "our-work/"), (f"{t}, {p['city']}", path)])]
+    body = ""
+    if p.get("ba"):
+        (bb, bw, bh, bbig), (ab, aw, ah, abig) = p["ba"]
+        body += (f'<section class="work"><header><h2>Before &amp; <b>after.</b></h2><span class="mono" style="color:var(--stone)">Drag to compare</span></header>'
+                 f'<div class="ba" style="--p:50%;aspect-ratio:{aw}/{ah}"><img src="{r}{ab}-{1600 if abig else 800}.webp" alt="After: {t.lower()} in {p["city"]}" loading="lazy">'
+                 f'<div class="ba-b"><img src="{r}{bb}-{1600 if bbig else 800}.webp" alt="Before: the same view before the install" loading="lazy"></div>'
+                 f'<span class="mono ba-l">Before</span><span class="mono ba-r">After</span>'
+                 f'<input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after"></div>'
+                 f'<p class="mono ba-cap">{p["slider"][2]}</p>{vcta()}</section>')
+    if fin: body += (f'<section class="work"><header><h2>The finished <b>job.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>'
+             f'<div class="strip">{"".join(pfig(p, i, r, n, len(fin)) for n, i in enumerate(fin, 1))}</div>{vcta()}</section>')
+    if p.get("video"):
+        mp4, poster, sec, pw, ph = vmeta(p)
+        body += (f'<section class="work"><header><h2>On <b>video.</b></h2></header><div class="pvid"><video controls preload="none" playsinline '
+                 f'poster="{r}{poster}" width="{pw}" height="{ph}" aria-label="{p["video"][1]}: {t.lower()} in {p["city"]}"><source src="{r}{mp4}" type="video/mp4"></video>'
+                 f'<p class="mono">{p["video"][1]} · {p["city"]}</p></div>{vcta()}</section>')
+        graph.append({"@type": "VideoObject", "name": f"{t}, {p['city']}: {p['video'][1].lower()}", "description": p["blurb"],
+                      "thumbnailUrl": BASE + poster, "contentUrl": BASE + mp4, "uploadDate": TODAY, "duration": f"PT{sec // 60}M{sec % 60}S"})
+    if p.get("youtube"):
+        body += vblock([p["youtube"]], r, "On <b>video.</b>"); graph.append(vobj(p["youtube"])); PAGE_VIDEOS[path] = [p["youtube"]]
+    if pre:
+        body += (f'<section class="work"><header><h2>Before &amp; <b>during.</b></h2><span class="mono" style="color:var(--stone)">Not the finished job</span></header>'
+                 f'<div class="strip">{"".join(pfig(p, i, r, n, len(pre)) for n, i in enumerate(pre, 1))}</div>{vcta()}</section>')
+    facts = f'<ul><li><b>Type of job:</b> {app_txt}</li><li><b>Where:</b> {p["city"]}</li>' + (f'<li><b>When:</b> {p["when"]}</li>' if p["when"] else "") + "</ul>"
+    if svc: facts += f'<p><a href="{r}{svc}/" style="color:var(--turf)">More about {next(x["title"] for x in SERVICES if x["slug"] == svc).lower()} →</a></p>'
+    body += f'<section class="prose"><h2>About this <b>job.</b></h2><div class="body"><p>{p["blurb"]}</p>{facts}</div></section>'
+    more = [q for q in PJ.PROJECTS if q is not p and q["app"] == p["app"]][:4]
+    if more: body += cards(more, r, f"More {app_txt.lower()}", "Keep looking")
+    hb, hw, hh, hbig, _ = p["hero"]
+    desc = f"{t} in {p['city']} by AJ Turf: photos{' and video' if p.get('video') or p.get('youtube') else ''} from a real job. Free onsite estimate, one exact price."
+    html = head(f"{t}, {p['city']} | AJ Turf Project", desc, path, 2, {"@context": "https://schema.org", "@graph": graph}, f"{t}, {p['city']}", "proj-" + p["slug"]) + f'''
+<header class="sub-hero">
+  <img src="{r}{hb}-{1600 if hbig else 800}.webp" alt="" fetchpriority="high">
+  <div class="in"><span class="mono crumbs"><a href="{r}">AJ Turf</a> / <a href="{r}our-work/">Our work</a> / {app_txt}</span>
+    <h1>{p["title"]}<br><b>{p["city"]}.</b></h1><p class="lede">{p["blurb"]}</p>
+    <p style="margin-top:28px"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a></p></div>
+</header>
+<main>{body}</main>
+''' + close(2)
+    os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(html)
+    urls.append(path)
+for p in PJ.PROJECTS: project_page(p)
 
 # Turf Guide
 from guide_content import GUIDES
@@ -371,6 +499,7 @@ cards = [("home", "hero-after", "Turf that looks like it<br>was <b>always there.
 cards += [(x["slug"], x["img"], SEO[x["slug"]][3]) for x in SERVICES]
 cards += [(CITY[a][0], CITY[a][2], f"Artificial turf in<br><b>{a}.</b>") for a in AREAS]
 cards += [("our-work", "green-canal-tiki", OW_H)]
+cards += [("proj-" + p["slug"], p["hero"][0][4:] + ("-1600" if p["hero"][3] else "-800"), f'{p["title"]}<br><b>{p["city"]}.</b>') for p in PJ.PROJECTS]
 cards += [("guide-" + g["slug"], g["img"], g["title"]) for g in (GUIDES if PUBLISH_GUIDE else [])]
 os.makedirs("img/og", exist_ok=True)
 root = pathlib.Path(".").resolve().as_uri() + "/"
