@@ -31,7 +31,7 @@ def vcard(v, r):
             f'<img src="{r}img/vid/{v}.webp" alt="" loading="lazy"><span class="play"></span></button><figcaption class="cap mono">{cap}</figcaption></figure>')
 
 def vcta():
-    return f'<p class="vid-cta"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a><a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a></p>'
+    return f'<p class="vid-cta"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a><a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a><a class="alt mono" href="sms:{PHONE_HREF}">Or text us</a></p>'
 
 def vblock(ids, r, h2):
     # no orphan video: the booking CTA sits directly under every player
@@ -247,6 +247,7 @@ document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{co
   <a class="cta mono" href="#book">Free estimate</a>
 </nav>'''
 
+QF = open("_qf.html", encoding="utf-8").read().strip()  # the quick form, shared with the hand-built home page
 def close(depth):
     r = "../" * depth
     svc = "".join(f'<a href="{r}{s["slug"]}/">{s["nav"]}</a>' for s in SERVICES)
@@ -257,7 +258,8 @@ def close(depth):
     <h2>See it in<br><b>your yard.</b></h2>
     <div><p style="max-width:380px;margin-bottom:24px">Book a free onsite estimate. We'll measure, bring samples you can feel, and leave you with one exact price.</p>
       <a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a>
-      <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a></div>
+      <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a><a class="alt mono" href="sms:{PHONE_HREF}">Or text us</a>
+      {QF}</div>
   </div>
 </section>
 <footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span><span class="foot-links"><a href="https://www.instagram.com/aj.turf" rel="me noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/aj.turf" rel="me noopener" target="_blank">Facebook</a><a href="https://www.youtube.com/@AJTurf" rel="me noopener" target="_blank">YouTube</a></span></footer>
