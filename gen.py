@@ -380,7 +380,8 @@ def project_page(p):
                  f'<p class="mono ba-cap">{p["slider"][2]}</p>{vcta()}</section>')
     if fin: body += (f'<section class="work"><header><h2>The finished <b>job.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>'
              f'<div class="strip">{"".join(pfig(p, i, r, n, len(fin)) for n, i in enumerate(fin, 1))}</div>{vcta()}</section>')
-    if p.get("video"):
+    # held_silent: audio had to come off (private talk / music) and Jereme ruled no silent video (10/11) -> off the page until it has a cleared music bed
+    if p.get("video") and not p.get("held_silent"):
         mp4, poster, sec, pw, ph = vmeta(p)
         body += (f'<section class="work"><header><h2>On <b>video.</b></h2></header><div class="pvid"><video controls preload="none" playsinline '
                  f'poster="{r}{poster}" width="{pw}" height="{ph}" aria-label="{p["video"][1]}: {t.lower()} in {p["city"]}"><source src="{r}{mp4}" type="video/mp4"></video>'
@@ -398,7 +399,7 @@ def project_page(p):
     more = [q for q in PJ.PROJECTS if q is not p and q["app"] == p["app"]][:4]
     if more: body += cards(more, r, f"More {app_txt.lower()}", "Keep looking")
     hb, hw, hh, hbig, _ = p["hero"]
-    desc = f"{t} in {p['city']} by AJ Turf: photos{' and video' if p.get('video') or p.get('youtube') else ''} from a real job. Free onsite estimate, one exact price."
+    desc = f"{t} in {p['city']} by AJ Turf: photos{' and video' if (p.get('video') and not p.get('held_silent')) or p.get('youtube') else ''} from a real job. Free onsite estimate, one exact price."
     html = head(f"{t}, {p['city']} | AJ Turf Project", desc, path, 2, {"@context": "https://schema.org", "@graph": graph}, f"{t}, {p['city']}", "proj-" + p["slug"]) + f'''
 <header class="sub-hero">
   <img src="{r}{hb}-{1600 if hbig else 800}.webp" alt="" fetchpriority="high">
