@@ -73,11 +73,11 @@ PHOTOS = {  # id: (alt, caption)
 }
 
 # Before/after pairs are listed as ("pair", before, after) so they always render side by side.
-HOME = ["028", "144", "246", "230", "201", "049", "111", "074", "189", "114", "green_backyard_01", "043"]
+HOME = ["028", "144", "246", "230", "201", "049", "074", "189", "114", "green_backyard_01", "043"]
 SERVICE = {
  "artificial-turf-installation": ["142", "176", "098", "120", "269", "134"],
  "pet-turf": ["060", "134", "032", "137", "232"],
- "putting-greens": ["green_canal_01", "green_canal_02", "green_waterfront_01", "green_waterfront_02", "green_waterfront_04", "green_bigyard_01"],
+ "putting-greens": ["green_canal_01", "green_canal_02", "green_waterfront_01", "green_waterfront_02", "green_waterfront_04", "green_waterfront_03"],
  "pool-and-paver-turf": ["068", "124", "190", "256", "093", "281"],
  "turf-repair": [("pair", "018", "001"), "025", "013"],
 }
@@ -87,7 +87,7 @@ CITY = {
  "Naples": ["053", "147", "161"],
  "Estero": ["107", "249", "196", "031"],
  "Bonita Springs": ["237", "190", "232", "069"],
- "Sanibel": ["043", "068", "111", "124"],
+ "Sanibel": ["043", "111", "124"],
  "Lehigh Acres": ["114", "120", "269", "098"],
 }
 # Muse's 22-photo wall, grouped into rails; each rail ends at the booking CTA
