@@ -203,7 +203,7 @@ def org():
             "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og/home.jpg", "logo": BASE + "img/mark.svg",
             "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS],
             "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate",
-            "sameAs": ["https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.youtube.com/@AJTurf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/", "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"]}
+            "sameAs": ["https://www.yelp.com/biz/aj-turf-fort-myers", "https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.youtube.com/@AJTurf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/", "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"]}
 
 def crumbs(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
