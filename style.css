@@ -294,3 +294,12 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 /* hero: says what + where before the scroll story (Jereme 10/12 red team #2) */
 .h1-kicker{display:table;margin-bottom:18px;padding:6px 10px;border-radius:4px;background:rgba(18,22,19,.62);font-family:var(--mono);font-size:clamp(12px,1.3vw,15px);font-weight:500;letter-spacing:.14em;line-height:1.4;text-transform:uppercase;color:var(--white);text-shadow:0 1px 3px rgba(0,0,0,.55)}
 @media (max-width:560px){.h1-kicker{font-size:11px;letter-spacing:.06em}}
+/* reviews (Thumbtack, verbatim; Jereme 10/12) */
+.reviews{padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px);background:var(--white)}
+.reviews ul{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:980px){.reviews ul{grid-template-columns:1fr}}
+.reviews li{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:28px;border:1px solid #dfe3dc;border-radius:6px;background:#fff}
+.reviews li p{margin:0;font-size:17px;line-height:1.6}
+.reviews li .mono{color:var(--stone);font-size:13px;letter-spacing:.08em}
+.rv-note{margin-top:28px;color:var(--stone);font-size:13px;letter-spacing:.06em}
+.rv-note a{color:var(--turf)}

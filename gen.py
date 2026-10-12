@@ -1,6 +1,6 @@
 # Generates service + city pages, sitemap, robots, llms.txt for the AJ Turf site.
 # Run: python gen.py   (home page index.html is hand-built; this only writes the rest)
-import json, os, datetime, re
+import json, os, datetime, re, html
 from PIL import Image
 
 BASE = "https://ajturffl.com/"  # ponytail: swap to the real domain when it exists
@@ -153,6 +153,23 @@ METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area w
           "turf edges to the concrete with turf glue that carries a 15-year warranty.</p>"
           "<p>Most installers pin turf down with 6-inch steel spikes driven through the whole lawn. Spikes work loose, can hurt "
           "bare feet and paws, and tear the backing over time. A glued edge is safer and lasts longer.</p>")
+
+# Thumbtack reviews, VERBATIM from FROM-MUSE-reviews-2026-10-12.md (all 14 are 5 stars, earned as AJ Supply).
+# Left out on purpose: Darleen S. (Jereme's mother: his call), Lori L. (a deck job), the one-liners.
+TT_URL = "https://www.thumbtack.com/fl/hollywood/artificial-turf-installation/aj-supply-artificial-turf-wholesale-install/service/426865480544509963"
+REVIEWS = [
+ ("Patricia C.", "2021", "Jereme and his team were excellent. They were professional and courteous during the original estimate. Jereme was able to answer all of my questions and find a grass and layout that worked for my home. The kids and dogs absolutely love our new fake grass and now I don't have to worry about dirt, mud or bugs!!"),
+ ("Melissa H.", "2022", "Jereme Strange was a great help in getting me through this process of leaving my horrible Florida Sod to this amazing stress free Turf. I would 100% recommend anyone who has been thinking about Turf to use AJ Supply. Jereme was so responsive to my needs, he gave very realistic expectations and was straight forward about everything."),
+ ("Dante D.", "2022", "Team was very professional and courteous. They took the time to break down each detail of my install. They have helped me create my dream back yard! I am a customer for life."),
+ ("Tiffany M.", "", "Hands down the best company to go to for all your turf needs. His professionalism and attention to detail is unmatched. Great customer service. You won't be disappointed!"),
+ ("Karla S.", "2023", "Jereme is very professional and listened to all my needs and wants without any hesitation. His work is very good and I can tell that he loves what he does, he is a true craftman and an artist."),
+ ("Adriana T.", "2022", "Great work from beginning to end. The service was smooth and very straight-forward. The team really went the extra mile at every stage and were so very helpful answering any concerns. I would recommend them unreservedly."),
+]
+def reviews_block(n=6):
+    cards = "".join(f'<li><p>&ldquo;{html.escape(t)}&rdquo;</p><span class="mono">{who}{" · " + y if y else ""} · Thumbtack</span></li>' for who, y, t in REVIEWS[:n])
+    return (f'<section class="reviews" id="reviews"><header><span class="mono" style="color:var(--turf)">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0 · 14 reviews on Thumbtack</span>'
+            f'<h2 style="margin-top:18px">What clients <b>say.</b></h2></header><ul>{cards}</ul>'
+            f'<p class="rv-note mono">Earned under our former name, AJ Supply. <a href="{TT_URL}" target="_blank" rel="noopener">Read all 14 on Thumbtack &rarr;</a></p></section>')
 
 FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most installs run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
 <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
@@ -308,6 +325,7 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
     <p style="margin-top:28px"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a></p></div>
 </header>
 <main>{secs}
+{reviews_block(3)}
 <section class="split" style="grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)"><div><span class="mono" style="color:var(--turf)">Questions</span><h2 style="margin-top:18px">Good to<br><b>know.</b></h2></div><div>
 {FAQ_BLOCK}</div></section>
 <section class="related"><span class="mono" style="color:var(--turf)">Keep looking</span><ul>{rel}</ul></section>
@@ -533,4 +551,8 @@ p{{margin:0;font:500 17px 'JetBrains Mono';letter-spacing:.12em;color:#4FB4C3}}<
         pg.screenshot(path=f"img/og/{slug}.jpg", type="jpeg", quality=86)
     b.close()
 os.remove("_og.html")
+# home page is hand-built: refresh its reviews block between the markers
+_h = open("index.html", encoding="utf-8").read()
+_h = re.sub(r"<!--REVIEWS-->.*?<!--/REVIEWS-->", lambda m: "<!--REVIEWS-->" + reviews_block(6) + "<!--/REVIEWS-->", _h, flags=re.S)
+open("index.html", "w", encoding="utf-8").write(_h)
 print(len(urls), "urls,", len(cards), "og cards")
