@@ -252,3 +252,30 @@ footer{padding-bottom:96px}
 .qf-c{font-size:13px;color:#aeb5ad}
 .qf-m{font-size:15px;color:var(--aqua);min-height:1.2em}
 @media (max-width:860px){.alt{margin-right:20px}}
+
+/* strip arrows + counter (site.js), project photo grid + full-screen viewer, social icons (10/11) */
+.snav{display:flex;align-items:center;gap:14px;padding:16px clamp(20px,6vw,90px) 0}
+.snav[hidden]{display:none}
+.sbtn{width:44px;height:44px;border:1px solid #c5cac3;background:var(--white);color:var(--lanai);font-size:18px;cursor:pointer}
+.sbtn:hover:not(:disabled){background:var(--lanai);color:var(--white)}
+.sbtn:disabled{opacity:.35;cursor:default}
+.scount{color:var(--stone);min-width:64px;text-align:center}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;padding:0 clamp(20px,6vw,90px)}
+.pgrid figure{position:relative;overflow:hidden}
+.pgrid .zoom{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.pgrid img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;transition:transform .6s}
+.pgrid .zoom:hover img{transform:scale(1.03)}
+.pgrid .cap{pointer-events:none}
+@media (max-width:560px){.pgrid{grid-template-columns:1fr 1fr;gap:6px}.pgrid .cap{display:none}}
+dialog.lb{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(10,12,10,.96);color:var(--white)}
+dialog.lb::backdrop{background:rgba(10,12,10,.96)}
+.lb figure{position:absolute;inset:56px 64px 48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.lb img{max-width:100%;max-height:calc(100% - 30px);object-fit:contain}
+.lb figcaption{color:#c9cfc8}
+.lb button{position:absolute;background:rgba(250,251,249,.12);color:var(--white);border:0;width:48px;height:48px;font-size:24px;cursor:pointer}
+.lb button:hover{background:rgba(250,251,249,.25)}
+.lb-x{top:12px;right:12px}.lb-p{left:10px;top:50%;transform:translateY(-50%)}.lb-n{right:10px;top:50%;transform:translateY(-50%)}
+@media (max-width:560px){.lb figure{inset:56px 8px 64px}.lb-p,.lb-n{top:auto;bottom:10px;transform:none}}
+.social{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.social a{display:inline-flex;padding:4px;color:#c9cfc8;transition:color .2s}
+.social a:hover{color:var(--aqua)}

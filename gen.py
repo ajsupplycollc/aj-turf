@@ -71,7 +71,7 @@ def fig(item, r):
 
 def pstrip(items, r, h2="Real <b>jobs.</b>", style=' style="padding-top:clamp(70px,10vw,140px)"'):
     # every photo gallery ends at the booking CTA
-    return (f'<section class="work"{style}><header><h2>{h2}</h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>'
+    return (f'<section class="work"{style}><header><h2>{h2}</h2></header>'
             f'<div class="strip">' + "".join(fig(x, r) for x in items) + "</div>" + vcta() + "</section>")
 
 # Project pages (projects.py, from Muse's staging manifest). Masters are HEIC/MOV; only web derivatives ship.
@@ -130,6 +130,14 @@ def pfig(p, i, r, n, total):
     ss = f' srcset="{r}{base}-800.webp 800w, {r}{base}-1600.webp 1600w" sizes="(max-width:860px) 88vw, 780px"' if big else ""
     return (f'<figure class="{"wide" if w > h else ""}"><img src="{r}{base}-800.webp"{ss} alt="{alt}" width="{w}" height="{h}" loading="lazy">'
             f'<figcaption class="cap mono">{KIND[k]} · {p["city"]}</figcaption></figure>')
+
+def gfig(p, i, r, n, total):
+    # grid tile that opens the full-screen viewer (site.js) at the 1600w file when there is one
+    base, w, h, big, k = i
+    t = re.sub(r"<[^>]+>", "", p["title"]).replace("&amp;", "&")
+    alt = f"{KIND[k]}: {t.lower()} in {p['city']}" + ("" if k in "BP" else f", photo {n} of {total}")
+    return (f'<figure><button type="button" class="zoom" data-full="{r}{base}-{1600 if big else 800}.webp" aria-label="Enlarge photo {n}">'
+            f'<img src="{r}{base}-800.webp" alt="{alt}" width="{w}" height="{h}" loading="lazy"></button><figcaption class="cap mono">{KIND[k]} · {p["city"]}</figcaption></figure>')
 
 def card(p, r):
     base, w, h, big, _ = p["hero"]
@@ -247,6 +255,7 @@ document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{co
   <a class="cta mono" href="#book">Free estimate</a>
 </nav>'''
 
+SOCIAL = open("_social.html", encoding="utf-8").read().strip()  # brand icons (Simple Icons, CC0)
 QF = open("_qf.html", encoding="utf-8").read().strip()  # the quick form, shared with the hand-built home page
 def close(depth):
     r = "../" * depth
@@ -262,7 +271,8 @@ def close(depth):
       {QF}</div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span><span class="foot-links"><a href="https://www.instagram.com/aj.turf" rel="me noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/aj.turf" rel="me noopener" target="_blank">Facebook</a><a href="https://www.youtube.com/@AJTurf" rel="me noopener" target="_blank">YouTube</a></span></footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span>{SOCIAL}</footer>
+<script src="{r}site.js" defer></script>
 <script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
 </html>'''
@@ -378,8 +388,8 @@ def project_page(p):
                  f'<span class="mono ba-l">Before</span><span class="mono ba-r">After</span>'
                  f'<input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after"></div>'
                  f'<p class="mono ba-cap">{p["slider"][2]}</p>{vcta()}</section>')
-    if fin: body += (f'<section class="work"><header><h2>The finished <b>job.</b></h2><span class="mono" style="color:var(--stone)">Drag to see more →</span></header>'
-             f'<div class="strip">{"".join(pfig(p, i, r, n, len(fin)) for n, i in enumerate(fin, 1))}</div>{vcta()}</section>')
+    if fin: body += (f'<section class="work"><header><h2>The finished <b>job.</b></h2><span class="mono" style="color:var(--stone)">Tap a photo to enlarge</span></header>'
+             f'<div class="pgrid">{"".join(gfig(p, i, r, n, len(fin)) for n, i in enumerate(fin, 1))}</div>{vcta()}</section>')
     # held_silent: audio had to come off (private talk / music) and Jereme ruled no silent video (10/11) -> off the page until it has a cleared music bed
     if p.get("video") and not p.get("held_silent"):
         mp4, poster, sec, pw, ph = vmeta(p)
@@ -392,7 +402,7 @@ def project_page(p):
         body += vblock([p["youtube"]], r, "On <b>video.</b>"); graph.append(vobj(p["youtube"])); PAGE_VIDEOS[path] = [p["youtube"]]
     if pre:
         body += (f'<section class="work"><header><h2>Before &amp; <b>during.</b></h2><span class="mono" style="color:var(--stone)">Not the finished job</span></header>'
-                 f'<div class="strip">{"".join(pfig(p, i, r, n, len(pre)) for n, i in enumerate(pre, 1))}</div>{vcta()}</section>')
+                 f'<div class="pgrid">{"".join(gfig(p, i, r, n, len(pre)) for n, i in enumerate(pre, 1))}</div>{vcta()}</section>')
     facts = f'<ul><li><b>Type of job:</b> {app_txt}</li><li><b>Where:</b> {p["city"]}</li>' + (f'<li><b>When:</b> {p["when"]}</li>' if p["when"] else "") + "</ul>"
     if svc: facts += f'<p><a href="{r}{svc}/" style="color:var(--turf)">More about {next(x["title"] for x in SERVICES if x["slug"] == svc).lower()} →</a></p>'
     body += f'<section class="prose"><h2>About this <b>job.</b></h2><div class="body"><p>{p["blurb"]}</p>{facts}</div></section>'
