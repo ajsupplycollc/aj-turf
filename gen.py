@@ -154,7 +154,7 @@ METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area w
           "<p>Most installers pin turf down with 6-inch steel spikes driven through the whole lawn. Spikes work loose, can hurt "
           "bare feet and paws, and tear the backing over time. A glued edge is safer and lasts longer.</p>")
 
-FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>In person. We measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
+FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most installs run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
 <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
 <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
