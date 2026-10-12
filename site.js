@@ -1,6 +1,18 @@
 // AJ Turf site behavior shared by every page: arrow buttons + counter on side-scroll strips,
 // and a full-screen viewer for the project-page photo grids. Plain JS, no dependencies.
 (() => {
+  // 0. phones: sticky Call / Text / Free estimate bar (Jereme 10/12 red team #3). Links reuse the
+  // page's own tel/sms/booking hrefs, so the GA4 lead listener counts these taps too.
+  const tel = document.querySelector('a[href^="tel:"]'), sms = document.querySelector('a[href^="sms:"]'),
+        book = document.querySelector('a[href*="appointments/schedules"]');
+  if (tel && sms && book) {
+    const bar = document.createElement('nav');
+    bar.className = 'mbar'; bar.setAttribute('aria-label', 'Contact AJ Turf');
+    bar.innerHTML = `<a href="${tel.getAttribute('href')}">Call</a><a href="${sms.getAttribute('href')}">Text</a>` +
+      `<a class="mbar-book" href="${book.getAttribute('href')}" target="_blank" rel="noopener">Free estimate</a>`;
+    document.body.appendChild(bar);
+  }
+
   // 1. strips: arrows + "3 / 12" instead of "drag to see more"
   document.querySelectorAll('.strip').forEach(strip => {
     const items = [...strip.children];
@@ -58,4 +70,5 @@
   let x0 = null;
   d.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
   d.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(at + (dx < 0 ? 1 : -1)); x0 = null; });
+
 })();

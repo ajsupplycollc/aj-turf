@@ -54,9 +54,7 @@ dict(
 <p>The quote should name the turf, not just "premium turf." Feel samples in person, especially for pet areas and putting greens.</p>
 <h2>7. "How are <b>payments</b> staged?"</h2>
 <p>Payments tied to progress protect both sides, for example a deposit to schedule, a payment when work starts, and the balance after a final walkthrough. Be cautious about paying most of the job before any work begins.</p>
-<h2>8. "Who is on site, and are they <b>insured</b>?"</h2>
-<p>Ask who does the work and ask to see proof of insurance for the crew.</p>
-<h2>9. "Will you help with my <b>HOA</b>?"</h2>
+<h2>8. "Will you help with my <b>HOA</b>?"</h2>
 <p>Many HOAs require architectural review before turf goes in. A good installer can give you the product specs and install details the HOA asks for.</p>
 <h2>Red flags</h2>
 <p>A price given without anyone seeing the yard. No product named on the quote. Most of the money up front. Vague answers about the base or edges. No written labor warranty.</p>

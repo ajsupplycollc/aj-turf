@@ -279,3 +279,18 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 .social{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .social a{display:inline-flex;padding:4px;color:#c9cfc8;transition:color .2s}
 .social a:hover{color:var(--aqua)}
+
+/* phones: sticky Call / Text / Free estimate bar (site.js); lifts the chat button above it */
+.mbar{display:none}
+@media (max-width:860px){
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1.4fr;position:fixed;left:0;right:0;bottom:0;z-index:9998;background:var(--lanai);border-top:1px solid #2a312b;padding-bottom:env(safe-area-inset-bottom)}
+  .mbar a{display:flex;align-items:center;justify-content:center;min-height:56px;font-family:var(--display);font-weight:500;font-size:16px;color:var(--white);text-decoration:none}
+  .mbar a+a{border-left:1px solid #2a312b}
+  .mbar .mbar-book{background:var(--turf)}
+  body{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
+  #ajc-btn{bottom:calc(74px + env(safe-area-inset-bottom))!important}
+  #ajc{bottom:calc(134px + env(safe-area-inset-bottom))!important}
+}
+/* hero: says what + where before the scroll story (Jereme 10/12 red team #2) */
+.h1-kicker{display:table;margin-bottom:18px;padding:6px 10px;border-radius:4px;background:rgba(18,22,19,.62);font-family:var(--mono);font-size:clamp(12px,1.3vw,15px);font-weight:500;letter-spacing:.14em;line-height:1.4;text-transform:uppercase;color:var(--white);text-shadow:0 1px 3px rgba(0,0,0,.55)}
+@media (max-width:560px){.h1-kicker{font-size:11px;letter-spacing:.06em}}

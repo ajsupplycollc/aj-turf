@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFM29XK9QK"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EFM29XK9QK');
-document.addEventListener('click',e=>{const y=e.target.closest('.yt');if(y){const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+y.dataset.id+'?autoplay=1&playsinline=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=y.dataset.title;y.replaceWith(f);gtag('event','video_play',{video_title:y.dataset.title});return}const a=e.target.closest('a');if(!a)return;if(a.href.includes('appointments/schedules'))gtag('event','generate_lead',{method:'booking_link'});else if(a.href.startsWith('tel:'))gtag('event','generate_lead',{method:'phone_call'});});</script>
+document.addEventListener('click',e=>{const y=e.target.closest('.yt');if(y){const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+y.dataset.id+'?autoplay=1&playsinline=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=y.dataset.title;y.replaceWith(f);gtag('event','video_play',{video_title:y.dataset.title});return}const a=e.target.closest('a');if(!a)return;if(a.href.includes('appointments/schedules'))gtag('event','generate_lead',{method:'booking_link'});else if(a.href.startsWith('tel:'))gtag('event','generate_lead',{method:'phone_call'});else if(a.href.startsWith('sms:'))gtag('event','generate_lead',{method:'text_message'});});</script>
 
 <title>AJ Turf | Artificial Turf &amp; Putting Greens, SW Florida</title>
 <meta name="description" content="Artificial turf, pet turf and putting greens from Fort Myers to Naples. Glued concrete-border installs, no spikes. Free onsite estimate.">
@@ -44,7 +44,7 @@ document.addEventListener('click',e=>{const y=e.target.closest('.yt');if(y){cons
       <text x="760" y="607">15' ROLLS · GLUED EDGE</text>
     </svg>
     <div class="copy">
-      <h1>Measured.<br>Bordered.<br><b>Finished.</b></h1>
+      <h1><span class="h1-kicker mono">Artificial turf · Fort Myers to Naples</span>Measured.<br>Bordered.<br><b>Finished.</b></h1>
       <div class="beats">
         <div class="beat on" data-to=".18"><span class="mono">Before · a dockside yard</span><p>Bare sand between the dock and the pool. The border is poured and the base is ready.</p></div>
         <div class="beat" data-to=".5"><span class="mono">The estimate · on site</span><p>We measure every edge in person and give you one exact written price. No satellite guesses.</p></div>
