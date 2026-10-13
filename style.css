@@ -366,6 +366,7 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 .print.in{opacity:1;animation:swing 1.15s cubic-bezier(.25,.8,.3,1) both}
 @keyframes swing{0%{opacity:0;rotate:calc(var(--r) - 18deg);translate:var(--x) calc(var(--y) - 22px)}35%{opacity:1;rotate:calc(var(--r) + 8deg);translate:var(--x) var(--y)}62%{rotate:calc(var(--r) - 3deg)}82%{rotate:calc(var(--r) + 1deg)}100%{rotate:var(--r)}}
 .method .print{--bg:var(--lanai)}
+.print.tall{--w:160px}.print.tall img{aspect-ratio:3/4}
 .step{grid-template-columns:120px minmax(0,1fr) minmax(0,1.2fr) 240px}
 .step .print{align-self:center}
 @media (prefers-reduced-motion:reduce){.print,.print.in{opacity:1;animation:none}}
