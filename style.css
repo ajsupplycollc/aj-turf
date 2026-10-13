@@ -355,5 +355,4 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
   .calc{grid-template-columns:1fr}
 }
 /* strips: hover-to-glide on desktop (site.js); snap off while gliding so it doesn't fight the motion; off-focus cards dim */
-.strip.gliding{scroll-snap-type:none}
-@media (hover:hover) and (pointer:fine){.strip figure{transition:opacity .35s}.strip figure:not(.in-focus){opacity:.55}.strip figure:hover{opacity:1}}
+@media (hover:hover) and (pointer:fine){.strip{scroll-snap-type:none}.strip figure{transition:opacity .35s}.strip figure:not(.in-focus){opacity:.55}.strip figure:hover{opacity:1}}

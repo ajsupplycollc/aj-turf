@@ -50,15 +50,20 @@
     addEventListener('resize', update); addEventListener('load', () => { update(); focus(); }); update(); focus();
     // desktop: hover toward the left/right edge to glide that way; speed grows toward the edge, the middle 40% is still
     if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
-      let v = 0, raf = 0;
-      const tick = () => { if (!v) { raf = 0; strip.classList.remove('gliding'); return; } strip.scrollLeft += v; raf = requestAnimationFrame(tick); };
+      // speed eases toward the target (no jumps when the cursor returns to the middle); snap is off on desktop (CSS)
+      let v = 0, target = 0, raf = 0;
+      const tick = () => {
+        v += (target - v) * .12;
+        if (Math.abs(v) < .2 && !target) { v = 0; raf = 0; return; }
+        strip.scrollLeft += v; raf = requestAnimationFrame(tick);
+      };
       strip.addEventListener('mousemove', e => {
         const r = strip.getBoundingClientRect(), x = (e.clientX - r.left) / r.width; // 0..1
         const edge = x < .3 ? -(.3 - x) / .3 : x > .7 ? (x - .7) / .3 : 0;
-        v = Math.sign(edge) * Math.round(edge * edge * 22); // ease-in: gentle near the zone, quick at the edge
-        if (v && !raf) { strip.classList.add('gliding'); raf = requestAnimationFrame(tick); }
+        target = Math.sign(edge) * edge * edge * 22; // gentle near the zone, quick at the edge
+        if (!raf && target) raf = requestAnimationFrame(tick);
       });
-      strip.addEventListener('mouseleave', () => { v = 0; });
+      strip.addEventListener('mouseleave', () => { target = 0; });
     }
   });
 
