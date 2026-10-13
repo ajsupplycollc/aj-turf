@@ -39,8 +39,27 @@
       nav.hidden = strip.scrollWidth <= strip.clientWidth + 4;
     };
     prev.onclick = () => step(-1); next.onclick = () => step(1);
-    strip.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
-    addEventListener('resize', update); addEventListener('load', update); update();
+    // the card nearest the middle is "in focus"; the rest dim a touch (Jereme 10/13: easy to focus on what you want)
+    const focus = () => {
+      const mid = strip.getBoundingClientRect().left + strip.clientWidth / 2;
+      let best = null, bd = 1e9;
+      items.forEach(el => { const r = el.getBoundingClientRect(), dd = Math.abs(r.left + r.width / 2 - mid); if (dd < bd) { bd = dd; best = el; } });
+      items.forEach(el => el.classList.toggle('in-focus', el === best));
+    };
+    strip.addEventListener('scroll', () => requestAnimationFrame(() => { update(); focus(); }), { passive: true });
+    addEventListener('resize', update); addEventListener('load', () => { update(); focus(); }); update(); focus();
+    // desktop: hover toward the left/right edge to glide that way; speed grows toward the edge, the middle 40% is still
+    if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      let v = 0, raf = 0;
+      const tick = () => { if (!v) { raf = 0; strip.classList.remove('gliding'); return; } strip.scrollLeft += v; raf = requestAnimationFrame(tick); };
+      strip.addEventListener('mousemove', e => {
+        const r = strip.getBoundingClientRect(), x = (e.clientX - r.left) / r.width; // 0..1
+        const edge = x < .3 ? -(.3 - x) / .3 : x > .7 ? (x - .7) / .3 : 0;
+        v = Math.sign(edge) * Math.round(edge * edge * 22); // ease-in: gentle near the zone, quick at the edge
+        if (v && !raf) { strip.classList.add('gliding'); raf = requestAnimationFrame(tick); }
+      });
+      strip.addEventListener('mouseleave', () => { v = 0; });
+    }
   });
 
   // 1b. ballpark calculator (Muse pass-1 directive §5). Range comes ONLY from the public $9-$15/sq ft band,
