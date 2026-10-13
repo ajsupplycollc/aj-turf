@@ -67,6 +67,18 @@
     }
   });
 
+  // 1a. pinned prints swing in the first time they scroll into view (CSS does the swing)
+  const prints = document.querySelectorAll('.print');
+  if (prints.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, i = [...el.closest('ul,.steps')?.querySelectorAll('.print') || []].indexOf(el);
+      setTimeout(() => el.classList.add('in'), Math.max(0, i % 3) * 90); // slight stagger when several land at once
+      io.unobserve(el);
+    }), { rootMargin: '0px 0px -12% 0px' });
+    prints.forEach(p => io.observe(p));
+  } else prints.forEach(p => p.classList.add('in'));
+
   // 1b. ballpark calculator (Muse pass-1 directive §5). Range comes ONLY from the public $9-$15/sq ft band,
   // revealed after name + phone, and the lead rides the quick form's /lead path tagged [Website calculator].
   // Repairs get no number: they start with an onsite assessment.

@@ -97,15 +97,12 @@ a{color:inherit}
 /* services: big type list, photo follows on hover */
 .services{padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px)}
 .svc-list{list-style:none;margin-top:28px;border-top:1px solid #d6d9d3}
-.svc-list li{position:relative;display:grid;grid-template-columns:140px minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:baseline;padding:30px 0;border-bottom:1px solid #d6d9d3;cursor:default}
+.svc-list li{position:relative;display:grid;grid-template-columns:140px minmax(0,1.3fr) minmax(0,1fr) 200px;gap:28px;align-items:center;padding:30px 0;border-bottom:1px solid #d6d9d3;cursor:default}
 .svc-list .mono{color:var(--stone)}
 .svc-list h3{font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,72px);letter-spacing:-.045em;line-height:.95;transition:transform .5s cubic-bezier(.2,.7,.2,1),color .3s}
 .svc-list h3 b{font-weight:700}
 .svc-list p{color:#4a514b;max-width:360px}
-.svc-list img{position:absolute;left:43%;top:50%;width:240px;aspect-ratio:4/3;object-fit:cover;transform:translateY(-50%) scale(.92) rotate(-2deg);opacity:0;pointer-events:none;transition:opacity .35s,transform .5s cubic-bezier(.2,.7,.2,1);z-index:2;box-shadow:0 24px 60px rgba(18,22,19,.25)}
 .svc-list li:hover h3{transform:translateX(14px);color:var(--turf)}
-.svc-list li:hover img{opacity:1;transform:translateY(-50%) scale(1) rotate(-2deg)}
-@media (hover:none),(max-width:860px){.svc-list li{grid-template-columns:1fr;gap:6px}.svc-list img{display:none}}
 /* area + faq */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(40px,6vw,100px);padding:clamp(80px,11vw,150px) clamp(20px,6vw,90px);background:var(--limestone)}
 .split h2{font-family:var(--display);font-weight:300;font-size:clamp(36px,4.4vw,64px);letter-spacing:-.04em;line-height:.95}
@@ -356,3 +353,23 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 }
 /* strips: hover-to-glide on desktop (site.js); snap off while gliding so it doesn't fight the motion; off-focus cards dim */
 @media (hover:hover) and (pointer:fine){.strip{scroll-snap-type:none}.strip figure{transition:opacity .35s}.strip figure:not(.in-focus){opacity:.55}.strip figure:hover{opacity:1}}
+
+/* pinned prints (Jereme 10/13): photos hang from a pin, swing in and settle a little crooked, one corner curled.
+   --r = resting tilt, --bg = section background (the curl shows it). site.js adds .in when the print scrolls into view. */
+.print{--bg:var(--white);position:relative;margin:0;width:200px;justify-self:end;background:#fbfaf5;padding:7px 7px 9px;rotate:var(--r);transform-origin:50% 0;
+  box-shadow:0 1px 2px rgba(0,0,0,.28),0 14px 26px -8px rgba(0,0,0,.4);opacity:0}
+.print img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.print::before{content:"";position:absolute;left:50%;top:-6px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;z-index:2;
+  background:radial-gradient(circle at 35% 30%,#7fd3df 0 25%,var(--aqua) 45%,#22707c 100%);box-shadow:0 3px 4px rgba(0,0,0,.45)}
+.print::after{content:"";position:absolute;right:0;bottom:0;width:26px;height:26px;
+  background:linear-gradient(315deg,var(--bg) 0 47%,rgba(0,0,0,.22) 50%,#e7e3d6 53%,#fbfaf5 78%);box-shadow:-2px -2px 4px rgba(0,0,0,.12)}
+.print.in{opacity:1;animation:swing 1.15s cubic-bezier(.25,.8,.3,1) both}
+@keyframes swing{0%{opacity:0;rotate:calc(var(--r) - 16deg);translate:0 -18px}35%{opacity:1;rotate:calc(var(--r) + 7deg);translate:0 0}62%{rotate:calc(var(--r) - 3deg)}82%{rotate:calc(var(--r) + 1deg)}100%{rotate:var(--r)}}
+.method .print{--bg:var(--lanai)}
+.step{grid-template-columns:120px minmax(0,1fr) minmax(0,1.2fr) 200px}
+.step .print{align-self:center}
+@media (prefers-reduced-motion:reduce){.print,.print.in{opacity:1;animation:none}}
+@media (max-width:860px){
+  .step,.svc-list li{grid-template-columns:1fr;gap:8px}
+  .print{justify-self:start;width:min(62vw,240px);margin:14px 0 6px 8px}
+}
