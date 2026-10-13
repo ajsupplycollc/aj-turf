@@ -51,7 +51,7 @@ Notice the pattern: on a spiked install, the perimeter is the first thing to go,
 
 ## What holds the middle of the lawn down?
 
-Not the border — the border's job is the perimeter. The field of the lawn is held by weight and by its seams: infill is applied (typically 1–2 lbs per square foot on landscape products) and power-broomed in, and that ballast is a real structural part of the system, not just cosmetic. Seams between panels are joined on seam tape with a full spread of adhesive. A lawn is a system — perimeter, seams, and ballast — and the spike method shortchanges the most stressed of the three.
+Not the border — the border's job is the perimeter. The field of the lawn is held by weight and by its seams: infill is applied (1.5 to 2 pounds per square foot is our standard) and power-broomed in, and that ballast is a real structural part of the system, not just cosmetic. Seams between panels are joined on seam tape with a full spread of adhesive. A lawn is a system — perimeter, seams, and ballast — and the spike method shortchanges the most stressed of the three.
 
 ## Florida note
 
@@ -87,6 +87,6 @@ Yes — it's a standard repair. The edge is rebuilt: a border is built along the
 The turf glue used in the AJ Method carries a 15-year warranty. The point of the method is that the bond is continuous — the whole edge is the fastener — rather than a row of individual spikes each aging on its own schedule.
 
 **If there's a concrete border, what keeps the seams from opening?**
-Seams are a separate system from the perimeter: panels are joined on seam tape with a full spread of adhesive, then weighted for the full cure window. Most seam failures trace back to glue applied to wet backing, no curing pressure, or starved adhesive — all install-day shortcuts, and all avoidable.
+Seams are a separate system from the perimeter: panels are joined on seam tape with a full spread of adhesive, then weighted for the full cure window. Most seam failures trace back to glue applied to wet backing, no curing pressure, or starved adhesive — all install-day shortcuts, and all avoidable. More on [how seams are built and why they fail](/guide/how-are-turf-seams-joined/).
 
 **Want the method on your yard?** Book a free onsite estimate — or call or text **305-762-9901**. Most installs run $9 to $15 a square foot depending on the turf and the site; your exact price is measured in person, free. Fort Myers to Naples, Mon–Sat, 9–5.

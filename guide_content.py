@@ -14,13 +14,13 @@ dict(
 <h2>1. <b>Dig out</b> the old lawn</h2>
 <p>Grass, roots and loose soil come out so the new base sits on firm ground. Leaving organic material underneath is what causes dips later, as it breaks down.</p>
 <h2>2. Build and <b>compact</b> the base</h2>
-<p>Screening sand goes in and is compacted in layers, firm enough to hold its shape but still free-draining, and graded so water moves through and away from the house. Poor compaction is the most common reason turf develops low spots: water washes the loose base out and the turf sinks into divots.</p>
+<p>Old grass and soil come out 2 to 3 inches below the sod line, and the base is never built on topsoil. In Southwest Florida the base that works is screening sand, the same sand paver crews bed driveways on. It's wetted and compacted in layers to a minimum of 95% Standard Proctor (ASTM D698), the Synthetic Turf Council's guideline and our own written spec (Florida's rule sets no compaction number). It ends up firm enough to hold its grade but still free-draining, and graded so water moves through and away from the house. Poor compaction is the most common reason turf develops low spots: water washes the loose base out and the turf sinks into divots. Crushed gravel only comes into it when a yard needs deep fill, and even then it gets capped with screening sand.</p>
 <h2>3. Secure the <b>edges</b></h2>
 <p>This is where installs differ most. The common shortcut is to pin turf down with 6-inch steel spikes driven through the lawn. We outline the area with 6-inch metal or plastic edging and pour a 3 x 3 x 3 inch concrete border along the inside of it, so the turf has something solid to be glued to.</p>
 <h2>4. Lay the <b>weed barrier</b></h2>
-<p>A weed barrier covers the entire area so nothing grows up through the turf and pushes or pierces it.</p>
+<p>A woven weed barrier covers the entire area so nothing grows up through the turf and pushes or pierces it. Woven fabric is far stronger than the pressed (nonwoven) sheet sold at big-box stores, so it goes down intact and stays intact. The barrier is pinned with spikes or galvanized nails here, underneath where nobody walks. Nothing gets nailed through the turf itself.</p>
 <h2>5. Cut, seam and <b>glue</b></h2>
-<p>Turf comes in rolls about 15 feet wide, so larger yards need seams. Cuts are planned so seams run the same direction and sit where they're least visible, then joined with seam tape. The perimeter is glued to the concrete border with turf glue that carries a 15-year warranty.</p>
+<p>Turf is directional, so every piece is laid with the blades leaning the same way. In a back yard the blades lean toward the house, so you look into the best face walking out the back door; in a front yard they lean toward the street, for the people passing by. Turf comes in rolls about 15 feet wide, so larger yards need seams. Cuts are planned so seams run the same direction and sit where they're least visible, then joined with seam tape. The perimeter is glued to the concrete border with turf glue that carries a 15-year warranty.</p>
 <h2>6. Infill and <b>brush</b></h2>
 <p>Infill, usually silica sand or a coated sand made for pets, is spread in thin passes and brushed in so the blades stand up and the turf stays weighted and stable. The turf is brushed against the grain, with synthetic bristles only, never wire.</p>
 <h2>How long it takes</h2>
@@ -77,7 +77,7 @@ dict(
 <h2>What makes it <b>worse</b></h2>
 <p>Full afternoon sun with no shade, and sunlight reflected off windows or glass doors onto the turf. Reflected sunlight can be strong enough to melt turf fibers, which is something manufacturers warn about in their care guides.</p>
 <h2>Ways to <b>cool it down</b></h2>
-<p><b>Cooling infill.</b> Newer infills are designed to hold moisture and release it slowly, cooling the surface the way sweat cools skin. The maker of one, T°Cool, says it lowers surface temperatures by up to 50°F when the infill is hydrated. It works best when it's watered periodically.</p>
+<p><b>Cooling infill.</b> Newer infills are designed to hold moisture and release it slowly, cooling the surface the way sweat cools skin. Our cooling option is TCool, a bagged precoated sand. Its maker says it can run up to 50°F cooler, but only while it's damp, so it works best when it's rinsed regularly. We never mix it into the zeolite layer on pet jobs; the two dilute each other.</p>
 <p><b>Keep water handy.</b> When we install, existing sprinkler heads are capped and left in place, not ripped out. A quick hose rinse cools the surface fast before kids or pets head out. (Florida's turf rule bars using in-ground sprinklers to water turf areas, so the hose is the tool.)</p>
 <p><b>Product choice.</b> Turf fibers vary. We bring samples so you can compare how different products look and feel in your yard's light.</p>
 <h2>How to <b>plan around it</b></h2>
@@ -86,7 +86,6 @@ dict(
 <p>We'd rather you hear it from us at the estimate than discover it in July. We'll look at sun exposure, bring samples, and talk through placement before you decide.</p>
 """,
  sources=["University of Florida IFAS research as reported by The Invading Sea, Aug 14, 2025: https://www.theinvadingsea.com/2025/08/14/artificial-turf-lawns-heat-xeriscapes-florida-friendly-landscaping-hb-683-water-california/",
-          "Manufacturer landscape care guide (reflected sunlight can melt fibers)",
-          "T°Cool manufacturer claims: https://www.tcoolturf.com/"],
+          "Manufacturer landscape care guide (reflected sunlight can melt fibers)"],
 ),
 ]

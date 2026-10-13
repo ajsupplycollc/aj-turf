@@ -47,7 +47,7 @@ dict(slug="turf-installation", letter="B", nav="Installation", img="method-revea
 <tr><td>Native soil</td><td>Left able to absorb water. It isn't pounded hard</td></tr>
 </tbody></table>
 <h2>Seams and infill</h2>
-<p>Turf comes in rolls 15 feet wide, so most yards need seams. Every piece is laid with the blades leaning the same way, joined on seam tape, glued sparingly (excess glue seeps through and mats the blades) and weighted while it cures. Infill goes in at 1.5 to 2 pounds per square foot and is brushed against the grain until the blades stand.</p>
+<p>Turf comes in rolls 15 feet wide, so most yards need seams. Every piece is laid with the blades leaning the same way (toward the house in a back yard, toward the street in a front yard), joined on seam tape, glued sparingly (excess glue seeps through and mats the blades) and weighted while it cures. Infill goes in at 1.5 to 2 pounds per square foot and is brushed against the grain until the blades stand.</p>
 <h2>Sprinklers and timing</h2>
 <p>Existing sprinkler heads inside the turf are capped and left in place, so the system stays intact and the yard stays reversible. Plan on about two days for every 1,000 square feet.</p>
 """),
@@ -128,4 +128,8 @@ QUESTION_PILLAR = {
     "why-does-my-artificial-turf-smell": "turf-ownership",
     "concrete-border-vs-spikes": "turf-installation",
     "can-my-hoa-stop-me-from-installing-artificial-turf": "artificial-turf-in-florida",
+    "how-are-turf-seams-joined": "turf-installation",
+    "why-do-turf-quotes-differ": "buying-artificial-turf",
+    "best-artificial-turf-for-dogs-in-florida": "artificial-turf-in-florida",
+    "why-did-my-turf-melt": "turf-ownership",
 }

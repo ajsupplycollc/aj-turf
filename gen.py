@@ -213,7 +213,7 @@ def reviews_block(n=6):
             f'<p class="rv-note mono">Earned under our former name, AJ Supply. <a href="{TT_URL}" target="_blank" rel="noopener">Read all 14 on Thumbtack &rarr;</a></p></section>')
 
 FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most installs run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
-<details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
+<details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site. Installs are typically scheduled within two weeks, or on your preferred date. New installs start at 1,000 square feet; repairs have no minimum.</p></details>
 <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
 <details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact and the yard reversible. Florida's turf rule bars using in-ground irrigation to water turf areas, so a quick hose rinse is the way to clean and cool it on hot days.</p></details>
@@ -525,7 +525,12 @@ def article(g):
     art = {"@type": "Article", "headline": g["title"], "description": g["desc"], "datePublished": TODAY, "dateModified": TODAY,
            "author": {"@id": BASE + "#business"}, "publisher": {"@id": BASE + "#business"}, "mainEntityOfPage": BASE + path,
            "image": BASE + f"img/og/guide-{g['slug']}.jpg"}
-    schema = {"@context": "https://schema.org", "@graph": [org(), art, faq, crumbs([("AJ Turf", ""), ("Turf Guide", "guide/")] + ([(PILLAR_OF[g["slug"]]["nav"], f"guide/{PILLAR_OF[g['slug']]['slug']}/")] if g["slug"] in PILLAR_OF else []) + [(g["title"], path)])]}
+    howto = []
+    if g["slug"] == "how-artificial-turf-is-installed":  # GEO plan §2.2: HowTo on the install anchor, text = visible step text
+        steps = _re.findall(r"<h2>\d\.\s*(.*?)</h2>\s*<p>(.*?)</p>", g["body"], _re.S)
+        howto = [{"@type": "HowTo", "name": g["title"], "description": g["a"], "step": [{"@type": "HowToStep", "position": i + 1,
+                  "name": _re.sub(r"<[^>]+>", "", n), "text": _re.sub(r"<[^>]+>", "", t)} for i, (n, t) in enumerate(steps)]}]
+    schema = {"@context": "https://schema.org", "@graph": [org(), art, faq] + howto + [crumbs([("AJ Turf", ""), ("Turf Guide", "guide/")] + ([(PILLAR_OF[g["slug"]]["nav"], f"guide/{PILLAR_OF[g['slug']]['slug']}/")] if g["slug"] in PILLAR_OF else []) + [(g["title"], path)])]}
     others = "".join(f'<li><a href="{r}guide/{x["slug"]}/">{x["title"]}</a></li>' for x in GUIDES if x is not g)
     src = "".join(f"<li>{x}</li>" for x in g["sources"])
     html = head(g["seo"], g["desc"], path, 2, schema, g["title"], "guide-" + g["slug"]) + f"""
@@ -557,6 +562,8 @@ AUTHOR = {"@type": "Person", "name": "Jereme Strange", "worksFor": {"@id": BASE 
 PILLAR_SERVICE = {"turf-product-science": ("Pet turf", "pet-turf/"), "turf-installation": ("Artificial turf installation", "artificial-turf-installation/"),
                   "turf-ownership": ("Turf repair", "turf-repair/"), "buying-artificial-turf": ("Artificial turf installation", "artificial-turf-installation/"),
                   "artificial-turf-in-florida": ("Artificial turf in Fort Myers", "fort-myers/")}
+QVIDEO = {"concrete-border-vs-spikes": ("aATUhfArpEY", "The method, <b>on a real job.</b>"),
+          "best-artificial-turf-for-dogs-in-florida": ("VXatdDEOrdw", "A dog run, <b>on video.</b>")}  # GEO plan §6.2: proof footage on its page
 QPAGES = []  # (slug, title) of every question page, in pillar order, for the hub + pillars
 _plain = lambda s: _re.sub(r"<[^>]+>", "", s)
 _inline = lambda s: _md.markdown(s).removeprefix("<p>").removesuffix("</p>")
@@ -580,6 +587,8 @@ def question_page(slug):
              "dateModified": TODAY, "author": AUTHOR, "publisher": {"@id": BASE + "#business"}, "mainEntityOfPage": BASE + path,
              "image": BASE + f"img/og/guide-{slug}.jpg"},
              crumbs([("AJ Turf", ""), ("Turf Guide", "guide/"), (p["nav"], f"guide/{p['slug']}/"), (title, path)])]
+    vid = QVIDEO.get(slug)
+    if vid: graph.append(vobj(vid[0])); PAGE_VIDEOS[path] = [vid[0]]
     if qa:
         graph.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": _plain(q), "acceptedAnswer": {"@type": "Answer", "text": _plain(a)}} for q, a in qa]})
     sibs = [(s, t) for s, t in QPAGES if s != slug and QUESTION_PILLAR[s] == p["slug"]][:3]
@@ -604,6 +613,7 @@ def question_page(slug):
 </main>
 <aside class="toc"><p class="mono">In this guide</p><ol>{toc}</ol>
 <a class="book" href="{BOOK}" target="_blank" rel="noopener" style="margin-top:26px;font-size:16px;padding:14px 20px">Free onsite estimate <span aria-hidden="true">→</span></a></aside></div>
+{vblock([vid[0]], r, vid[1]) if vid else ""}
 <section class="related"><span class="mono" style="color:var(--turf)">Keep reading</span><ul>{rel}</ul></section>
 """ + close(2)
     os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(page_html)
