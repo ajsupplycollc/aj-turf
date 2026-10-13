@@ -240,6 +240,10 @@ CITY = {
    "On a barrier island, salt air, sandy soil and storm recovery shape what holds up. A glued edge with no spikes is a sturdy choice for island yards."),
 }
 
+import hashlib
+# cache-bust: browsers keep style.css/site.js ~10 min, so new markup met old CSS (Jereme 10/13 "pics are squished")
+ASSET_V = hashlib.md5(open("style.css", "rb").read() + open("site.js", "rb").read()).hexdigest()[:8]
+
 def head(title, desc, path, depth, schema, og_title=None, og_slug="home"):
     r = "../" * depth
     return f'''<!doctype html>
@@ -262,7 +266,7 @@ document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{co
 <link rel="icon" href="{r}img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-<link rel="stylesheet" href="{r}style.css">
+<link rel="stylesheet" href="{r}style.css?v={ASSET_V}">
 <script type="application/ld+json">{json.dumps(schema)}</script>
 </head>
 <body>
@@ -289,7 +293,7 @@ def close(depth):
   </div>
 </section>
 <footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span>{SOCIAL}</footer>
-<script src="{r}site.js" defer></script>
+<script src="{r}site.js?v={ASSET_V}" defer></script>
 <script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
 </html>'''
@@ -556,6 +560,7 @@ p{{margin:0;font:500 17px 'JetBrains Mono';letter-spacing:.12em;color:#4FB4C3}}<
 os.remove("_og.html")
 # home page is hand-built: refresh its reviews block between the markers
 _h = open("index.html", encoding="utf-8").read()
+_h = re.sub(r'(href="style\.css|src="site\.js)(\?v=\w+)?"', lambda m: f'{m.group(1)}?v={ASSET_V}"', _h)
 _h = re.sub(r"<!--REVIEWS-->.*?<!--/REVIEWS-->", lambda m: "<!--REVIEWS-->" + reviews_block(6) + "<!--/REVIEWS-->", _h, flags=re.S)
 open("index.html", "w", encoding="utf-8").write(_h)
 print(len(urls), "urls,", len(cards), "og cards")
