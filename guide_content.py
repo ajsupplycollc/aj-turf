@@ -78,7 +78,7 @@ dict(
 <p>Full afternoon sun with no shade, and sunlight reflected off windows or glass doors onto the turf. Reflected sunlight can be strong enough to melt turf fibers, which is something manufacturers warn about in their care guides.</p>
 <h2>Ways to <b>cool it down</b></h2>
 <p><b>Cooling infill.</b> Newer infills are designed to hold moisture and release it slowly, cooling the surface the way sweat cools skin. The maker of one, T°Cool, says it lowers surface temperatures by up to 50°F when the infill is hydrated. It works best when it's watered periodically.</p>
-<p><b>Keep water handy.</b> When we install, existing sprinkler heads are capped and left in place, not ripped out. A quick run of water over the turf, by sprinkler or hose, cools the surface fast before kids or pets head out.</p>
+<p><b>Keep water handy.</b> When we install, existing sprinkler heads are capped and left in place, not ripped out. A quick hose rinse cools the surface fast before kids or pets head out. (Florida's turf rule bars using in-ground sprinklers to water turf areas, so the hose is the tool.)</p>
 <p><b>Product choice.</b> Turf fibers vary. We bring samples so you can compare how different products look and feel in your yard's light.</p>
 <h2>How to <b>plan around it</b></h2>
 <p>Think about where the turf goes and when it gets used. Shaded areas, east-facing yards and spots under trees or lanai screens stay more comfortable. For pets, keep a shaded or covered area available in midday heat.</p>

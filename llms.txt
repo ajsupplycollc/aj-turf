@@ -4,12 +4,28 @@
 
 ## Key facts
 - Service: residential artificial turf installation, commercial and event lawns, pet turf, backyard putting greens with fringe, turf around pools and pavers, turf repair and re-installs.
-- Install method: 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, full weed barrier, turf glued to the border with 15-year-warrantied glue. No 6-inch steel spikes through the lawn.
-- Pricing: free onsite estimate, measured in person, one exact written price. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
+- Install method: screening-sand base compacted to 95% Standard Proctor (ASTM D698), 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, a woven weed barrier over everything, turf glued to the border with 15-year-warrantied glue. No spikes through the turf (spikes only pin the barrier and seam tape underneath).
+- Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site. Free onsite estimate, measured in person, one exact written price.
+- Warranty: Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
 - Payments: 30% to schedule, 35% on the first day on site, 35% at completion.
 - Timeline: about two days per 1,000 square feet.
 - Hours: Monday to Saturday, 9 to 5.
 - Contact: 305-762-9901, ajturffl@gmail.com. Book: https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax
+
+## Turf knowledge base
+- [Turf Guide](https://ajturffl.com/guide/): index of every guide, in five sections
+- [Turf Product Science: What Artificial Turf Is Made Of](https://ajturffl.com/guide/turf-product-science/): Artificial turf is yarn tufted into a backing. Three numbers tell you most of what you need: face weight (the yarn you walk on), pile height...
+- [Turf Installation Science: How Artificial Turf Should Be Built](https://ajturffl.com/guide/turf-installation/): Most turf failures are install failures, not product failures. A lasting install comes down to three things: a compacted, free-draining base...
+- [Owning Artificial Turf: Heat, Pets, Care and Repairs](https://ajturffl.com/guide/turf-ownership/): Turf trades mowing and watering for a few honest realities: it gets hot in full Florida sun, pet areas need rinsing, it needs brushing and t...
+- [Buying Artificial Turf: Cost, Quotes and Warranties](https://ajturffl.com/guide/buying-artificial-turf/): Most installs in Southwest Florida run $9 to $15 a square foot, depending on the turf and the site. The difference between a good quote and ...
+- [Artificial Turf in Florida: HOA Law, DEP Rule 62-308 and Water Restrictions](https://ajturffl.com/guide/artificial-turf-in-florida/): Two Florida laws matter most. §720.3045 stops an HOA from restricting turf nobody can see, and §125.572 with DEP Rule 62-308.100 (effective ...
+- [How Artificial Turf Is Installed, Step by Step](https://ajturffl.com/guide/how-artificial-turf-is-installed/)
+- [Concrete border vs spikes: how turf is supposed to be held down](https://ajturffl.com/guide/concrete-border-vs-spikes/)
+- [How Hot Does Artificial Turf Get in Florida?](https://ajturffl.com/guide/how-hot-does-artificial-turf-get-in-florida/)
+- [Why does my artificial turf smell — and how do you actually fix it?](https://ajturffl.com/guide/why-does-my-artificial-turf-smell/)
+- [Questions to Ask Before You Hire a Turf Installer](https://ajturffl.com/guide/questions-to-ask-before-hiring-a-turf-installer/)
+- [Can my HOA stop me from installing artificial turf in Florida?](https://ajturffl.com/guide/can-my-hoa-stop-me-from-installing-artificial-turf/)
+- [Videos](https://ajturffl.com/videos/): every AJ Turf install video, playing from the AJ Turf YouTube channel
 
 ## Pages
 - https://ajturffl.com/
@@ -26,6 +42,7 @@
 - https://ajturffl.com/sanibel/
 - https://ajturffl.com/lehigh-acres/
 - https://ajturffl.com/our-work/
+- https://ajturffl.com/videos/
 - https://ajturffl.com/work/long-key-50-ft-putting-green/
 - https://ajturffl.com/work/pembroke-pines-canal-putting-green/
 - https://ajturffl.com/work/boynton-beach-putting-green-build/
@@ -52,5 +69,13 @@
 - https://ajturffl.com/guide/how-artificial-turf-is-installed/
 - https://ajturffl.com/guide/questions-to-ask-before-hiring-a-turf-installer/
 - https://ajturffl.com/guide/how-hot-does-artificial-turf-get-in-florida/
+- https://ajturffl.com/guide/why-does-my-artificial-turf-smell/
+- https://ajturffl.com/guide/concrete-border-vs-spikes/
+- https://ajturffl.com/guide/can-my-hoa-stop-me-from-installing-artificial-turf/
+- https://ajturffl.com/guide/turf-product-science/
+- https://ajturffl.com/guide/turf-installation/
+- https://ajturffl.com/guide/turf-ownership/
+- https://ajturffl.com/guide/buying-artificial-turf/
+- https://ajturffl.com/guide/artificial-turf-in-florida/
 - https://ajturffl.com/guide/
 - https://ajturffl.com/privacy/

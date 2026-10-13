@@ -21,6 +21,47 @@ VIDEOS = {
  "LgpH3u-eJ6A": ("Duck Key, FL Project Walkthrough — Whole-Property Turf & Landscaping", "A canal-front, whole-property turf and landscaping project in progress in Duck Key, in the Florida Keys.", 32, "2026-10-08", True, "Duck Key · canal-front, in progress"),
  "HgPybt3IXWA": ("Coral Gables, FL Project Recap: New Fence, Privacy Hedges & Finished Turf", "A full-property recap in the Coral Gables area: new chain-link fence, a Clusia privacy hedge and finished artificial turf.", 53, "2026-10-08", True, "Coral Gables · fence, hedge, turf"),
 }
+
+# Every upload on the AJ Turf channel lands on /videos/ automatically: the build reads the channel's public feed,
+# adds new ids to VIDEOS (title, description, date, short/long, length, thumbnail), and caches them in videos_cache.json
+# so a build with no network still renders. ponytail: feed = the newest 15 uploads; older ones live on in the cache.
+import json as _json, urllib.request as _ur, html as _html
+CHANNEL = "UCu5g85tvUUTuOrH4CoHcimQ"
+def _get(url):
+    return _ur.urlopen(_ur.Request(url, headers={"user-agent": "Mozilla/5.0"}), timeout=30).read()
+def sync_videos():
+    try: cache = _json.load(open("videos_cache.json", encoding="utf-8"))
+    except Exception: cache = {}
+    try:
+        feed = _get(f"https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL}").decode("utf-8")
+        for e in re.findall(r"<entry>(.*?)</entry>", feed, re.S):
+            v = re.search(r"<yt:videoId>(.*?)<", e).group(1)
+            if v in VIDEOS or v in cache: continue
+            title = _html.unescape(re.search(r"<title>(.*?)<", e).group(1)).split(" | ")[0]
+            desc = _html.unescape((re.search(r"<media:description>(.*?)</media:description>", e, re.S) or [None, ""])[1]).strip().split("\n")[0][:300] or title
+            tall = "/shorts/" in e
+            try: sec = int(re.search(rb'"lengthSeconds":"(\d+)"', _get(f"https://www.youtube.com/watch?v={v}")).group(1))
+            except Exception: sec = 0
+            cache[v] = [title, desc, sec, re.search(r"<published>(\d{4}-\d\d-\d\d)", e).group(1), tall, title.split(" — ")[0]]
+        _json.dump(cache, open("videos_cache.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    except Exception as ex:
+        print("video feed skipped:", ex)
+    for v, row in cache.items():
+        VIDEOS.setdefault(v, tuple(row))
+    from PIL import Image
+    import io
+    for v, row in VIDEOS.items():  # local thumbnail for every video (YouTube's own frame), so pages don't hotlink
+        out = f"img/vid/{v}.webp"
+        if os.path.exists(out): continue
+        for name in (["oardefault", "hqdefault"] if row[4] else ["maxresdefault", "hqdefault"]):
+            try: im = Image.open(io.BytesIO(_get(f"https://i.ytimg.com/vi/{v}/{name}.jpg"))).convert("RGB"); break
+            except Exception: im = None
+        if im is None: continue
+        if row[4] and im.width > im.height:  # letterboxed short: keep the centre 9:16
+            w = round(im.height * 9 / 16); im = im.crop(((im.width - w) // 2, 0, (im.width + w) // 2, im.height))
+        im.thumbnail((720, 720)); im.save(out, quality=80)
+sync_videos()
+
 OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA"]
 CITY_VIDEOS = {"Fort Myers": (["3yovFZ8U0ns"], "A finished Fort Myers <b>lawn.</b>")}  # geo-matched only: the video's city = the page's city
 SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A"], "Waterfront, <b>on the job.</b>")}
@@ -40,7 +81,7 @@ def vblock(ids, r, h2):
 def vobj(v):
     t, d, s, date, _, _ = VIDEOS[v]
     return {"@type": "VideoObject", "name": t, "description": d, "thumbnailUrl": BASE + f"img/vid/{v}.webp", "uploadDate": date,
-            "duration": f"PT{s // 60}M{s % 60}S", "embedUrl": f"https://www.youtube.com/embed/{v}"}
+            **({"duration": f"PT{s // 60}M{s % 60}S"} if s else {}), "embedUrl": f"https://www.youtube.com/embed/{v}"}
 
 HOME_VIDEOS = ["4j__CUFYhnQ", "3yovFZ8U0ns", "aATUhfArpEY"]  # embedded by hand in index.html
 PAGE_VIDEOS = {"": HOME_VIDEOS}  # path -> video ids, for the video sitemap
@@ -175,7 +216,7 @@ FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most insta
 <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site.</p></details>
 <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
-<details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact, and a quick run of water is an easy way to rinse and cool the turf on hot days.</p></details>
+<details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact and the yard reversible. Florida's turf rule bars using in-ground irrigation to water turf areas, so a quick hose rinse is the way to clean and cool it on hot days.</p></details>
 <details><summary>What's the warranty?</summary><p>Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign.</p></details>
 """
 
@@ -231,7 +272,7 @@ CITY = {
  "Naples": ("naples", "Collier County", "courtyard",
    "Naples homes and HOA communities expect a finished, high-end look. Tight edges, hidden seams and a natural-looking turf matter here."),
  "Estero": ("estero", "Lee County", "backyard-green",
-   "Estero's newer communities often mean HOA review before anything changes in the yard. We help you put the approval request together."),
+   "Estero's newer communities often mean HOA review before anything changes in the yard. We prepare the HOA application and submit it for you."),
  "Bonita Springs": ("bonita-springs", "Lee County", "pool-deck",
    "Between Fort Myers and Naples, Bonita Springs yards range from golf communities to waterfront lots, both a natural fit for putting greens and pool-side turf."),
  "Lehigh Acres": ("lehigh-acres", "Lee County", "backyard-wide",
@@ -272,7 +313,7 @@ document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{co
 <body>
 <nav class="nav solid" id="nav">
   <a class="mark" href="{r}"><img src="{r}img/mark.svg" alt="" width="34" height="34">AJ<span>/</span>TURF</a>
-  <div class="mid mono"><a href="{r}#method">Method</a><a href="{r}#work">Work</a><a href="{r}#services">Services</a><a href="{r}guide/">Turf Guide</a></div>
+  <div class="mid mono"><a href="{r}#method">Method</a><a href="{r}#work">Work</a><a href="{r}videos/">Videos</a><a href="{r}#services">Services</a><a href="{r}guide/">Turf Guide</a></div>
   <a class="cta mono" href="#book">Free estimate</a>
 </nav>'''
 
@@ -292,7 +333,7 @@ def close(depth):
       {QF}</div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span>{SOCIAL}</footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}videos/">Videos</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span>{SOCIAL}</footer>
 <script src="{r}site.js?v={ASSET_V}" defer></script>
 <script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
@@ -363,7 +404,7 @@ for a in AREAS:
     secs = [
       (f"Turf in <b>{a}.</b>", f"<p>{local}</p><p>AJ Turf installs artificial turf lawns, pet turf, putting greens and turf around pools and pavers for homes in {a} and across {county}. Every job starts with a free onsite estimate: we measure in person and give you one exact written price.</p>"
          "<ul>" + "".join(f'<li><b><a href="../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>"),
-      ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. Many HOAs still ask for architectural review before you install. We'll give you the product specs and install details your HOA usually asks for.</p>"),
+      ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. An HOA can't restrict turf it can't see (§720.3045), but a visible front yard can still need architectural review. We prepare that application with the product specs and install details, and submit it to your HOA for you. <a href='../guide/can-my-hoa-stop-me-from-installing-artificial-turf/'>How the two laws work</a>.</p>"),
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
     ]
     vids = []
@@ -389,6 +430,32 @@ page("our-work/", OW_TITLE, "Watch real AJ Turf installs: whole-property tours, 
      [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, CITY[a][0] + "/") for a in AREAS[:3]], "Real AJ Turf installs, on video", "our-work")
 PAGE_VIDEOS["our-work/"] = OUR_WORK
 urls.append("our-work/")
+
+# /videos/: every channel upload, grouped. Plays in YouTube's own player, so each play counts on the channel (Jereme 10/13).
+def vgroup(v):
+    t = VIDEOS[v][0].lower()
+    if any(k in t for k in ("method", "putting green", "first job", "how we")): return 1
+    if any(k in t for k in ("dog", "pet", "rooftop", "commercial")): return 2
+    return 0
+VGROUPS = ["Project walkthroughs & <b>tours.</b>", "How we <b>install.</b>", "Pet turf & <b>specialty.</b>"]
+_vids = sorted(VIDEOS, key=lambda v: VIDEOS[v][3], reverse=True)
+_vsec = "".join(
+    f'<section class="work"><header><h2>{h}</h2></header><div class="vgrid">' + "".join(vcard(v, "../") for v in _vids if vgroup(v) == i) + "</div></section>"
+    for i, h in enumerate(VGROUPS) if any(vgroup(v) == i for v in _vids))
+_vschema = {"@context": "https://schema.org", "@graph": [org(), crumbs([("AJ Turf", ""), ("Videos", "videos/")]),
+            {"@type": "CollectionPage", "name": "AJ Turf videos", "url": BASE + "videos/"}] + [vobj(v) for v in _vids]}
+os.makedirs("videos", exist_ok=True)
+open("videos/index.html", "w", encoding="utf-8").write(head("Artificial Turf Install Videos | AJ Turf, Southwest Florida",
+    "Watch real AJ Turf installs: finished-yard tours, the install method on the job, a putting green built start to finish, and pet turf.",
+    "videos/", 1, _vschema, "AJ Turf on video", "our-work") + f"""
+<header class="sub-hero" style="min-height:58vh"><img src="../img/green-canal-tiki.webp" alt="">
+  <div class="in"><span class="mono crumbs"><a href="../">AJ Turf</a> / Videos</span><h1>Real installs,<br><b>on video.</b></h1>
+  <p class="lede">Finished yards, the install method on the job, and builds from start to finish. Every video is ours, from our YouTube channel.</p>
+  <p style="margin-top:22px"><a class="alt mono" href="https://www.youtube.com/@AJTurf" target="_blank" rel="noopener" style="color:var(--white)">Subscribe on YouTube →</a></p></div></header>
+<main>{_vsec}{vcta().replace('class="vid-cta"', 'class="vid-cta" style="padding-bottom:clamp(60px,8vw,110px)"')}</main>
+""" + close(1))
+PAGE_VIDEOS["videos/"] = _vids
+urls.append("videos/")
 
 # Project pages: one per staged set, application first, city as a label
 def vmeta(p):
@@ -450,13 +517,15 @@ for p in PJ.PROJECTS: project_page(p)
 
 # Turf Guide
 from guide_content import GUIDES
+from kb_pages import PILLAR as _PL, QUESTION_PILLAR as _QP
+PILLAR_OF = {s: _PL[pl] for s, pl in _QP.items()}
 def article(g):
     path = f"guide/{g['slug']}/"; r = "../../"
     faq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": g["q"], "acceptedAnswer": {"@type": "Answer", "text": g["a"]}}]}
     art = {"@type": "Article", "headline": g["title"], "description": g["desc"], "datePublished": TODAY, "dateModified": TODAY,
            "author": {"@id": BASE + "#business"}, "publisher": {"@id": BASE + "#business"}, "mainEntityOfPage": BASE + path,
            "image": BASE + f"img/og/guide-{g['slug']}.jpg"}
-    schema = {"@context": "https://schema.org", "@graph": [org(), art, faq, crumbs([("AJ Turf", ""), ("Turf Guide", "guide/"), (g["title"], path)])]}
+    schema = {"@context": "https://schema.org", "@graph": [org(), art, faq, crumbs([("AJ Turf", ""), ("Turf Guide", "guide/")] + ([(PILLAR_OF[g["slug"]]["nav"], f"guide/{PILLAR_OF[g['slug']]['slug']}/")] if g["slug"] in PILLAR_OF else []) + [(g["title"], path)])]}
     others = "".join(f'<li><a href="{r}guide/{x["slug"]}/">{x["title"]}</a></li>' for x in GUIDES if x is not g)
     src = "".join(f"<li>{x}</li>" for x in g["sources"])
     html = head(g["seo"], g["desc"], path, 2, schema, g["title"], "guide-" + g["slug"]) + f"""
@@ -479,18 +548,119 @@ def article(g):
     os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(html)
     urls.append(path)
 for g in (GUIDES if PUBLISH_GUIDE else []): article(g)
-if PUBLISH_GUIDE:
-  os.makedirs("guide", exist_ok=True)
-items = "".join(f'<li><a href="{x["slug"]}/"><h3>{x["title"]}</h3><p>{x["desc"]}</p></a></li>' for x in GUIDES)
-if PUBLISH_GUIDE: open("guide/index.html", "w", encoding="utf-8").write(head("Turf Guide: Straight Answers About Artificial Turf | AJ Turf",
-    "Plain answers about artificial turf: how it's installed, what to ask an installer, heat, drainage, pets, HOAs and warranties.", "guide/", 1,
-    {"@context": "https://schema.org", "@graph": [org(), crumbs([("AJ Turf", ""), ("Turf Guide", "guide/")])]}, "The AJ Turf Guide", "home") + f"""
+
+# ---- Turf Guide knowledge hub (GEO plan, Muse KB 10/13): hub -> 5 pillars -> question pages ----
+import markdown as _md
+from kb_pages import PILLARS, PILLAR, QUESTION_PILLAR
+_KBI = json.load(open("kb_src/index.json", encoding="utf-8"))
+AUTHOR = {"@type": "Person", "name": "Jereme Strange", "worksFor": {"@id": BASE + "#business"}}
+PILLAR_SERVICE = {"turf-product-science": ("Pet turf", "pet-turf/"), "turf-installation": ("Artificial turf installation", "artificial-turf-installation/"),
+                  "turf-ownership": ("Turf repair", "turf-repair/"), "buying-artificial-turf": ("Artificial turf installation", "artificial-turf-installation/"),
+                  "artificial-turf-in-florida": ("Artificial turf in Fort Myers", "fort-myers/")}
+QPAGES = []  # (slug, title) of every question page, in pillar order, for the hub + pillars
+_plain = lambda s: _re.sub(r"<[^>]+>", "", s)
+_inline = lambda s: _md.markdown(s).removeprefix("<p>").removesuffix("</p>")
+
+def kb_question(slug):
+    src = open(f"kb_src/{slug}.md", encoding="utf-8").read()
+    title = re.search(r"^# (.+)$", src, re.M).group(1).strip()
+    answer = re.search(r"^\*\*The answer:\*\* (.+)$", src, re.M).group(1).strip()
+    body = src.split("**The answer:**", 1)[1].split("\n", 1)[1]
+    faq_md = body.split("## FAQ", 1)[1] if "## FAQ" in body else ""
+    body = body.split("## Related questions")[0].split("## FAQ")[0]
+    qa = re.findall(r"^\*\*(.+?\?)\*\*\n(.+?)(?=\n\n|\Z)", faq_md, re.M | re.S)
+    return title, _inline(answer), _md.markdown(body, extensions=["tables"]), [(_inline(q), _inline(a.strip())) for q, a in qa]
+
+def question_page(slug):
+    title, answer, body_html, qa = kb_question(slug)
+    meta = _KBI[slug]; p = PILLAR[QUESTION_PILLAR[slug]]
+    path = f"guide/{slug}/"; r = "../../"
+    faq_html = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in qa)
+    graph = [org(), {"@type": "Article", "headline": title, "description": meta["Suggested meta description"], "datePublished": TODAY,
+             "dateModified": TODAY, "author": AUTHOR, "publisher": {"@id": BASE + "#business"}, "mainEntityOfPage": BASE + path,
+             "image": BASE + f"img/og/guide-{slug}.jpg"},
+             crumbs([("AJ Turf", ""), ("Turf Guide", "guide/"), (p["nav"], f"guide/{p['slug']}/"), (title, path)])]
+    if qa:
+        graph.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": _plain(q), "acceptedAnswer": {"@type": "Answer", "text": _plain(a)}} for q, a in qa]})
+    sibs = [(s, t) for s, t in QPAGES if s != slug and QUESTION_PILLAR[s] == p["slug"]][:3]
+    svc = PILLAR_SERVICE[p["slug"]]
+    rel = "".join(f'<li><a href="{r}guide/{s}/">{t}</a></li>' for s, t in sibs)
+    rel += f'<li><a href="{r}guide/{p["slug"]}/">{p["title"].split(":")[0]}</a></li><li><a href="{r}{svc[1]}">{svc[0]}</a></li>'
+    toc = "".join(f"<li>{_plain(t)}</li>" for t in _re.findall(r"<h2>(.*?)</h2>", body_html))
+    faq_block = f'<div class="art-faq"><h2>Questions people <b>ask.</b></h2>{faq_html}</div>' if qa else ""
+    page_html = head(meta["Suggested meta title"], meta["Suggested meta description"], path, 2, {"@context": "https://schema.org", "@graph": graph}, title, "guide-" + slug) + f"""
+<header class="sub-hero" style="min-height:62vh">
+  <img src="{r}img/{p['img']}.webp" alt="">
+  <div class="in"><span class="mono crumbs"><a href="{r}">AJ Turf</a> / <a href="{r}guide/">Turf Guide</a> / <a href="{r}guide/{p['slug']}/">{p['nav']}</a></span>
+    <h1 style="font-size:clamp(34px,5vw,74px)">{title}</h1></div>
+</header>
+<div class="art-wrap"><main class="article">
+  <p class="byline mono">By Jereme Strange, AJ Turf · years on the manufacturing side of the turf industry, and years installing and repairing turf in Florida</p>
+  <p class="mono" style="color:var(--turf)">The short answer</p>
+  <p class="short">{answer}</p>
+  <div class="art-body">{body_html}</div>
+  {faq_block}
+  <p class="mono" style="margin-top:30px;color:var(--stone)">Updated {TODAY}</p>
+</main>
+<aside class="toc"><p class="mono">In this guide</p><ol>{toc}</ol>
+<a class="book" href="{BOOK}" target="_blank" rel="noopener" style="margin-top:26px;font-size:16px;padding:14px 20px">Free onsite estimate <span aria-hidden="true">→</span></a></aside></div>
+<section class="related"><span class="mono" style="color:var(--turf)">Keep reading</span><ul>{rel}</ul></section>
+""" + close(2)
+    os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(page_html)
+    urls.append(path)
+
+for p in PILLARS:  # question list per pillar: the existing guides + the new KB pages
+    for s, pl in QUESTION_PILLAR.items():
+        if pl == p["slug"]:
+            t = next((x["title"] for x in GUIDES if x["slug"] == s), None) or re.search(r"^# (.+)$", open(f"kb_src/{s}.md", encoding="utf-8").read(), re.M).group(1)
+            QPAGES.append((s, t))
+for s in _KBI: question_page(s)
+
+def pillar_page(p):
+    path = f"guide/{p['slug']}/"; r = "../../"
+    qs = [(s, t) for s, t in QPAGES if QUESTION_PILLAR[s] == p["slug"]]
+    items = "".join(f'<li><a href="{r}guide/{s}/">{t}</a></li>' for s, t in qs)
+    others = "".join(f'<li><a href="{r}guide/{x["slug"]}/">{x["title"].split(":")[0]}</a></li>' for x in PILLARS if x is not p)
+    graph = [org(), crumbs([("AJ Turf", ""), ("Turf Guide", "guide/"), (p["nav"], path)]),
+             {"@type": "CollectionPage", "name": p["title"], "url": BASE + path, "description": p["lead"], "author": AUTHOR,
+              "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": BASE + f"guide/{s}/", "name": t} for i, (s, t) in enumerate(qs)]}}]
+    toc = "".join(f"<li>{_plain(t)}</li>" for t in _re.findall(r"<h2>(.*?)</h2>", p["body"]))
+    qblock = f'<div class="art-qs"><h2>Questions in this <b>section.</b></h2><ul>{items}</ul></div>' if qs else ""
+    page_html = head(p["title"] + " | AJ Turf", p["lead"][:155], path, 2, {"@context": "https://schema.org", "@graph": graph}, p["title"].split(":")[0], "home") + f"""
+<header class="sub-hero" style="min-height:58vh"><img src="{r}img/{p['img']}.webp" alt="">
+  <div class="in"><span class="mono crumbs"><a href="{r}">AJ Turf</a> / <a href="{r}guide/">Turf Guide</a> / {p['nav']}</span><h1>{p['h1']}</h1></div></header>
+<div class="art-wrap"><main class="article">
+  <p class="byline mono">By Jereme Strange, AJ Turf</p>
+  <p class="mono" style="color:var(--turf)">The short answer</p>
+  <p class="short">{p['lead']}</p>
+  <div class="art-body">{p['body']}</div>
+  {qblock}
+</main>
+<aside class="toc"><p class="mono">In this section</p><ol>{toc}</ol>
+<a class="book" href="{BOOK}" target="_blank" rel="noopener" style="margin-top:26px;font-size:16px;padding:14px 20px">Free onsite estimate <span aria-hidden="true">→</span></a></aside></div>
+<section class="related"><span class="mono" style="color:var(--turf)">More of the Turf Guide</span><ul>{others}</ul></section>
+""" + close(2)
+    os.makedirs(path, exist_ok=True); open(path + "index.html", "w", encoding="utf-8").write(page_html)
+    urls.append(path)
+for p in PILLARS: pillar_page(p)
+
+def _hub_item(p):
+    qs = "".join(f'<li><a href="{s}/">{t}</a></li>' for s, t in QPAGES if QUESTION_PILLAR[s] == p["slug"])
+    return (f'<li class="pillar"><a class="pillar-h" href="{p["slug"]}/"><span class="mono">{p["letter"]} · {p["nav"]}</span>'
+            f'<h3>{p["h1"]}</h3><p>{p["lead"]}</p></a><ul>{qs}</ul></li>')
+_hub_graph = [org(), crumbs([("AJ Turf", ""), ("Turf Guide", "guide/")]),
+    {"@type": "CollectionPage", "name": "The AJ Turf Guide", "url": BASE + "guide/", "author": AUTHOR,
+     "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": BASE + f"guide/{p['slug']}/", "name": p["title"]} for i, p in enumerate(PILLARS)]}}]
+os.makedirs("guide", exist_ok=True)
+open("guide/index.html", "w", encoding="utf-8").write(head("Turf Guide: Straight Answers About Artificial Turf | AJ Turf",
+    "Everything about artificial turf in one place: what it's made of, how it should be installed, owning it, buying it, and Florida's rules. From a Fort Myers installer.", "guide/", 1,
+    {"@context": "https://schema.org", "@graph": _hub_graph}, "The AJ Turf Guide", "home") + f"""
 <header class="sub-hero" style="min-height:58vh"><img src="../img/backyard-wide.webp" alt="">
   <div class="in"><span class="mono crumbs"><a href="../">AJ Turf</a> / Turf Guide</span><h1>Straight answers<br>about <b>turf.</b></h1>
-  <p class="lede">What homeowners ask us most, answered plainly and backed by real product data and research.</p></div></header>
-<main class="guide-list"><ul>{items}</ul></main>
+  <p class="lede">From both sides of the business: how turf is made and how it should be installed. Plain answers, real numbers, and the honest downsides.</p></div></header>
+<main class="hub"><ul class="pillars">{"".join(_hub_item(p) for p in PILLARS)}</ul></main>
 """ + close(1))
-if PUBLISH_GUIDE: urls.append("guide/")
+urls.append("guide/")
 
 # privacy
 os.makedirs("privacy", exist_ok=True)
@@ -508,7 +678,7 @@ def vsite(v):
     t, d, sec, date, _, _ = VIDEOS[v]
     return (f"<video:video><video:thumbnail_loc>{BASE}img/vid/{v}.webp</video:thumbnail_loc><video:title>{_esc(t)}</video:title>"
             f"<video:description>{_esc(d)}</video:description><video:player_loc>https://www.youtube.com/embed/{v}</video:player_loc>"
-            f"<video:duration>{sec}</video:duration><video:publication_date>{date}</video:publication_date></video:video>")
+            + (f"<video:duration>{sec}</video:duration>" if sec else "") + f"<video:publication_date>{date}</video:publication_date></video:video>")
 open("sitemap.xml", "w", encoding="utf-8").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n' +
     "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod>{''.join(vsite(v) for v in PAGE_VIDEOS.get(u, []))}</url>\n" for u in urls) + "</urlset>\n")
 open("robots.txt", "w").write("User-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in
@@ -520,12 +690,18 @@ open("llms.txt", "w", encoding="utf-8").write(f"""# AJ Turf
 
 ## Key facts
 - Service: residential artificial turf installation, commercial and event lawns, pet turf, backyard putting greens with fringe, turf around pools and pavers, turf repair and re-installs.
-- Install method: 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, full weed barrier, turf glued to the border with 15-year-warrantied glue. No 6-inch steel spikes through the lawn.
-- Pricing: free onsite estimate, measured in person, one exact written price. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
+- Install method: screening-sand base compacted to 95% Standard Proctor (ASTM D698), 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, a woven weed barrier over everything, turf glued to the border with 15-year-warrantied glue. No spikes through the turf (spikes only pin the barrier and seam tape underneath).
+- Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site. Free onsite estimate, measured in person, one exact written price.
+- Warranty: Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
 - Payments: 30% to schedule, 35% on the first day on site, 35% at completion.
 - Timeline: about two days per 1,000 square feet.
 - Hours: Monday to Saturday, 9 to 5.
 - Contact: {PHONE}, {EMAIL}. Book: {BOOK}
+
+## Turf knowledge base
+- [Turf Guide]({BASE}guide/): index of every guide, in five sections
+""" + "".join(f"- [{x['title']}]({BASE}guide/{x['slug']}/): {x['lead'][:140]}...\n" for x in PILLARS)
+  + "".join(f"- [{t}]({BASE}guide/{s}/)\n" for s, t in QPAGES) + f"""- [Videos]({BASE}videos/): every AJ Turf install video, playing from the AJ Turf YouTube channel
 
 ## Pages
 """ + "".join(f"- {BASE}{u}\n" for u in urls))
@@ -539,6 +715,7 @@ cards += [(CITY[a][0], CITY[a][2], f"Artificial turf in<br><b>{a}.</b>") for a i
 cards += [("our-work", "green-canal-tiki", OW_H)]
 cards += [("proj-" + p["slug"], p["hero"][0][4:] + ("-1600" if p["hero"][3] else "-800"), f'{p["title"]}<br><b>{p["city"]}.</b>') for p in PJ.PROJECTS]
 cards += [("guide-" + g["slug"], g["img"], g["title"]) for g in (GUIDES if PUBLISH_GUIDE else [])]
+cards += [("guide-" + s, PILLAR[QUESTION_PILLAR[s]]["img"], dict(QPAGES)[s]) for s in _KBI]
 os.makedirs("img/og", exist_ok=True)
 root = pathlib.Path(".").resolve().as_uri() + "/"
 with sync_playwright() as pw:
