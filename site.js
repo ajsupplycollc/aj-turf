@@ -79,56 +79,36 @@
     prints.forEach(p => io.observe(p));
   } else prints.forEach(p => p.classList.add('in'));
 
-  // 1b. ballpark calculator (Muse pass-1 directive §5). Range comes ONLY from the public $9-$15/sq ft band,
-  // revealed after name + phone, and the lead rides the quick form's /lead path tagged [Website calculator].
+  // 1b. ballpark calculator. Range comes ONLY from the public $9-$15/sq ft band and shows live, no gate
+  // (Muse D2 10/13: the range is already public; the quick form below stays the lead capture).
   // Repairs get no number: they start with an onsite assessment.
   const LO = 9, HI = 15, TYPES = ['Lawn', 'Pet turf', 'Putting green', 'Pool & pavers', 'Repair'];
   const money = n => '$' + n.toLocaleString('en-US');
   const range = sq => [Math.ceil(sq * LO / 10) * 10, Math.floor(sq * HI / 10) * 10]; // rounding stays inside the band
   document.querySelectorAll('.calc').forEach(c => {
     const t0 = TYPES.includes(c.dataset.type) ? c.dataset.type : 'Lawn';
+    const book = document.querySelector('a[href*="appointments/schedules"]');
     c.innerHTML = `<div><span class="mono" style="color:var(--turf)">Ballpark calculator</span><h2>What would it <b>cost?</b></h2>
       <p class="calc-note">Ballparks only — your exact price comes from a free onsite measurement.</p></div>
-      <form class="calc-f" novalidate>
+      <form class="calc-f" onsubmit="return false">
         <label>Project<select name="type">${TYPES.map(t => `<option${t === t0 ? ' selected' : ''}>${t}</option>`).join('')}</select></label>
         <label class="calc-sq">About how many square feet?<span><input name="sqr" type="range" min="100" max="5000" step="50" value="500" aria-label="Square feet slider"><input name="sq" type="number" min="100" max="5000" step="10" value="500" inputmode="numeric" aria-label="Square feet"></span></label>
-        <div class="calc-gate"><label>Name<input name="name" autocomplete="name" maxlength="80"></label>
-          <label>Phone<input name="phone" type="tel" autocomplete="tel" maxlength="30"></label>
-          <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button class="book" type="submit">Show my ballpark <span aria-hidden="true">→</span></button>
-          <p class="qf-c">No spam. No obligation.</p></div>
         <p class="calc-out" role="status" aria-live="polite"></p>
+        ${book ? `<a class="book" href="${book.getAttribute('href')}" target="_blank" rel="noopener">Get your exact price, free <span aria-hidden="true">→</span></a>` : ''}
       </form>`;
-    const f = c.querySelector('form'), out = f.querySelector('.calc-out'), gate = f.querySelector('.calc-gate');
-    const F = f.elements; let open = false;
+    const f = c.querySelector('form'), out = f.querySelector('.calc-out'), F = f.elements;
     const sq = () => Math.max(100, Math.min(5000, +F.sq.value || 100));
     const show = () => {
       const rep = F.type.value === 'Repair';
       f.querySelector('.calc-sq').hidden = rep;
-      gate.hidden = rep || open;
       if (rep) out.textContent = 'Repairs start with a free onsite assessment — exact price on site.';
-      else if (open) { const [a, b] = range(sq()); out.textContent = `Ballpark: ${money(a)}–${money(b)}`; }
-      else out.textContent = '';
+      else { const [a, b] = range(sq()); out.textContent = `Ballpark: ${money(a)}–${money(b)}`; }
     };
-    F.sqr.oninput = () => { F.sq.value = F.sqr.value; show(); };
-    F.sq.oninput = () => { F.sqr.value = sq(); show(); };
-    F.type.onchange = show;
-    f.onsubmit = async e => {
-      e.preventDefault();
-      const name = F.name.value.trim(), phone = F.phone.value;
-      if (!name || phone.replace(/\D/g, '').length < 10) { out.textContent = 'Please add your name and a 10-digit phone number.'; return; }
-      const [a, b] = range(sq()), btn = gate.querySelector('button');
-      btn.disabled = true; out.textContent = 'One sec...';
-      try {
-        const r = await fetch('https://ajturf-chat.sam-947.workers.dev/lead', { method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ name, phone, website: F.website.value, page: location.pathname,
-            need: `[Website calculator] ${F.type.value} · about ${sq()} sq ft · ballpark shown ${money(a)}–${money(b)}` }) });
-        const j = await r.json(); if (!r.ok) throw new Error(j.error || '');
-        open = true; show();
-        if (window.gtag) gtag('event', 'generate_lead', { method: 'calculator' });
-      } catch (err) { out.textContent = (err.message || "That didn't send.") + ' You can also call or text 305-762-9901.'; }
-      btn.disabled = false;
-    };
+    let told = false;  // one GA4 event per visit when someone actually uses it
+    const used = () => { show(); if (!told && window.gtag) { gtag('event', 'calculator_use'); told = true; } };
+    F.sqr.oninput = () => { F.sq.value = F.sqr.value; used(); };
+    F.sq.oninput = () => { F.sqr.value = sq(); used(); };
+    F.type.onchange = used;
     show();
   });
 

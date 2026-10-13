@@ -246,7 +246,7 @@ SERVICES = [
       # Strip = Muse's plan set (photo_content.SERVICE); the old copies duplicated those files.
       lede="True-rolling backyard greens with fringe, built off the patio, beside the pool or out by the water.",
       sections=[("Built like a <b>green.</b>",
-        "<p>A good green is about the base. We shape and compact it so the ball rolls true, then install a short putting surface surrounded by a slightly taller fringe turf, the same way a course frames a green.</p>"
+        "<p>A good green is about the base. We shape and compact it so the ball rolls true, then install a short putting surface surrounded by a slightly taller fringe turf, the same way a course frames a green. How fast does a backyard green roll? See the <a href='../guide/how-fast-does-a-turf-putting-green-roll/'>lab-measured speeds and test conditions</a>.</p>"
         "<ul><li><b>Putting surface plus fringe.</b> Two turfs, cut and seamed by hand.</li><li><b>Cups and flags placed where you want them.</b></li><li><b>Fits real yards.</b> Off a lanai, along a canal or tucked into a side yard.</li></ul>"),
        ("The <b>details.</b>", METHOD)]),
  dict(slug="pool-and-paver-turf", nav="Pools & pavers", title="Turf for Pools & Pavers", h1="Pools &amp; <b>pavers.</b>", img="pavers", kw="turf around pools and pavers",

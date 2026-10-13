@@ -413,3 +413,8 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 .pillar ul{list-style:none;margin-top:16px;border-top:1px solid #cfd3cc}
 .pillar li a{display:block;padding:10px 0;border-bottom:1px solid #cfd3cc;text-decoration:none;font-size:15px}
 .pillar li a:hover{color:var(--turf)}
+
+/* Build 4 (Muse D3): small "Watch" text link under the hero CTAs on phones only (desktop has the in-hero player) */
+.top-watch{display:none}
+@media (max-width:860px){.top-watch{display:inline-block;margin-top:12px;color:#dfe3dd;font-size:11px;text-decoration:underline;text-underline-offset:3px}}
+.calc-f .book{justify-self:start;margin-top:4px}
