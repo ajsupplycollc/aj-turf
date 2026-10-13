@@ -261,7 +261,7 @@ document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{co
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{og_title or title}"><meta name="twitter:description" content="{desc}"><meta name="twitter:image" content="{BASE}img/og/{og_slug}.jpg">
 <link rel="icon" href="{r}img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="{r}style.css">
 <script type="application/ld+json">{json.dumps(schema)}</script>
 </head>
@@ -317,6 +317,9 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
     secs = "".join(x if isinstance(x, str) else f'<section class="prose"><h2>{x[0]}</h2><div class="body">{x[1]}</div></section>' for x in sections)
     rel = "".join(f'<li><a href="{r}{u}">{n}</a></li>' for n, u in related)
     if photos: secs += pstrip(photos, r)
+    # ballpark calculator on the service pages (Muse pass-1 §5); site.js builds it
+    ct = {"artificial-turf-installation/": "Lawn", "pet-turf/": "Pet turf", "putting-greens/": "Putting green", "pool-and-paver-turf/": "Pool & pavers", "turf-repair/": "Repair"}.get(path)
+    if ct: secs += f'<section class="calc-sec"><div class="calc" data-type="{ct}"></div></section>'
     html = head(title, desc, path, depth, schema, og_title, og_slug) + f'''
 <header class="sub-hero">
   <img src="{r}img/{img}.webp" alt="">
