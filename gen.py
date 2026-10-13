@@ -563,7 +563,8 @@ PILLAR_SERVICE = {"turf-product-science": ("Pet turf", "pet-turf/"), "turf-insta
                   "turf-ownership": ("Turf repair", "turf-repair/"), "buying-artificial-turf": ("Artificial turf installation", "artificial-turf-installation/"),
                   "artificial-turf-in-florida": ("Artificial turf in Fort Myers", "fort-myers/")}
 QVIDEO = {"concrete-border-vs-spikes": ("aATUhfArpEY", "The method, <b>on a real job.</b>"),
-          "best-artificial-turf-for-dogs-in-florida": ("VXatdDEOrdw", "A dog run, <b>on video.</b>")}  # GEO plan §6.2: proof footage on its page
+          "best-artificial-turf-for-dogs-in-florida": ("VXatdDEOrdw", "A dog run, <b>on video.</b>"),
+          "how-fast-does-a-turf-putting-green-roll": ("IhduTxos9As", "A green, <b>start to finish.</b>")}  # GEO plan §6.2: proof footage on its page
 QPAGES = []  # (slug, title) of every question page, in pillar order, for the hub + pillars
 _plain = lambda s: _re.sub(r"<[^>]+>", "", s)
 _inline = lambda s: _md.markdown(s).removeprefix("<p>").removesuffix("</p>")
@@ -704,7 +705,7 @@ open("llms.txt", "w", encoding="utf-8").write(f"""# AJ Turf
 - Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site. Free onsite estimate, measured in person, one exact written price.
 - Warranty: Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
 - Payments: 30% to schedule, 35% on the first day on site, 35% at completion.
-- Timeline: about two days per 1,000 square feet.
+- Timeline: about two days per 1,000 square feet. Installs are typically scheduled within two weeks, or on the client's preferred date. New installs start at 1,000 square feet; repairs have no minimum.
 - Hours: Monday to Saturday, 9 to 5.
 - Contact: {PHONE}, {EMAIL}. Book: {BOOK}
 

@@ -28,7 +28,7 @@ Zeolite works by trapping ammonium, the step before ammonia gas, so it stops the
 
 ## Why does plain sand fail in a dog run?
 
-Silica is the right ballast: it weights the turf and holds the blades up. But on its own in a dog area it holds urine against the backing, where bacteria turn it into ammonia. That's why pet systems put silica underneath and an odor-active layer on top.
+Silica is the right ballast: it weights the turf and holds the blades up. For lawns and pet areas the grade sold for this is 30/65 silica, at 1.5 to 2 pounds per square foot. But on its own in a dog area it holds urine against the backing, where bacteria turn it into ammonia. That's why pet systems put silica underneath and an odor-active layer on top.
 
 ## What about heat and paws?
 

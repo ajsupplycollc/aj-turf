@@ -132,4 +132,6 @@ QUESTION_PILLAR = {
     "why-do-turf-quotes-differ": "buying-artificial-turf",
     "best-artificial-turf-for-dogs-in-florida": "artificial-turf-in-florida",
     "why-did-my-turf-melt": "turf-ownership",
+    "how-fast-does-a-turf-putting-green-roll": "turf-product-science",
+    "what-does-a-turf-warranty-cover": "buying-artificial-turf",
 }
