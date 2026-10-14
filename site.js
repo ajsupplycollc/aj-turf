@@ -67,6 +67,18 @@
     }
   });
 
+  // 0b. before/after sliders: drag ANYWHERE on the photo (iOS only moves a range input by its invisible thumb).
+  // Horizontal drags move the divider; vertical swipes still scroll the page (touch-action: pan-y in CSS).
+  document.querySelectorAll('.ba').forEach(ba => {
+    const input = ba.querySelector('input[type=range]');
+    const setX = x => { const r = ba.getBoundingClientRect(), p = Math.max(0, Math.min(100, (x - r.left) / r.width * 100));
+      ba.style.setProperty('--p', p + '%'); if (input) input.value = p; };
+    let down = false;
+    ba.addEventListener('pointerdown', e => { down = true; setX(e.clientX); });
+    ba.addEventListener('pointermove', e => { if (down || e.pointerType === 'mouse' && e.buttons) setX(e.clientX); });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => ba.addEventListener(t, () => { down = false; }));
+  });
+
   // 1a. pinned prints swing in the first time they scroll into view (CSS does the swing)
   const prints = document.querySelectorAll('.print');
   if (prints.length && 'IntersectionObserver' in window) {
