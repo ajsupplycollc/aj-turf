@@ -62,11 +62,11 @@ def sync_videos():
         im.thumbnail((720, 720)); im.save(out, quality=80)
 sync_videos()
 
-# Duck Key stitch: mid-install, rotated, no payoff (Jereme via Muse 10/16). C-12 fire-pit green: Muse holds it until the channel call.
-HIDDEN = {"LgpH3u-eJ6A", "Ak-UVF63S1g"}
+# Duck Key stitch: mid-install, rotated, no payoff (Jereme via Muse 10/16): off every page.
+HIDDEN = {"LgpH3u-eJ6A"}
 OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "HgPybt3IXWA", "v2eITlM3ujc", "EF2Vn8CENRE", "zzQ96jgy13k"]
 CITY_VIDEOS = {"Fort Myers": (["3yovFZ8U0ns"], "A finished Fort Myers <b>lawn.</b>")}  # geo-matched only: the video's city = the page's city
-SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "zzQ96jgy13k"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A", "gwrSbYCwsoA"], "Waterfront, <b>on the job.</b>"),
+SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "zzQ96jgy13k"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["gwrSbYCwsoA"], "A pool surround, <b>on the job.</b>"),
                   "pet-turf": (["VXatdDEOrdw"], "A rooftop dog run, <b>on video.</b>"), "artificial-turf-installation": (["aATUhfArpEY"], "The method, <b>on a real job.</b>"),
                   "turf-repair": (["aATUhfArpEY"], "How we <b>rebuild it.</b>")}
 # a service video sits right after this section (default: after the first)
@@ -76,7 +76,7 @@ SERVICE_VIDEO_AFTER = {"artificial-turf-installation": "How we <b>build it.</b>"
 VIDEO_JOB = {"G8VQdQvdHKs": "work/marathon-resort-lawn-and-pool", "qcrd7AaRggQ": "work/marathon-waterfront-lawn", "VXatdDEOrdw": "work/key-largo-rooftop-dog-run",
  "KCdGos73yv8": "work/west-palm-beach-rooftop-terrace", "XV1PvYFIxKY": "work/west-palm-beach-rooftop-terrace", "E4Mxf-pbMyY": "work/south-miami-driveway-turf-strips",
  "IhduTxos9As": "work/boynton-beach-putting-green-build", "70gmWscveDg": "work/long-key-50-ft-putting-green", "XeKvGsyuBuI": "work/lower-matecumbe-canal-lawn",
- "bs1ThPgmBGQ": "work/hialeah-gardens-front-yard-putting-green", "U7XIJkDtIYs": "work/dogs-on-pet-turf", "ajRINxB-_YQ": "work/miami-front-yard-lawn"}
+ "bs1ThPgmBGQ": "work/hialeah-gardens-front-yard-putting-green", "Ak-UVF63S1g": "putting-greens", "U7XIJkDtIYs": "work/dogs-on-pet-turf", "ajRINxB-_YQ": "work/miami-front-yard-lawn"}
 def vcard(v, r, job=False):
     t, _, _, _, tall, cap = VIDEOS[v]
     return (f'<figure class="vid{"" if tall else " wide"}"><button class="yt" data-id="{v}" data-title="{t}" aria-label="Play video: {t}">'
@@ -121,8 +121,12 @@ def fig(item, r):
     ss = f' srcset="{r}img/p/{item}-800.webp 800w, {r}img/p/{item}-1600.webp 1600w" sizes="(max-width:860px) 88vw, 780px"' if big else ""
     return f'<figure class="{"wide" if w > h else ""}"><img src="{r}img/p/{item}-800.webp"{ss} alt="{a}" width="{w}" height="{h}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>'
 
-PHOTO_JOB = {"299": "marathon-resort-lawn-and-pool", "190": "marathon-resort-lawn-and-pool", "124": "marathon-resort-lawn-and-pool",
-             "196": "southwest-florida-backyard-lawn", "069": "southwest-florida-backyard-lawn", "120": "southwest-florida-backyard-lawn", "098": "southwest-florida-backyard-lawn"}
+PHOTO_JOB = {  # city-strip photo -> the job page showing the same picture (image-hash match, 10/16); the other 10 aren't on any job page
+ "037": "lower-matecumbe-canal-lawn", "130": "lower-matecumbe-canal-lawn", "161": "lower-matecumbe-canal-lawn", "269": "lower-matecumbe-canal-lawn",
+ "135": "boynton-beach-putting-green-build", "293": "boynton-beach-putting-green-build", "107": "boynton-beach-putting-green-build",
+ "green_waterfront_03": "long-key-50-ft-putting-green", "green_canal_03": "pembroke-pines-canal-putting-green", "237": "marathon-waterfront-lawn",
+ "299": "marathon-resort-lawn-and-pool", "190": "marathon-resort-lawn-and-pool", "124": "marathon-resort-lawn-and-pool",
+ "196": "southwest-florida-backyard-lawn", "069": "southwest-florida-backyard-lawn", "120": "southwest-florida-backyard-lawn", "098": "southwest-florida-backyard-lawn"}
 def pstrip(items, r, h2="Real <b>jobs.</b>", style=' style="padding-top:clamp(70px,10vw,140px)"', link=False):
     # every photo gallery ends at the booking CTA
     return (f'<section class="work"{style}><header><h2>{h2}</h2></header>'
