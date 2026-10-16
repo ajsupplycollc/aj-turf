@@ -19,7 +19,6 @@ VIDEOS = {
  "IhduTxos9As": ("My First Job: Building a Backyard Putting Green Start to Finish", "A backyard putting green filmed day by day across seven visits, from the bare yard through excavation, base and weed barrier to the finished green.", 549, "2026-10-08", True, "Putting green · start to finish"),
  "aATUhfArpEY": ("The AJ Method: How We Install Artificial Turf", "Jereme walks through the AJ Turf install method on a real Florida Keys job: excavation, base compaction, weed barrier and the turf going down.", 138, "2026-10-08", True, "The AJ Method · on a real job"),
  "LgpH3u-eJ6A": ("Duck Key, FL Project Walkthrough — Whole-Property Turf & Landscaping", "A canal-front, whole-property turf and landscaping project in progress in Duck Key, in the Florida Keys.", 32, "2026-10-08", True, "Duck Key · canal-front, in progress"),
- "32e58ALhpEQ": ("A 3-Hole Putting Green for a 7-Year-Old's Birthday — Built in 2 Days", "A three-hole backyard putting green built over two days as a 7-year-old's birthday surprise.", 70, "2026-10-16", True, "Birthday putting green · built in 2 days"),
  "HgPybt3IXWA": ("Coral Gables, FL Project Recap: New Fence, Privacy Hedges & Finished Turf", "A full-property recap in the Coral Gables area: new chain-link fence, a Clusia privacy hedge and finished artificial turf.", 53, "2026-10-08", True, "Coral Gables · fence, hedge, turf"),
 }
 
@@ -63,9 +62,9 @@ def sync_videos():
         im.thumbnail((720, 720)); im.save(out, quality=80)
 sync_videos()
 
-OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA", "v2eITlM3ujc", "EF2Vn8CENRE", "32e58ALhpEQ"]
+OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA", "v2eITlM3ujc", "EF2Vn8CENRE", "zzQ96jgy13k"]
 CITY_VIDEOS = {"Fort Myers": (["3yovFZ8U0ns"], "A finished Fort Myers <b>lawn.</b>")}  # geo-matched only: the video's city = the page's city
-SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "32e58ALhpEQ"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A", "gwrSbYCwsoA"], "Waterfront, <b>on the job.</b>")}
+SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "zzQ96jgy13k"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A", "gwrSbYCwsoA"], "Waterfront, <b>on the job.</b>")}
 
 def vcard(v, r):
     t, _, _, _, tall, cap = VIDEOS[v]
@@ -209,7 +208,7 @@ REVIEWS = [
 ]
 def reviews_block(n=6):
     cards = "".join(f'<li><p>&ldquo;{html.escape(t)}&rdquo;</p><span class="mono">{who}{" · " + y if y else ""} · Thumbtack</span></li>' for who, y, t in REVIEWS[:n])
-    return (f'<section class="reviews" id="reviews"><header><span class="mono" style="color:var(--turf)">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0 · 14 reviews on Thumbtack</span>'
+    return (f'<section class="reviews" id="reviews"><header><span class="mono" style="color:var(--turf)">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0 on Thumbtack</span>'
             f'<h2 style="margin-top:18px">What clients <b>say.</b></h2></header><ul>{cards}</ul>'
             f'<p class="rv-note mono">Earned under our former name, AJ Supply. <a href="{TT_URL}" target="_blank" rel="noopener">Read all 14 on Thumbtack &rarr;</a></p></section>')
 
