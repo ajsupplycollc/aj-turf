@@ -19,6 +19,7 @@ VIDEOS = {
  "IhduTxos9As": ("My First Job: Building a Backyard Putting Green Start to Finish", "A backyard putting green filmed day by day across seven visits, from the bare yard through excavation, base and weed barrier to the finished green.", 549, "2026-10-08", True, "Putting green · start to finish"),
  "aATUhfArpEY": ("The AJ Method: How We Install Artificial Turf", "Jereme walks through the AJ Turf install method on a real Florida Keys job: excavation, base compaction, weed barrier and the turf going down.", 138, "2026-10-08", True, "The AJ Method · on a real job"),
  "LgpH3u-eJ6A": ("Duck Key, FL Project Walkthrough — Whole-Property Turf & Landscaping", "A canal-front, whole-property turf and landscaping project in progress in Duck Key, in the Florida Keys.", 32, "2026-10-08", True, "Duck Key · canal-front, in progress"),
+ "32e58ALhpEQ": ("A 3-Hole Putting Green for a 7-Year-Old's Birthday — Built in 2 Days", "A three-hole backyard putting green built over two days as a 7-year-old's birthday surprise.", 70, "2026-10-16", True, "Birthday putting green · built in 2 days"),
  "HgPybt3IXWA": ("Coral Gables, FL Project Recap: New Fence, Privacy Hedges & Finished Turf", "A full-property recap in the Coral Gables area: new chain-link fence, a Clusia privacy hedge and finished artificial turf.", 53, "2026-10-08", True, "Coral Gables · fence, hedge, turf"),
 }
 
@@ -62,9 +63,9 @@ def sync_videos():
         im.thumbnail((720, 720)); im.save(out, quality=80)
 sync_videos()
 
-OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA"]
+OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA", "v2eITlM3ujc", "EF2Vn8CENRE", "32e58ALhpEQ"]
 CITY_VIDEOS = {"Fort Myers": (["3yovFZ8U0ns"], "A finished Fort Myers <b>lawn.</b>")}  # geo-matched only: the video's city = the page's city
-SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A"], "Waterfront, <b>on the job.</b>")}
+SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "32e58ALhpEQ"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A", "gwrSbYCwsoA"], "Waterfront, <b>on the job.</b>")}
 
 def vcard(v, r):
     t, _, _, _, tall, cap = VIDEOS[v]
@@ -83,7 +84,7 @@ def vobj(v):
     return {"@type": "VideoObject", "name": t, "description": d, "thumbnailUrl": BASE + f"img/vid/{v}.webp", "uploadDate": date,
             **({"duration": f"PT{s // 60}M{s % 60}S"} if s else {}), "embedUrl": f"https://www.youtube.com/embed/{v}"}
 
-HOME_VIDEOS = ["4j__CUFYhnQ", "3yovFZ8U0ns", "aATUhfArpEY"]  # embedded by hand in index.html
+HOME_VIDEOS = ["4j__CUFYhnQ", "3yovFZ8U0ns", "aATUhfArpEY", "v2eITlM3ujc"]  # embedded by hand in index.html
 PAGE_VIDEOS = {"": HOME_VIDEOS}  # path -> video ids, for the video sitemap
 
 import photo_content as PC
@@ -147,10 +148,10 @@ def wfile(p, f, n):
     return base, im.width, im.height, os.path.exists(base + "-1600.webp")
 
 import subprocess
-def poster(p):
-    base = f"img/w/{p['slug']}-poster"
+def poster(p, sfx=""):
+    base = f"img/w/{p['slug']}{sfx}-poster"
     if not os.path.exists(base + "-800.webp"):
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", f"vid/w/{p['slug']}.mp4", "-frames:v", "1", "-vf", "scale='min(800,iw)':-2", base + "-800.webp"], check=True)
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", "1", "-i", f"vid/w/{p['slug']}{sfx}.mp4", "-frames:v", "1", "-vf", "scale='min(800,iw)':-2", base + "-800.webp"], check=True)
     im = Image.open(base + "-800.webp")
     return base, im.width, im.height, False, "F"
 
@@ -425,7 +426,7 @@ OW_TITLE, OW_H = "Recent Work — Watch Our Installs | AJ Turf, Southwest Florid
 groups = [OUR_WORK[i:i + 3] for i in range(0, len(OUR_WORK), 3)]
 page("our-work/", OW_TITLE, "Watch real AJ Turf installs: whole-property tours, a putting green built start to finish, and the install method on the job. Free onsite estimate.",
      "Our work", OW_H, "Walk finished yards and watch the method on real jobs. When you're ready, we'll measure yours for free.", "green-canal-tiki",
-     [cards([p for p in PJ.PROJECTS if a in (p["app"], p.get("also"))], "../", h, "By type of job") for a, h, _ in PJ.APPS] + [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>"])] + [pstrip(ids, "../", h) for h, ids in PC.OUR_WORK_RAILS],
+     [cards([p for p in PJ.PROJECTS if a in (p["app"], p.get("also"))], "../", h, "By type of job") for a, h, _ in PJ.APPS] + [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>", "Start to <b>finish.</b>"])] + [pstrip(ids, "../", h) for h, ids in PC.OUR_WORK_RAILS],
      [crumbs([("AJ Turf", ""), ("Our work", "our-work/")])] + [vobj(v) for v in OUR_WORK],
      [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, CITY[a][0] + "/") for a in AREAS[:3]], "Real AJ Turf installs, on video", "our-work")
 PAGE_VIDEOS["our-work/"] = OUR_WORK
@@ -458,9 +459,9 @@ PAGE_VIDEOS["videos/"] = _vids
 urls.append("videos/")
 
 # Project pages: one per staged set, application first, city as a label
-def vmeta(p):
-    # self-hosted clip (vid/w/<slug>.mp4, encoded from the staged master); poster + duration for the player and VideoObject
-    mp4 = f"vid/w/{p['slug']}.mp4"; base, w, h, _, _ = poster(p)
+def vmeta(p, sfx=""):
+    # self-hosted clip (vid/w/<slug><sfx>.mp4, encoded from the staged master); poster + duration for the player and VideoObject
+    mp4 = f"vid/w/{p['slug']}{sfx}.mp4"; base, w, h, _, _ = poster(p, sfx)
     d = float(subprocess.run(["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", mp4], capture_output=True, text=True).stdout)
     return mp4, base + "-800.webp", round(d), w, h
 
@@ -483,12 +484,14 @@ def project_page(p):
     if fin: body += (f'<section class="work"><header><h2>The finished <b>job.</b></h2><span class="mono" style="color:var(--stone)">Tap a photo to enlarge</span></header>'
              f'<div class="pgrid">{"".join(gfig(p, i, r, n, len(fin)) for n, i in enumerate(fin, 1))}</div>{vcta()}</section>')
     # held_silent: audio had to come off (private talk / music) and Jereme ruled no silent video (10/11) -> off the page until it has a cleared music bed
-    if p.get("video") and not p.get("held_silent"):
-        mp4, poster, sec, pw, ph = vmeta(p)
-        body += (f'<section class="work"><header><h2>On <b>video.</b></h2></header><div class="pvid"><video controls preload="none" playsinline '
-                 f'poster="{r}{poster}" width="{pw}" height="{ph}" aria-label="{p["video"][1]}: {t.lower()} in {p["city"]}"><source src="{r}{mp4}" type="video/mp4"></video>'
-                 f'<p class="mono">{p["video"][1]} · {p["city"]}</p></div>{vcta()}</section>')
-        graph.append({"@type": "VideoObject", "name": f"{t}, {p['city']}: {p['video'][1].lower()}", "description": p["blurb"],
+    clips = [(sfx, v) for sfx, v in (("", p.get("video")), ("-2", p.get("video2"))) if v and not (sfx == "" and p.get("held_silent"))]
+    for sfx, v in clips:
+        mp4, poster, sec, pw, ph = vmeta(p, sfx)
+        body += ((f'<section class="work"><header><h2>On <b>video.</b></h2></header>' if sfx == "" or len(clips) == 1 else '<section class="work">') +
+                 f'<div class="pvid"><video controls preload="none" playsinline '
+                 f'poster="{r}{poster}" width="{pw}" height="{ph}" aria-label="{v[1]}: {t.lower()} in {p["city"]}"><source src="{r}{mp4}" type="video/mp4"></video>'
+                 f'<p class="mono">{v[1]} · {p["city"]}</p></div>{vcta()}</section>')
+        graph.append({"@type": "VideoObject", "name": f"{t}, {p['city']}: {v[1].lower()}", "description": p["blurb"],
                       "thumbnailUrl": BASE + poster, "contentUrl": BASE + mp4, "uploadDate": TODAY, "duration": f"PT{sec // 60}M{sec % 60}S"})
     if p.get("youtube"):
         body += vblock([p["youtube"]], r, "On <b>video.</b>"); graph.append(vobj(p["youtube"])); PAGE_VIDEOS[path] = [p["youtube"]]
