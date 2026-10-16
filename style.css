@@ -423,16 +423,3 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 .ba{touch-action:pan-y;cursor:ew-resize}
 .ba input{pointer-events:none}
 .ba img{pointer-events:none;-webkit-user-drag:none;user-select:none}
-
-/* hero = square before/after composite, shown whole (never cropped) over a blurred fill of itself.
-   Desktop: it sits between the headline and the hero video (headline trimmed to make room); phone: in flow above the copy. */
-.top .hero-blur{filter:blur(28px) brightness(.5);transform:scale(1.15)}
-.top h1{font-size:clamp(42px,4.4vw,92px)}
-.hero-fit{--gut:clamp(18px,5vw,64px);--h1:calc(8.6 * clamp(42px,4.4vw,92px));position:absolute;z-index:1;top:96px;
-  --l:max(calc(var(--gut) + var(--h1) + 36px),calc(var(--gut) + 610px));left:var(--l);width:calc(100% - var(--l) - var(--gut) - clamp(160px,15vw,220px) - 36px);height:calc(100% - 150px);object-fit:contain;object-position:center}
-@media (max-width:860px){
-  .top{flex-direction:column;align-items:stretch}
-  .top h1{font-size:clamp(38px,10.5vw,56px)}
-  .hero-fit{position:relative;inset:auto;margin:112px auto 0;width:min(calc(100% - 32px),34svh);height:auto;aspect-ratio:1}
-  .top-in{margin-top:auto;padding-top:22px}
-}
