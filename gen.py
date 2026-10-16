@@ -62,14 +62,25 @@ def sync_videos():
         im.thumbnail((720, 720)); im.save(out, quality=80)
 sync_videos()
 
-OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "LgpH3u-eJ6A", "HgPybt3IXWA", "v2eITlM3ujc", "EF2Vn8CENRE", "zzQ96jgy13k"]
+# Duck Key stitch: mid-install, rotated, no payoff (Jereme via Muse 10/16). C-12 fire-pit green: Muse holds it until the channel call.
+HIDDEN = {"LgpH3u-eJ6A", "Ak-UVF63S1g"}
+OUR_WORK = ["4j__CUFYhnQ", "3yovFZ8U0ns", "IhduTxos9As", "aATUhfArpEY", "HgPybt3IXWA", "v2eITlM3ujc", "EF2Vn8CENRE", "zzQ96jgy13k"]
 CITY_VIDEOS = {"Fort Myers": (["3yovFZ8U0ns"], "A finished Fort Myers <b>lawn.</b>")}  # geo-matched only: the video's city = the page's city
-SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "zzQ96jgy13k"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A", "gwrSbYCwsoA"], "Waterfront, <b>on the job.</b>")}
+SERVICE_VIDEOS = {"putting-greens": (["IhduTxos9As", "zzQ96jgy13k"], "Watch one <b>go in.</b>"), "pool-and-paver-turf": (["LgpH3u-eJ6A", "gwrSbYCwsoA"], "Waterfront, <b>on the job.</b>"),
+                  "pet-turf": (["VXatdDEOrdw"], "A rooftop dog run, <b>on video.</b>"), "artificial-turf-installation": (["aATUhfArpEY"], "The method, <b>on a real job.</b>"),
+                  "turf-repair": (["aATUhfArpEY"], "How we <b>rebuild it.</b>")}
+# a service video sits right after this section (default: after the first)
+SERVICE_VIDEO_AFTER = {"artificial-turf-installation": "How we <b>build it.</b>", "turf-repair": "How we <b>rebuild.</b>"}
 
-def vcard(v, r):
+# 4: video -> its job page (matched by place + job; unmatched videos get no link)
+VIDEO_JOB = {"G8VQdQvdHKs": "work/marathon-resort-lawn-and-pool", "qcrd7AaRggQ": "work/marathon-waterfront-lawn", "VXatdDEOrdw": "work/key-largo-rooftop-dog-run",
+ "KCdGos73yv8": "work/west-palm-beach-rooftop-terrace", "XV1PvYFIxKY": "work/west-palm-beach-rooftop-terrace", "E4Mxf-pbMyY": "work/south-miami-driveway-turf-strips",
+ "IhduTxos9As": "work/boynton-beach-putting-green-build", "70gmWscveDg": "work/long-key-50-ft-putting-green", "XeKvGsyuBuI": "work/lower-matecumbe-canal-lawn",
+ "bs1ThPgmBGQ": "work/hialeah-gardens-front-yard-putting-green", "U7XIJkDtIYs": "work/dogs-on-pet-turf", "ajRINxB-_YQ": "work/miami-front-yard-lawn"}
+def vcard(v, r, job=False):
     t, _, _, _, tall, cap = VIDEOS[v]
     return (f'<figure class="vid{"" if tall else " wide"}"><button class="yt" data-id="{v}" data-title="{t}" aria-label="Play video: {t}">'
-            f'<img src="{r}img/vid/{v}.webp" alt="" loading="lazy"><span class="play"></span></button><figcaption class="cap mono">{cap}</figcaption></figure>')
+            f'<img src="{r}img/vid/{v}.webp" alt="{_html.escape(cap)}" loading="lazy"><span class="play"></span></button><figcaption class="cap mono">{cap}</figcaption>' + (f'<a class="vid-job mono" href="{r}{VIDEO_JOB[v]}/">See this job →</a>' if v in VIDEO_JOB and job else "") + '</figure>')
 
 def vcta():
     return f'<p class="vid-cta"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a><a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a><a class="alt mono" href="sms:{PHONE_HREF}">Or text us</a></p>'
@@ -110,10 +121,13 @@ def fig(item, r):
     ss = f' srcset="{r}img/p/{item}-800.webp 800w, {r}img/p/{item}-1600.webp 1600w" sizes="(max-width:860px) 88vw, 780px"' if big else ""
     return f'<figure class="{"wide" if w > h else ""}"><img src="{r}img/p/{item}-800.webp"{ss} alt="{a}" width="{w}" height="{h}" loading="lazy"><figcaption class="cap mono">{c}</figcaption></figure>'
 
-def pstrip(items, r, h2="Real <b>jobs.</b>", style=' style="padding-top:clamp(70px,10vw,140px)"'):
+PHOTO_JOB = {"299": "marathon-resort-lawn-and-pool", "190": "marathon-resort-lawn-and-pool", "124": "marathon-resort-lawn-and-pool",
+             "196": "southwest-florida-backyard-lawn", "069": "southwest-florida-backyard-lawn", "120": "southwest-florida-backyard-lawn", "098": "southwest-florida-backyard-lawn"}
+def pstrip(items, r, h2="Real <b>jobs.</b>", style=' style="padding-top:clamp(70px,10vw,140px)"', link=False):
     # every photo gallery ends at the booking CTA
     return (f'<section class="work"{style}><header><h2>{h2}</h2></header>'
-            f'<div class="strip">' + "".join(fig(x, r) for x in items) + "</div>" + vcta() + "</section>")
+            f'<div class="strip">' + "".join(fig(x, r) if not (link and isinstance(x, str) and x in PHOTO_JOB) else
+                                             f'<a href="{r}work/{PHOTO_JOB[x]}/" class="pjob">' + fig(x, r) + "</a>" for x in items) + "</div>" + vcta() + "</section>")
 
 # Project pages (projects.py, from Muse's staging manifest). Masters are HEIC/MOV; only web derivatives ship.
 # Re-saving through PIL drops EXIF, so no GPS from clients' homes leaves this machine.
@@ -313,7 +327,7 @@ document.addEventListener('click',e=>{{const y=e.target.closest('.yt');if(y){{co
 <body>
 <nav class="nav solid" id="nav">
   <a class="mark" href="{r}"><img src="{r}img/mark.svg" alt="" width="34" height="34">AJ<span>/</span>TURF</a>
-  <div class="mid mono"><a href="{r}#method">Method</a><a href="{r}#work">Work</a><a href="{r}videos/">Videos</a><a href="{r}#services">Services</a><a href="{r}guide/">Turf Guide</a></div>
+  <div class="mid mono"><a href="{r}#method">Method</a><a href="{r}our-work/">Work</a><a href="{r}videos/">Videos</a><a href="{r}#services">Services</a><a href="{r}guide/">Turf Guide</a></div>
   <a class="cta mono" href="#book">Free estimate</a>
 </nav>'''
 
@@ -330,6 +344,7 @@ def close(depth):
     <div><p style="max-width:380px;margin-bottom:24px">Book a free onsite estimate. We'll measure, bring samples you can feel, and leave you with one exact price.</p>
       <a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a>
       <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a><a class="alt mono" href="sms:{PHONE_HREF}">Or text us</a>
+      <p class="book-note">Estimates are booked at least 48 hours out. We'll call the day before to confirm, and again when we're on our way.</p>
       {QF}</div>
   </div>
 </section>
@@ -393,11 +408,19 @@ for s in SERVICES:
     ps = [p for p in PJ.PROJECTS if any(svc == s["slug"] and a in (p["app"], p.get("also")) for a, _, svc in PJ.APPS)]
     if ps: secs.append(cards(ps, "../", "Real projects, <b>start to finish.</b>"))
     if s["slug"] in SERVICE_VIDEOS:
-        vids, h = SERVICE_VIDEOS[s["slug"]]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
+        vids, h = SERVICE_VIDEOS[s["slug"]]; at = SERVICE_VIDEO_AFTER.get(s["slug"])
+        i = next((n + 1 for n, x in enumerate(secs) if isinstance(x, tuple) and x[0] == at), 1)
+        secs.insert(i, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
+    if s["slug"] == "turf-repair":  # no repair jobs in the catalog yet: point at the work hub by type
+        secs.append(cards([next(p for p in PJ.PROJECTS if p["app"] == a) for a, _, _ in PJ.APPS], "../", "Our work, <b>by type of job.</b>", "Real installs"))
     page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], secs,
          [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], list(s.get("photos", ())) + PC.SERVICE.get(s["slug"], []))
     urls.append(path)
 
+# 6: nearest existing job pages per city (SWFL jobs first), shown as cards above the reviews
+_SW = ["lehigh-acres-backyard-putting-green", "southwest-florida-backyard-lawn", "marco-island-canal-front-lawn"]
+NEAR = {"Fort Myers": _SW, "Cape Coral": _SW, "Lehigh Acres": _SW, "Sanibel": _SW,
+        "Naples": _SW[::-1], "Estero": _SW[::-1], "Bonita Springs": _SW[::-1]}
 for a in AREAS:
     slug, county, img, local = CITY[a]
     path = slug + "/"
@@ -412,12 +435,15 @@ for a in AREAS:
     if ps: secs.insert(1, cards(ps, "../", f"Projects in <b>{a}.</b>"))
     if a in CITY_VIDEOS:
         vids, h = CITY_VIDEOS[a]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
+    secs.append(pstrip(PC.CITY[a], "../", link=True))
+    near = [p for s_ in NEAR[a] for p in PJ.PROJECTS if p["slug"] == s_ and p not in ps]
+    if near: secs.append(cards(near, "../", f"Jobs near <b>{a}.</b>", "Nearby"))
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
     biz = dict(org()); biz["@id"] = BASE + path + "#area"; biz["areaServed"] = {"@type": "City", "name": a + ", FL"}
     page(path, f"Artificial Turf & Putting Greens, {a} FL | AJ Turf",
          f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate.",
          a, f"Turf in<br><b>{a}.</b>", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price.",
-         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug, PC.CITY[a])
+         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug)
     urls.append(path)
 
 # Our Work: the proof hub YouTube descriptions and bios point to. A CTA band follows every 3 cards.
@@ -425,7 +451,7 @@ OW_TITLE, OW_H = "Recent Work — Watch Our Installs | AJ Turf, Southwest Florid
 groups = [OUR_WORK[i:i + 3] for i in range(0, len(OUR_WORK), 3)]
 page("our-work/", OW_TITLE, "Watch real AJ Turf installs: whole-property tours, a putting green built start to finish, and the install method on the job. Free onsite estimate.",
      "Our work", OW_H, "Walk finished yards and watch the method on real jobs. When you're ready, we'll measure yours for free.", "green-canal-tiki",
-     [cards([p for p in PJ.PROJECTS if a in (p["app"], p.get("also"))], "../", h, "By type of job") for a, h, _ in PJ.APPS] + [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>", "Start to <b>finish.</b>"])] + [pstrip(ids, "../", h) for h, ids in PC.OUR_WORK_RAILS],
+     [cards([p for p in PJ.PROJECTS if a in (p["app"], p.get("also"))], "../", h, "By type of job") for a, h, _ in PJ.APPS] + [vblock(g, "../", h) for g, h in zip(groups, ["Watch the <b>installs.</b>", "More <b>jobs.</b>", "Start to <b>finish.</b>"])],
      [crumbs([("AJ Turf", ""), ("Our work", "our-work/")])] + [vobj(v) for v in OUR_WORK],
      [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, CITY[a][0] + "/") for a in AREAS[:3]], "Real AJ Turf installs, on video", "our-work")
 PAGE_VIDEOS["our-work/"] = OUR_WORK
@@ -438,10 +464,12 @@ def vgroup(v):
     if any(k in t for k in ("dog", "pet", "rooftop", "commercial")): return 2
     return 0
 VGROUPS = ["Project walkthroughs & <b>tours.</b>", "How we <b>install.</b>", "Pet turf & <b>specialty.</b>"]
-_vids = sorted(VIDEOS, key=lambda v: VIDEOS[v][3], reverse=True)
+VGROUP_SVC = [("Artificial turf lawns", "artificial-turf-installation"), ("Putting greens", "putting-greens"), ("Pet turf", "pet-turf")]
+_vids = sorted((v for v in VIDEOS if v not in HIDDEN), key=lambda v: VIDEOS[v][3], reverse=True)
 _vsec = "".join(
-    f'<section class="work"><header><h2>{h}</h2></header><div class="vgrid">' + "".join(vcard(v, "../") for v in _vids if vgroup(v) == i) + "</div></section>"
-    for i, h in enumerate(VGROUPS) if any(vgroup(v) == i for v in _vids))
+    f'<section class="work"><header><h2>{h}</h2><a class="mono" href="../{VGROUP_SVC[i][1]}/" style="color:var(--turf)">{VGROUP_SVC[i][0]} →</a></header><div class="vgrid">'
+    + "".join(vcard(v, "../", job=True) for v in _vids if vgroup(v) == i) + "</div>" + (vcta() if n == 0 else "") + "</section>"
+    for n, (i, h) in enumerate((i, h) for i, h in enumerate(VGROUPS) if any(vgroup(v) == i for v in _vids)))
 _vschema = {"@context": "https://schema.org", "@graph": [org(), crumbs([("AJ Turf", ""), ("Videos", "videos/")]),
             {"@type": "CollectionPage", "name": "AJ Turf videos", "url": BASE + "videos/"}] + [vobj(v) for v in _vids]}
 os.makedirs("videos", exist_ok=True)
@@ -449,9 +477,9 @@ open("videos/index.html", "w", encoding="utf-8").write(head("Artificial Turf Ins
     "Watch real AJ Turf installs: finished-yard tours, the install method on the job, a putting green built start to finish, and pet turf.",
     "videos/", 1, _vschema, "AJ Turf on video", "our-work") + f"""
 <header class="sub-hero" style="min-height:58vh"><img src="../img/green-canal-tiki.webp" alt="">
-  <div class="in"><span class="mono crumbs"><a href="../">AJ Turf</a> / Videos</span><h1>Real installs,<br><b>on video.</b></h1>
-  <p class="lede">Finished yards, the install method on the job, and builds from start to finish. Every video is ours, from our YouTube channel.</p>
-  <p style="margin-top:22px"><a class="alt mono" href="https://www.youtube.com/@AJTurf" target="_blank" rel="noopener" style="color:var(--white)">Subscribe on YouTube →</a></p></div></header>
+  <div class="in"><span class="mono crumbs"><a href="../">AJ Turf</a> / Videos</span><h1>Watch real installs,<br><b>start to finish.</b></h1>
+  <p class="lede">Finished yards, the install method on the job, and builds from start to finish. Every video is ours, from our YouTube channel. <a class="mono" href="https://www.youtube.com/@AJTurf" target="_blank" rel="noopener" style="color:inherit;font-size:12px;white-space:nowrap">Subscribe on YouTube →</a></p>
+  <p class="vid-cta" style="margin-top:28px;padding:0"><a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a><a class="alt mono" href="tel:{PHONE_HREF}" style="color:var(--white)">Or call {PHONE}</a><a class="alt mono" href="sms:{PHONE_HREF}" style="color:var(--white)">Or text us</a></p></div></header>
 <main>{_vsec}{vcta().replace('class="vid-cta"', 'class="vid-cta" style="padding-bottom:clamp(60px,8vw,110px)"')}</main>
 """ + close(1))
 PAGE_VIDEOS["videos/"] = _vids

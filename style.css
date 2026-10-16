@@ -423,3 +423,8 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 .ba{touch-action:pan-y;cursor:ew-resize}
 .ba input{pointer-events:none}
 .ba img{pointer-events:none;-webkit-user-drag:none;user-select:none}
+
+.book-note{max-width:380px;margin-top:18px;font-size:14px;opacity:.85}
+.vid-job{position:absolute;z-index:2;top:10px;left:10px;padding:6px 10px;font-size:10.5px;color:var(--white);background:rgba(18,22,19,.78);text-decoration:none;border-radius:2px}
+.vid-job:hover{background:var(--turf)}
+.pjob{display:contents;color:inherit}
