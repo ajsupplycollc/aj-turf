@@ -91,6 +91,24 @@
     prints.forEach(p => io.observe(p));
   } else prints.forEach(p => p.classList.add('in'));
 
+  // 1c. polish pass: section headings, cards and rows fade up the first time they scroll in.
+  // The class is added here, so with no JS (or reduced motion) everything just shows.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // ponytail: scroll check instead of IntersectionObserver, so a fast jump past an item (anchor link, End key) still reveals it
+    let rv = [...document.querySelectorAll('main h2, section > h2, .strip, .svc-list li, .guide-list li, .related li, .pcards a, .vid-row, .calc')]
+      .filter(el => !el.closest('.top, #hero'));
+    rv.forEach(el => el.classList.add('rv'));
+    let ticking = false;
+    const check = () => {
+      ticking = false;
+      const h = innerHeight * .92;
+      rv = rv.filter(el => el.getBoundingClientRect().top < h ? (el.classList.add('in'), false) : true);
+      if (!rv.length) removeEventListener('scroll', onScroll);
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(check); } };
+    addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); check();
+  }
+
   // 1b. ballpark calculator. Range comes ONLY from the public $9-$15/sq ft band and shows live, no gate
   // (Muse D2 10/13: the range is already public; the quick form below stays the lead capture).
   // Repairs get no number: they start with an onsite assessment.

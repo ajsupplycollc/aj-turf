@@ -428,3 +428,30 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 .vid-job{position:absolute;z-index:2;top:10px;left:10px;padding:6px 10px;font-size:10.5px;color:var(--white);background:rgba(18,22,19,.78);text-decoration:none;border-radius:2px}
 .vid-job:hover{background:var(--turf)}
 .pjob{display:contents;color:inherit}
+
+/* polish pass (Jereme 44774/44777): motion on buttons, links, cards, scroll + load. All of it is off under reduced motion. */
+.book,.sbtn{transition:background .25s,color .25s,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.book span{display:inline-block;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.book:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(18,22,19,.55)}
+.book:hover span{transform:translateX(5px)}
+.book:active,.sbtn:active:not(:disabled){transform:translateY(1px) scale(.98);box-shadow:none;transition-duration:.08s}
+.nav .mid a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s cubic-bezier(.2,.7,.2,1),opacity .2s}
+.nav .mid a:hover{opacity:1;background-size:100% 1px}
+.nav .cta{border-bottom:0;padding:4px 8px;margin-right:-8px;box-shadow:inset 0 -1px 0 var(--aqua);transition:box-shadow .3s cubic-bezier(.2,.7,.2,1),color .3s}
+.nav .cta:hover{box-shadow:inset 0 -2.4em 0 var(--aqua);color:var(--lanai)}
+.strip figure,.pcards a,.vid-row figure{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+@media (hover:hover){
+  .strip figure:hover,.pcards a:hover,.vid-row figure:hover{transform:translateY(-4px);box-shadow:0 14px 28px -14px rgba(18,22,19,.5)}
+}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.top-copy>*,.top-vid{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.top-copy>:nth-child(2){animation-delay:.12s}.top-copy>:nth-child(3){animation-delay:.22s}.top-copy>:nth-child(4){animation-delay:.32s}.top-vid{animation-delay:.4s}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media (prefers-reduced-motion:reduce){
+  .book,.book span,.sbtn,.strip figure,.pcards a,.vid-row figure,.rv{transition:none}
+  .book:hover,.book:hover span,.strip figure:hover,.pcards a:hover,.vid-row figure:hover{transform:none}
+  .rv{opacity:1;transform:none}
+  .top-copy>*,.top-vid{animation:none}
+}
