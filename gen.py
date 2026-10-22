@@ -9,7 +9,7 @@ EMAIL = "ajturffl@gmail.com"
 PUBLISH_GUIDE = True   # flip to True when Jereme approves the Turf Guide
 BOOK = "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2DTv90ZIlO1yxFsxeEcVhJxtTSvLrjRpB3xc9llHbTBaQ1nFWr8KTX7mevE-Gx56R-V1wuX7ax"
 TODAY = datetime.date.today().isoformat()
-AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel", "Lehigh Acres"]
+AREAS = ["Fort Myers", "Cape Coral", "Naples", "Estero", "Bonita Springs", "Sanibel", "Lehigh Acres", "Marco Island"]
 
 # YouTube videos (@AJTurf). Thumbs are self-hosted crops in img/vid/; add new uploads here, then to a page or OUR_WORK.
 # id: (YouTube title, schema description, seconds, upload date, vertical?, card caption)
@@ -297,7 +297,33 @@ CITY = {
    "Just east of Fort Myers, Lehigh Acres yards sit on sandy soil where keeping grass green through summer is a constant fight. Turf on a compacted, draining base ends that."),
  "Sanibel": ("sanibel", "Lee County", "palm-yard",
    "On a barrier island, salt air, sandy soil and storm recovery shape what holds up. A glued edge with no spikes is a sturdy choice for island yards."),
+ "Marco Island": ("marco-island", "Collier County", "green-waterfront",
+   "On Marco Island, salt air, full sun and sandy island soil are what turf has to stand up to, and many yards already have a green or a lawn that's starting to show its age."),
 }
+
+# Cities whose page leads with something other than the generic service list (Muse spec 10/22, Jereme-approved):
+# Marco = putting greens + repairs first, then waterfront, then general installs. Only claims already live on the site.
+CITY_FOCUS = {"Marco Island": dict(
+  title="Putting Greens &amp; Turf Repair, Marco Island FL | AJ Turf",
+  desc="Backyard putting greens built and repaired on Marco Island, turf repair whoever installed it, and canal-front lawns. Free onsite assessment.",
+  h1="Marco Island<br><b>greens &amp; repair.</b>",
+  lede="Backyard putting greens built and repaired, turf repair whoever put it in, and canal-front lawns. Free onsite estimate, one exact price.",
+  secs=[
+   ("Putting greens on <b>Marco Island.</b>",
+    "<p>We build new backyard greens and repair the ones already there. On an older green the usual problems are open seams, lifting edges, worn cups and fringe, and matted spots that no longer roll true.</p>"
+    "<ul><li><b>New greens.</b> A shaped, compacted base, a putting surface plus a taller fringe, cut and seamed by hand, with cups placed where you want them. <a href='../putting-greens/'>How we build a green</a>.</li>"
+    "<li><b>Green repair.</b> Seams re-cut and re-taped, edges re-secured, low spots rebuilt.</li>"
+    "<li><b>Repair or resurface.</b> If the base or the turf itself has failed, we'll tell you straight and quote a rebuild instead. <a href='../guide/can-artificial-turf-be-repaired-or-does-it-need-replacing/'>How to tell the difference</a>.</li></ul>"),
+   ("Turf repair, <b>whoever installed it.</b>",
+    "<p>We fix turf other crews put in, or pull it and do it right. Every repair starts with a free onsite assessment and an exact price, and repairs have no minimum job size.</p>"
+    "<ul><li><b>Ripples and wrinkles.</b> Re-stretched and re-secured.</li><li><b>Open or visible seams.</b> Re-cut and re-taped.</li><li><b>Dips and washouts.</b> Base rebuilt and compacted.</li><li><b>Loose edges.</b> Secured, or re-done with a concrete border.</li></ul>"
+    "<p><a href='../turf-repair/'>More on turf repair</a>.</p>"),
+   ("Canal-front <b>lawns.</b>",
+    "<p>Waterfront yards get salt air, full sun and sandy soil. We build on a compacted base that drains and glue the turf to a concrete border with no spikes, so the edges hold. Older turf fades in Florida sun; here's <a href='../guide/will-artificial-turf-fade-in-the-florida-sun/'>what decides how fast</a>. See a <a href='../work/marco-island-canal-front-lawn/'>canal-front lawn we built on Marco Island</a>.</p>"),
+   ("New turf <b>lawns.</b>",
+    "<p>New installs start at 1,000 square feet, and most run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure on site and give you one exact written price, and the estimate is free. <a href='../artificial-turf-installation/'>How we install a lawn</a>.</p>"
+    "<ul>" + "".join(f'<li><b><a href="../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>"),
+  ])}
 
 import hashlib
 # cache-bust: browsers keep style.css/site.js ~10 min, so new markup met old CSS (Jereme 10/13 "pics are squished")
@@ -424,7 +450,7 @@ for s in SERVICES:
 # 6: nearest existing job pages per city (SWFL jobs first), shown as cards above the reviews
 _SW = ["lehigh-acres-backyard-putting-green", "southwest-florida-backyard-lawn", "marco-island-canal-front-lawn"]
 NEAR = {"Fort Myers": _SW, "Cape Coral": _SW, "Lehigh Acres": _SW, "Sanibel": _SW,
-        "Naples": _SW[::-1], "Estero": _SW[::-1], "Bonita Springs": _SW[::-1]}
+        "Naples": _SW[::-1], "Estero": _SW[::-1], "Bonita Springs": _SW[::-1], "Marco Island": _SW[::-1]}
 for a in AREAS:
     slug, county, img, local = CITY[a]
     path = slug + "/"
@@ -434,9 +460,11 @@ for a in AREAS:
       ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. An HOA can't restrict turf it can't see (§720.3045), but a visible front yard can still need architectural review. We prepare that application with the product specs and install details, and submit it to your HOA for you. <a href='../guide/can-my-hoa-stop-me-from-installing-artificial-turf/'>How the two laws work</a>.</p>"),
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
     ]
+    fx = CITY_FOCUS.get(a)
+    if fx: secs[0:1] = fx["secs"]
     vids = []
     ps = [p for p in PJ.PROJECTS if p["city"].startswith(a + ",")]
-    if ps: secs.insert(1, cards(ps, "../", f"Projects in <b>{a}.</b>"))
+    if ps: secs.insert(3 if fx else 1, cards(ps, "../", f"Projects in <b>{a}.</b>"))  # focus pages: after the waterfront section
     if a in CITY_VIDEOS:
         vids, h = CITY_VIDEOS[a]; secs.insert(1, vblock(vids, "../", h)); PAGE_VIDEOS[path] = vids
     secs.append(pstrip(PC.CITY[a], "../", link=True))
@@ -444,9 +472,10 @@ for a in AREAS:
     if near: secs.append(cards(near, "../", f"Jobs near <b>{a}.</b>", "Nearby"))
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
     biz = dict(org()); biz["@id"] = BASE + path + "#area"; biz["areaServed"] = {"@type": "City", "name": a + ", FL"}
-    page(path, f"Artificial Turf & Putting Greens, {a} FL | AJ Turf",
-         f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate.",
-         a, f"Turf in<br><b>{a}.</b>", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price.",
+    fx = fx or {}
+    page(path, fx.get("title", f"Artificial Turf & Putting Greens, {a} FL | AJ Turf"),
+         fx.get("desc", f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate."),
+         a, fx.get("h1", f"Turf in<br><b>{a}.</b>"), fx.get("lede", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price."),
          img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug)
     urls.append(path)
 

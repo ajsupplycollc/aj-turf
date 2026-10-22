@@ -89,6 +89,7 @@ CITY = {
  "Bonita Springs": ["237", "190", "232", "069"],
  "Sanibel": ["043", "111", "124"],
  "Lehigh Acres": ["114", "120", "269", "098"],
+ "Marco Island": [("pair", "018", "001"), "green_waterfront_01", "green_canal_01", "green_waterfront_02"],  # repair + greens lead (Muse 10/22)
 }
 # Muse's 22-photo wall, grouped into rails; each rail ends at the booking CTA
 OUR_WORK_RAILS = [
