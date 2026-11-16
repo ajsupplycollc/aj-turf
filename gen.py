@@ -263,6 +263,11 @@ SERVICES = [
       # green-course.webp OFF the site 10/9: Jereme — "not my work", origin unknown (maybe a sub's job elsewhere). Never re-add.
       # Strip = Muse's plan set (photo_content.SERVICE); the old copies duplicated those files.
       lede="True-rolling backyard greens with fringe, built off the patio, beside the pool or out by the water.",
+      faq="<details><summary>How much does a backyard putting green cost?</summary><p>Greens are priced at a premium over a standard lawn install, because the base is shaped for a true roll and two turfs, the putting surface and the fringe, are cut and seamed by hand. The exact price comes after a free onsite estimate: we measure and take photos, review it, then follow up with one exact written price. The $9 to $15 a square foot range is for typical lawn installs.</p></details>"
+          "<details><summary>How fast will it roll?</summary><p>That depends on the turf and how the green is set up, so we don't promise a speed. See the <a href='../guide/how-fast-does-a-turf-putting-green-roll/'>lab-measured speeds and test conditions</a> in the Turf Guide.</p></details>"
+          "<details><summary>How do you make sure it putts right?</summary><p>The base is shaped and compacted so the ball rolls true, and we play-test every green before handoff.</p></details>"
+          "<details><summary>Where can a green go?</summary><p>Off a lanai, beside a pool, along a canal or tucked into a side yard. Cups and flags go where you want them.</p></details>"
+          "<details><summary>Do you repair or resurface old greens?</summary><p>Yes. See <a href='../turf-repair/'>turf repair</a>: a worn green along a pool deck is on that page, before and after.</p></details>",
       sections=[("Built like a <b>green.</b>",
         "<p>A good green is about the base. We shape and compact it so the ball rolls true, then install a short putting surface surrounded by a slightly taller fringe turf, the same way a course frames a green. How fast does a backyard green roll? See the <a href='../guide/how-fast-does-a-turf-putting-green-roll/'>lab-measured speeds and test conditions</a>.</p>"
         "<ul><li><b>Putting surface plus fringe.</b> Two turfs, cut and seamed by hand.</li><li><b>Cups and flags placed where you want them.</b></li><li><b>Fits real yards.</b> Off a lanai, along a canal or tucked into a side yard.</li></ul>"),
@@ -400,10 +405,11 @@ def faq_schema(html):
     qa = _re.findall(r"<summary>(.*?)</summary><p>(.*?)</p>", html)
     return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}
 
-def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related, og_title=None, og_slug="home", photos=()):
+def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related, og_title=None, og_slug="home", photos=(), faq=""):
+    faq = faq + FAQ_BLOCK  # page-specific questions first, then the shared set
     depth = path.count("/")
     r = "../" * depth
-    schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra + [faq_schema(FAQ_BLOCK)]}
+    schema = {"@context": "https://schema.org", "@graph": [org()] + schema_extra + [faq_schema(faq)]}
     secs = "".join(x if isinstance(x, str) else f'<section class="prose"><h2>{x[0]}</h2><div class="body">{x[1]}</div></section>' for x in sections)
     rel = "".join(f'<li><a href="{r}{u}">{n}</a></li>' for n, u in related)
     if photos: secs += pstrip(photos, r)
@@ -419,8 +425,8 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
 </header>
 <main>{secs}
 {reviews_block(3)}
-<section class="split" style="grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)"><div><span class="mono" style="color:var(--turf)">Questions</span><h2 style="margin-top:18px">Good to<br><b>know.</b></h2></div><div>
-{FAQ_BLOCK}</div></section>
+<section class="split"><div><span class="mono" style="color:var(--turf)">Questions</span><h2 style="margin-top:18px">Good to<br><b>know.</b></h2></div><div>
+{faq}</div></section>
 <section class="related"><span class="mono" style="color:var(--turf)">Keep looking</span><ul>{rel}</ul></section>
 </main>
 ''' + close(depth)
@@ -461,7 +467,7 @@ for s in SERVICES:
     if s["slug"] == "turf-repair":  # no repair jobs in the catalog yet: point at the work hub by type
         secs.append(cards([next(p for p in PJ.PROJECTS if p["app"] == a) for a, _, _ in PJ.APPS], "../", "Our work, <b>by type of job.</b>", "Real installs"))
     page(path, t, desc, s["nav"], s["h1"], s["lede"], s["img"], secs,
-         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], list(s.get("photos", ())) + PC.SERVICE.get(s["slug"], []))
+         [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], list(s.get("photos", ())) + PC.SERVICE.get(s["slug"], []), s.get("faq", ""))
     urls.append(path)
 
 # 6: nearest existing job pages per city (SWFL jobs first), shown as cards above the reviews
