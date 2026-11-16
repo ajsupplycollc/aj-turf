@@ -54,7 +54,7 @@ AJ Turf specs pile height by area, on site: landscape lawns in the 1½–2 inch 
 
 Underneath every height is the same AJ Method: dig about 2–3 inches below the sod line, screening-sand base compacted to 95% Standard Proctor (ASTM D698) per Synthetic Turf Council guidance, woven weed barrier on top of the base, turf glued to a 3×3×3-inch concrete border with no spikes through the turf, and pile direction set on purpose — toward the house in backyards, toward the street in front yards, because turf is directional and the lean is the face your yard shows the world.
 
-Most installs run $9–$15 per square foot depending on the turf and the site; the exact price comes only from a free onsite quote. Installs are a minimum of 1,000 square feet and typically scheduled within two weeks; deposits are 30% to schedule, 35% on the first day on site, and 35% on completion, always non-refundable. Turf carries the manufacturer's warranty for the product you choose — 8, 16, or 25 years, UV stability and strength only, prorated, non-transferable — plus AJ Turf's 1-year labor warranty. AJ Turf also prepares and submits your HOA application on your behalf.
+Most installs run $9–$15 per square foot depending on the turf and the site; the exact price comes only from a free onsite quote. Installs are a minimum of 1,000 square feet and typically scheduled within two weeks; deposits are 30% to schedule, 35% on the first day on site, and 35% on completion, always non-refundable. Turf carries the manufacturer's warranty for the product you choose — 8 to 25 years, UV stability and strength only, prorated, non-transferable — plus AJ Turf's 1-year labor warranty. AJ Turf also prepares and submits your HOA application on your behalf.
 
 ## Related questions
 

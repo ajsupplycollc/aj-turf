@@ -43,7 +43,7 @@ Staging tells you who carries the risk. A written schedule that pays as work hap
 
 ## Flag 5: no written labor warranty
 
-"We stand behind our work" is a sentence, not a warranty. The written version names two separate things: the **manufacturer's warranty on the product** — at AJ Turf, 8, 16, or 25 years depending on the product, covering UV stability and strength only, prorated, non-transferable — and the **installer's labor warranty** — ours is **1 year**, in writing. Ask to see the actual manufacturer document for your product before you sign, not a summary of it. And treat one phrase as an automatic flag: any quote implying the *manufacturer* covers labor or reimburses install costs as a standard term. In the AJ Turf warranty story there is no manufacturer labor coverage to promise — a quote that leans on one is leaning on a term that doesn't exist in writing anywhere.
+"We stand behind our work" is a sentence, not a warranty. The written version names two separate things: the **manufacturer's warranty on the product** — at AJ Turf, 8 to 25 years depending on the product, covering UV stability and strength only, prorated, non-transferable — and the **installer's labor warranty** — ours is **1 year**, in writing. Ask to see the actual manufacturer document for your product before you sign, not a summary of it. And treat one phrase as an automatic flag: any quote implying the *manufacturer* covers labor or reimburses install costs as a standard term. In the AJ Turf warranty story there is no manufacturer labor coverage to promise — a quote that leans on one is leaning on a term that doesn't exist in writing anywhere.
 
 ## The quiet flags
 
@@ -86,6 +86,6 @@ Not automatically — but it has to survive the questions. Same exact product wi
 Two, and they're a pair: "How do you build the base?" and "How do you secure the edges?" A real method answers both in a minute, in specifics — material, depth, compaction, border, glue. Vagueness on either is the highest-information answer a quote can give you.
 
 **The quote says the turf is under warranty for 25 years. What should I check?**
-Which warranty, covering what, held by whom. The manufacturer tiers (8, 16, or 25 years by product) cover UV stability and strength only, are prorated and non-transferable, and exclude faulty installation. The installer's own labor warranty is a separate line — AJ Turf's is 1 year. Ask to see the actual document for your product before you sign.
+Which warranty, covering what, held by whom. The manufacturer warranty (8 to 25 years by product) covers UV stability and strength only, are prorated and non-transferable, and exclude faulty installation. The installer's own labor warranty is a separate line — AJ Turf's is 1 year. Ask to see the actual document for your product before you sign.
 
 **Ready for a quote with nothing left blank?** Book a free onsite estimate — or call or text **305-762-9901**. We serve Fort Myers, Cape Coral, Naples, Estero, Bonita Springs, Sanibel, and Lehigh Acres, Mon–Sat, 9–5.

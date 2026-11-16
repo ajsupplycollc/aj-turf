@@ -64,6 +64,6 @@ Yes — the melted section is cut out and replaced. But the reflection has to be
 That pattern usually means thermal expansion working against a loose perimeter — most often spike-secured edges that have crept. The fix is to re-stretch the turf and re-secure the perimeter properly, then top the infill back up to spec. On our repairs, the edge gets rebuilt as a glued concrete border so it stops moving.
 
 **How much does a repair cost?**
-It depends entirely on which layer failed, which is why repairs start with a free onsite assessment rather than a phone number. We diagnose it in person, quote the exact price on site, and there is no minimum job size for repair work.
+It depends entirely on which layer failed, which is why repairs start with a free onsite assessment rather than a phone number. We diagnose it in person, follow up with the exact price, and there is no minimum job size for repair work.
 
 **Ready to find out whether yours is a repair or a replacement?** Book a free onsite estimate — or call or text **305-762-9901**. We serve Fort Myers, Cape Coral, Naples, Estero, Bonita Springs, Sanibel, and Lehigh Acres, Mon–Sat, 9–5.

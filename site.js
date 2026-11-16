@@ -131,7 +131,7 @@
     const show = () => {
       const rep = F.type.value === 'Repair';
       f.querySelector('.calc-sq').hidden = rep;
-      if (rep) out.textContent = 'Repairs start with a free onsite assessment — exact price on site.';
+      if (rep) out.textContent = 'Repairs start with a free onsite assessment — exact price in a follow-up.';
       else { const [a, b] = range(sq()); out.textContent = `Ballpark: ${money(a)}–${money(b)}`; }
     };
     let told = false;  // one GA4 event per visit when someone actually uses it

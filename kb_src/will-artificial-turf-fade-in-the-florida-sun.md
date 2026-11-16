@@ -2,7 +2,7 @@
 
 **By Jereme Strange, AJ Turf** — years on the manufacturing side of the turf industry, and years installing and repairing turf in Florida.
 
-**The answer:** Quality artificial turf should not visibly fade for years in Florida sun, but "UV resistant" does not mean color-proof forever. It means the yarn is stabilized to hold its color and strength under sunlight — the exact promise the manufacturer warranty covers, for UV stability and strength only, prorated over 8, 16, or 25 years depending on product.
+**The answer:** Quality artificial turf should not visibly fade for years in Florida sun, but "UV resistant" does not mean color-proof forever. It means the yarn is stabilized to hold its color and strength under sunlight — the exact promise the manufacturer warranty covers, for UV stability and strength only, prorated over 8 to 25 years depending on product.
 
 ## What sunlight actually does to turf yarn
 
@@ -20,7 +20,7 @@ That is real evidence of stabilization doing its job. It is still a lab score, n
 |---|---|
 | What does "UV resistant" mean? | The yarn is stabilized to maintain color (UV stability) and fiber strength under sunlight |
 | What does the warranty cover on UV? | UV stability and strength only — under normal use |
-| How long? | 8, 16, or 25 years depending on the product you choose |
+| How long? | 8 to 25 years depending on the product you choose |
 | Is coverage full value for the whole term? | No — it is prorated, and it does not transfer to a later owner |
 | Does UV resistance cover melting? | No — window-reflection melt is heat damage, excluded from the warranty |
 
@@ -49,7 +49,7 @@ Florida is the stress test. Southwest Florida sun is strong, the season is long,
 
 ## How AJ Turf handles this
 
-AJ Turf quotes the warranty exactly as published: turf carries the manufacturer's warranty for the product you choose — 8, 16, or 25 years depending on the product — covering UV stability and strength only; installation is covered separately by AJ Turf's 1-year labor warranty. You see the exact warranty for your product before you sign. We never present any manufacturer labor coverage as part of that promise — labor is ours, for one year, and that is the whole labor story.
+AJ Turf quotes the warranty exactly as published: turf carries the manufacturer's warranty for the product you choose — 8 to 25 years depending on the product — covering UV stability and strength only; installation is covered separately by AJ Turf's 1-year labor warranty. You see the exact warranty for your product before you sign. We never present any manufacturer labor coverage as part of that promise — labor is ours, for one year, and that is the whole labor story.
 
 The install underneath is built to keep the claim path clean: excavation about 2–3 inches below the sod line, a screening-sand base compacted to 95% Standard Proctor (ASTM D698) per Synthetic Turf Council guidance, a woven weed barrier on top of the base, and turf glued to a 3×3×3-inch concrete border — no spikes through the turf. Most installs run $9–$15 per square foot; the exact price comes only from a free onsite quote, where we also scan for low-E reflection risk. Installs are a minimum of 1,000 square feet, typically scheduled within two weeks; deposits are 30/35/35, always non-refundable. If your HOA needs paperwork, AJ Turf prepares and submits the application on your behalf.
 

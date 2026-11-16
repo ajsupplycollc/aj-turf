@@ -42,7 +42,7 @@ Southwest Florida yards sit on sand over limestone, and a lot of them — Cape C
 
 ## How AJ Turf handles this
 
-We do not quote exact prices from photos, texts, or square-footage guesses, because that is exactly how homeowners end up with a number that changes on install day. We come out, measure, look at drainage, access, and edges, show you the actual product, and give you one exact written price. The quote names the product with both its face weight and its total weight, states the manufacturer's warranty for that product — 8, 16, or 25 years depending on the product, covering UV stability and strength only — plus our 1-year labor warranty, and stages payments 30/35/35. If you have an HOA, we prepare and submit the application for you. No pressure in the yard: the price is the price, in writing.
+We do not quote exact prices from photos, texts, or square-footage guesses, because that is exactly how homeowners end up with a number that changes on install day. We come out, measure, look at drainage, access, and edges, show you the actual product, and take photos; then we review it and follow up with one exact written price. The quote names the product with both its face weight and its total weight, states the manufacturer's warranty for that product — 8 to 25 years depending on the product, covering UV stability and strength only — plus our 1-year labor warranty, and stages payments 30/35/35. If you have an HOA, we prepare and submit the application for you. No pressure in the yard: the price is the price, in writing.
 
 ## Related questions
 

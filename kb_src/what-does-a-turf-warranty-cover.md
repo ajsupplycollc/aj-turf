@@ -42,7 +42,7 @@ Two exclusions bite hardest here: melt from reflected sun off energy-efficient g
 
 ## How AJ Turf handles this
 
-Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign. We build every base and border so an installation problem isn't what stands between you and the product warranty.
+Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign. We build every base and border so an installation problem isn't what stands between you and the product warranty.
 
 ## FAQ
 

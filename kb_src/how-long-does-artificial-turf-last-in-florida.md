@@ -2,7 +2,7 @@
 
 **By Jereme Strange, AJ Turf** — years on the manufacturing side of the turf industry, and years installing and repairing turf in Florida.
 
-**The answer:** In Florida, plan on 10–15 years of honest service life from a quality artificial turf install — not the "decades" in some vendor marketing. The manufacturer's warranty runs 8, 16, or 25 years depending on the product you choose, but it covers UV stability and strength only, prorated, and it's separate from realistic everyday life.
+**The answer:** In Florida, plan on 10–15 years of honest service life from a quality artificial turf install — not the "decades" in some vendor marketing. The manufacturer's warranty runs 8 to 25 years depending on the product you choose, but it covers UV stability and strength only, prorated, and it's separate from realistic everyday life.
 
 ## Two different numbers that get sold as one
 
@@ -14,7 +14,7 @@ When vendor marketing says turf lasts for decades, treat that as a vendor claim 
 
 | Warranty fact | What it means for you |
 |---|---|
-| Tiers | 8, 16, or 25 years, depending on the product you choose — you'll see the exact warranty for your product before you sign |
+| Range | 8 to 25 years, depending on the product you choose — you'll see the exact warranty for your product before you sign |
 | What it covers | The product maintaining UV stability and strength under normal use — nothing more |
 | How it pays | Prorated: the manufacturer's share shrinks as the years pass, so a late-term claim is worth a fraction of the product |
 | Who holds it | You, the purchaser — no registration is required |
@@ -59,7 +59,7 @@ We quote life honestly and warranty exactly. Before you sign, you see the exact 
 ## FAQ
 
 **Does a 25-year warranty mean the turf will look good for 25 years?**
-No. The 25-year figure is a warranty tier covering UV stability and strength, on a prorated schedule — it is not a service-life promise. Our honest planning frame for a Florida yard is 10–15 years of service life. Vendor "decades" language describes the paperwork, not the lawn.
+No. The 25-year figure is a warranty tier covering UV stability and strength, on a prorated schedule — it is not a service-life promise. The 25-year tier is real and sits on our top-tier products; ask for it at the estimate and we'll show you which ones carry it. Our honest planning frame for a Florida yard is 10–15 years of service life. Vendor "decades" language describes the paperwork, not the lawn.
 
 **What voids or blocks a turf warranty claim?**
 The big ones for homeowners: faulty installation, wear from an inadequate sub-base, failure to maintain per the manufacturer's care guide, damage from chemicals or improper cleaning, and melt from reflected window heat. That is why the install underneath the turf matters as much as the product on top.

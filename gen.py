@@ -230,15 +230,15 @@ def reviews_block(n=6):
             f'<h2 style="margin-top:18px">What clients <b>say.</b></h2></header><ul>{cards}</ul>'
             f'<p class="rv-note mono">Earned under our former name, AJ Supply. <a href="{TT_URL}" target="_blank" rel="noopener">Read all 14 on Thumbtack &rarr;</a></p></section>')
 
-FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most installs run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure on site and give you one exact written price, and the estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
+FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most installs run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure and photograph it on site, review it, then follow up with one exact written price. The estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
 <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site. Installs are typically scheduled within two weeks, or on your preferred date. New installs start at 1,000 square feet; repairs have no minimum.</p></details>
 <details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
 <details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact and the yard reversible. Florida's turf rule bars using in-ground irrigation to water turf areas, so a quick hose rinse is the way to clean and cool it on hot days.</p></details>
-<details><summary>What's the warranty?</summary><p>Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign.</p></details>
+<details><summary>What's the warranty?</summary><p>Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign.</p></details>
 """
 
-SEO = {'artificial-turf-installation': ('Artificial Turf Lawns in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf lawns, built to last', 'Green year round with no mowing or watering. Installed on a compacted base with a glued concrete border, no spikes. Free onsite estimate.', 'Artificial turf<br><b>lawns.</b>'), 'pet-turf': ('Pet Turf Installation in Fort Myers &amp; Naples | AJ Turf', 'Pet turf that drains, not smells', "Built drainage-first so Florida heat doesn't trap odor. Pet-friendly infill and glued edges with no spikes for paws. Free onsite estimate.", 'Pet turf that<br><b>drains.</b>'), 'putting-greens': ('Backyard Putting Greens in Fort Myers &amp; Naples | AJ Turf', 'Backyard putting greens with a true roll', 'Putting surface plus fringe, cut and seamed by hand, off the lanai or out by the water. Free onsite estimate and one exact price.', 'Backyard<br><b>putting greens.</b>'), 'pool-and-paver-turf': ('Turf for Pools &amp; Pavers in Fort Myers &amp; Naples | AJ Turf', 'Turf for pools and pavers', 'Turf strips between pavers and tight, glued borders around pool decks. Clean lines that look designed, not patched in. Free onsite estimate.', 'Pools &amp;<br><b>pavers.</b>'), 'turf-repair': ('Artificial Turf Repair in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf repair and re-installs', 'Ripples, open seams, washouts and loose edges fixed, or a full re-install done right with a concrete border. Free onsite estimate.', 'Turf repair &amp;<br><b>re-installs.</b>')}
+SEO = {'artificial-turf-installation': ('Artificial Turf Lawns in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf lawns, built to last', 'Green year round with no mowing or watering. Installed on a compacted base with a glued concrete border, no spikes. Free onsite estimate.', 'Artificial turf<br><b>lawns.</b>'), 'pet-turf': ('Pet Turf Installation in Fort Myers &amp; Naples | AJ Turf', 'Pet turf that drains, not smells', "Built drainage-first so Florida heat doesn't trap odor. Pet-friendly infill and glued edges with no spikes for paws. Free onsite estimate.", 'Pet turf that<br><b>drains.</b>'), 'putting-greens': ('Backyard Putting Greens in Fort Myers &amp; Naples | AJ Turf', 'Backyard putting greens with a true roll', 'Putting surface plus fringe, cut and seamed by hand, off the lanai or out by the water. Free onsite estimate, then one exact price.', 'Backyard<br><b>putting greens.</b>'), 'pool-and-paver-turf': ('Turf for Pools &amp; Pavers in Fort Myers &amp; Naples | AJ Turf', 'Turf for pools and pavers', 'Turf strips between pavers and tight, glued borders around pool decks. Clean lines that look designed, not patched in. Free onsite estimate.', 'Pools &amp;<br><b>pavers.</b>'), 'turf-repair': ('Artificial Turf Repair in Fort Myers &amp; Naples | AJ Turf', 'Artificial turf repair and re-installs', 'Ripples, open seams, washouts and loose edges fixed, or a full re-install done right with a concrete border. Free onsite estimate.', 'Turf repair &amp;<br><b>re-installs.</b>')}
 
 SERVICES = [
  dict(slug="artificial-turf-installation", nav="Lawns", title="Artificial Turf Installation", h1="Artificial turf <b>lawns.</b>",
@@ -275,7 +275,7 @@ SERVICES = [
        ("How we <b>build it.</b>", METHOD)]),
  dict(slug="turf-repair", nav="Repairs", title="Artificial Turf Repair & Re-installs", h1="Repairs &amp; <b>re-installs.</b>", img="pool-side", kw="artificial turf repair",
       photos=[("repair-before","A worn, matted putting green along a pool deck before the repair","Before · worn green by the pool"),("repair-after","The same green after the repair, fresh and even","After · same green, repaired"),("repair-after-wide","The repaired green running the length of the pool deck","After · full length")],
-      lede="Ripples, open seams, washed-out bases and loose edges. We fix turf other crews put in, or pull it and do it right. Free onsite assessment, an exact price on the spot, and no minimum job size.",
+      lede="Ripples, open seams, washed-out bases and loose edges. We fix turf other crews put in, or pull it and do it right. Free onsite assessment, an exact price in a follow-up, and no minimum job size.",
       sections=[("What we <b>fix.</b>",
         "<ul><li><b>Ripples and wrinkles.</b> Re-stretched and re-secured.</li><li><b>Open or visible seams.</b> Re-cut and re-taped.</li><li><b>Dips and washouts.</b> Base rebuilt and compacted.</li><li><b>Loose edges.</b> Secured, or re-done with a concrete border.</li></ul>"
         "<p>Sometimes a repair isn't worth it. If the base or the turf itself has failed, we'll tell you straight and quote a full re-install instead.</p>"),
@@ -307,7 +307,7 @@ CITY_FOCUS = {"Marco Island": dict(
   title="Putting Greens &amp; Turf Repair, Marco Island FL | AJ Turf",
   desc="Backyard putting greens built and repaired on Marco Island, turf repair whoever installed it, and canal-front lawns. Free onsite assessment.",
   h1="Marco Island<br><b>greens &amp; repair.</b>",
-  lede="Backyard putting greens built and repaired, turf repair whoever put it in, and canal-front lawns. Free onsite estimate, one exact price.",
+  lede="Backyard putting greens built and repaired, turf repair whoever put it in, and canal-front lawns. Free onsite estimate, then one exact price.",
   secs=[
    ("Putting greens on <b>Marco Island.</b>",
     "<p>We build new backyard greens and repair the ones already there. On an older green the usual problems are open seams, lifting edges, worn cups and fringe, and matted spots that no longer roll true.</p>"
@@ -321,7 +321,7 @@ CITY_FOCUS = {"Marco Island": dict(
    ("Canal-front <b>lawns.</b>",
     "<p>Waterfront yards get salt air, full sun and sandy soil. We build on a compacted base that drains and glue the turf to a concrete border with no spikes, so the edges hold. Older turf fades in Florida sun; here's <a href='../guide/will-artificial-turf-fade-in-the-florida-sun/'>what decides how fast</a>. See a <a href='../work/marco-island-canal-front-lawn/'>canal-front lawn we built on Marco Island</a>.</p>"),
    ("New turf <b>lawns.</b>",
-    "<p>New installs start at 1,000 square feet, and most run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure on site and give you one exact written price, and the estimate is free. <a href='../artificial-turf-installation/'>How we install a lawn</a>.</p>"
+    "<p>New installs start at 1,000 square feet, and most run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure and photograph it on site, review it, then follow up with one exact written price. The estimate is free. <a href='../artificial-turf-installation/'>How we install a lawn</a>.</p>"
     "<ul>" + "".join(f'<li><b><a href="../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>"),
   ])}
 
@@ -371,7 +371,7 @@ def close(depth):
   <img src="{r}img/green-canal.webp" alt="" loading="lazy">
   <div class="in">
     <h2>See it in<br><b>your yard.</b></h2>
-    <div><p style="max-width:380px;margin-bottom:24px">Book a free onsite estimate. We'll measure, bring samples you can feel, and leave you with one exact price.</p>
+    <div><p style="max-width:380px;margin-bottom:24px">Book a free onsite estimate. We'll measure, bring samples you can feel, and follow up with one exact written price.</p>
       <a class="book" href="{BOOK}" target="_blank" rel="noopener">Book a free estimate <span aria-hidden="true">→</span></a>
       <a class="alt mono" href="tel:{PHONE_HREF}">Or call {PHONE}</a><a class="alt mono" href="sms:{PHONE_HREF}">Or text us</a>
       <p class="book-note">Estimates are booked at least 48 hours out. We'll call the day before to confirm, and again when we're on our way.</p>
@@ -455,7 +455,7 @@ for a in AREAS:
     slug, county, img, local = CITY[a]
     path = slug + "/"
     secs = [
-      (f"Turf in <b>{a}.</b>", f"<p>{local}</p><p>AJ Turf installs artificial turf lawns, pet turf, putting greens and turf around pools and pavers for homes in {a} and across {county}. Every job starts with a free onsite estimate: we measure in person and give you one exact written price.</p>"
+      (f"Turf in <b>{a}.</b>", f"<p>{local}</p><p>AJ Turf installs artificial turf lawns, pet turf, putting greens and turf around pools and pavers for homes in {a} and across {county}. Every job starts with a free onsite estimate: we measure and photograph in person, then follow up with one exact written price.</p>"
          "<ul>" + "".join(f'<li><b><a href="../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>"),
       ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. An HOA can't restrict turf it can't see (§720.3045), but a visible front yard can still need architectural review. We prepare that application with the product specs and install details, and submit it to your HOA for you. <a href='../guide/can-my-hoa-stop-me-from-installing-artificial-turf/'>How the two laws work</a>.</p>"),
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
@@ -475,7 +475,7 @@ for a in AREAS:
     fx = fx or {}
     page(path, fx.get("title", f"Artificial Turf & Putting Greens, {a} FL | AJ Turf"),
          fx.get("desc", f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate."),
-         a, fx.get("h1", f"Turf in<br><b>{a}.</b>"), fx.get("lede", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, one exact price."),
+         a, fx.get("h1", f"Turf in<br><b>{a}.</b>"), fx.get("lede", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, then one exact price."),
          img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug)
     urls.append(path)
 
@@ -564,7 +564,7 @@ def project_page(p):
     more = [q for q in PJ.PROJECTS if q is not p and q["app"] == p["app"]][:4]
     if more: body += cards(more, r, f"More {app_txt.lower()}", "Keep looking")
     hb, hw, hh, hbig, _ = p["hero"]
-    desc = f"{t} in {p['city']} by AJ Turf: photos{' and video' if (p.get('video') and not p.get('held_silent')) or p.get('youtube') else ''} from a real job. Free onsite estimate, one exact price."
+    desc = f"{t} in {p['city']} by AJ Turf: photos{' and video' if (p.get('video') and not p.get('held_silent')) or p.get('youtube') else ''} from a real job. Free onsite estimate, then one exact price."
     html = head(f"{t}, {p['city']} | AJ Turf Project", desc, path, 2, {"@context": "https://schema.org", "@graph": graph}, f"{t}, {p['city']}", "proj-" + p["slug"]) + f'''
 <header class="sub-hero">
   <img src="{r}{hb}-{1600 if hbig else 800}.webp" alt="" fetchpriority="high">
@@ -765,8 +765,8 @@ open("llms.txt", "w", encoding="utf-8").write(f"""# AJ Turf
 ## Key facts
 - Service: residential artificial turf installation, commercial and event lawns, pet turf, backyard putting greens with fringe, turf around pools and pavers, turf repair and re-installs.
 - Install method: screening-sand base compacted to 95% Standard Proctor (ASTM D698), 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, a woven weed barrier over everything, turf glued to the border with 15-year-warrantied glue. No spikes through the turf (spikes only pin the barrier and seam tape underneath).
-- Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site. Free onsite estimate, measured in person, one exact written price.
-- Warranty: Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
+- Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site. Free onsite estimate, measured and photographed in person, then one exact written price in a follow-up.
+- Warranty: Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
 - Payments: 30% to schedule, 35% on the first day on site, 35% at completion.
 - Timeline: about two days per 1,000 square feet. Installs are typically scheduled within two weeks, or on the client's preferred date. New installs start at 1,000 square feet; repairs have no minimum.
 - Hours: Monday to Saturday, 9 to 5.

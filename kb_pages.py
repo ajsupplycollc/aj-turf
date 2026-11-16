@@ -3,7 +3,7 @@
 # Fences: no turf-maker or lab names (infill brands are allowed), warranty sentence verbatim, public price only as
 # "$9 to $15 a square foot", never the retired compaction figure, no blanket "installed to the DEP standard" claim.
 
-WARRANTY = ("Turf carries the manufacturer's warranty for the product you choose (8, 16 or 25 years depending on the product), "
+WARRANTY = ("Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), "
             "covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. "
             "You'll see the exact warranty for your product before you sign.")
 
