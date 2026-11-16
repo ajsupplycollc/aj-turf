@@ -427,6 +427,22 @@ def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, relat
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     open(os.path.join(path, "index.html") if path.endswith("/") else path, "w", encoding="utf-8").write(html)
 
+# Aimed internal links (Muse GSC aiming 11/16): point at the install page Google picked (how-artificial-turf-is-installed)
+# and the guide questions sitting closest to page one. Re-aim from Muse's Monday keyword tracker.
+def gtitle(s): return GUIDE_TITLE.get(s) or re.search(r"^# (.+)$", open(f"kb_src/{s}.md", encoding="utf-8").read(), re.M).group(1)  # same title the guide hub shows
+GUIDE_TITLE = {"how-artificial-turf-is-installed": "How Artificial Turf Is Installed, Step by Step"}
+CLUSTER = ["how-long-does-an-artificial-turf-installation-take", "what-base-goes-under-artificial-turf",
+           "do-i-need-a-weed-barrier-under-artificial-turf", "does-artificial-turf-get-mold-algae-or-bugs",
+           "does-artificial-turf-contain-pfas-or-lead", "can-artificial-turf-go-around-a-pool-deck-or-over-hardscape",
+           "what-does-a-turf-warranty-cover"]
+SVC_READ = {
+    "artificial-turf-installation": ("Straight answers <b>before you buy.</b>", ["how-artificial-turf-is-installed"] + CLUSTER),
+    "turf-repair": ("What went wrong, <b>and why.</b>", ["can-artificial-turf-be-repaired-or-does-it-need-replacing",
+        "why-is-my-artificial-turf-wrinkling-or-lifting", "why-do-artificial-turf-installs-fail-in-the-first-two-years",
+        "why-did-my-turf-melt", "what-does-a-turf-warranty-cover", "how-artificial-turf-is-installed"]),
+}
+def readlist(h, slugs, r): return (h, "<ul>" + "".join(f'<li><a href="{r}guide/{s}/">{gtitle(s)}</a></li>' for s in slugs) + "</ul>")
+
 urls = [""]
 for s in SERVICES:
     path = s["slug"] + "/"
@@ -435,6 +451,7 @@ for s in SERVICES:
     svc = {"@type": "Service", "name": s["title"], "serviceType": s["kw"], "provider": {"@id": BASE + "#business"},
            "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS], "url": BASE + path}
     secs, vids = list(s["sections"]), []
+    if s["slug"] in SVC_READ: secs.append(readlist(*SVC_READ[s["slug"]], "../"))
     ps = [p for p in PJ.PROJECTS if any(svc == s["slug"] and a in (p["app"], p.get("also")) for a, _, svc in PJ.APPS)]
     if ps: secs.append(cards(ps, "../", "Real projects, <b>start to finish.</b>"))
     if s["slug"] in SERVICE_VIDEOS:
@@ -582,6 +599,11 @@ for p in PJ.PROJECTS: project_page(p)
 from guide_content import GUIDES
 from kb_pages import PILLAR as _PL, QUESTION_PILLAR as _QP
 PILLAR_OF = {s: _PL[pl] for s, pl in _QP.items()}
+def BEACH(r):  # Google's chosen install page: link it hard to the service pages and the near-page-one questions
+    qs = "".join(f'<li><a href="{r}guide/{s}/">{gtitle(s)}</a></li>' for s in CLUSTER)
+    return (f'<h2>Want it built this way?</h2><p>These are the steps behind our <a href="{r}artificial-turf-installation/">artificial turf installation</a> '
+            f'in Southwest Florida, from Fort Myers to Naples. Turf already in and failing? See <a href="{r}turf-repair/">turf repair</a>: we fix installs '
+            f'whoever put them in.</p><h2>Common install questions</h2><ul>{qs}</ul>')
 def article(g):
     path = f"guide/{g['slug']}/"; r = "../../"
     faq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": g["q"], "acceptedAnswer": {"@type": "Answer", "text": g["a"]}}]}
@@ -605,7 +627,7 @@ def article(g):
 <div class="art-wrap"><main class="article">
   <p class="mono" style="color:var(--turf)">The short answer</p>
   <p class="short">{g['a']}</p>
-  <div class="art-body">{g['body']}</div>
+  <div class="art-body">{g['body']}{BEACH(r) if g["slug"] == "how-artificial-turf-is-installed" else ""}</div>
   <div class="sources"><p class="mono">Sources</p><ul>{src}</ul><p class="mono" style="margin-top:14px">Updated {TODAY}</p></div>
 </main>
 <aside class="toc"><p class="mono">In this guide</p><ol>{"".join(f"<li>{_re.sub(r'<[^>]+>','',t)}</li>" for t in _re.findall(r"<h2>(.*?)</h2>", g["body"]))}</ol>
