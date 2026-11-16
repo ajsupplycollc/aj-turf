@@ -44,6 +44,8 @@ Two exclusions bite hardest here: melt from reflected sun off energy-efficient g
 
 Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign. We build every base and border so an installation problem isn't what stands between you and the product warranty.
 
+**Maintenance in year one.** Every AJ Turf installation includes a 1-year labor warranty. During that first year, if your turf needs attention because of how it was installed — infill settling or running low, turf laying down in high-traffic areas, seams or edges lifting — we come back out, assess it in person, and make it right. That's covered by the warranty, not an extra service call. Routine cleaning and cosmetic upkeep aren't included — but if the install itself isn't performing, that's on us.
+
 ## FAQ
 
 **Does the warranty cover my dog?**
