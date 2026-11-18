@@ -34,6 +34,13 @@ PROJECTS = [
       blurb="A front-yard putting green, dug out one day and finished with flags in the next.",
       photos=[("IMG_3899.HEIC","F"),("IMG_3893.HEIC","P")],
       video=("2021-10-14-17920506880843887.mp4", "Finished green, reveal day")),
+ # Sean's Marco Beach green (Muse 11/18, Jereme-approved). HARD RULE: finished/in-progress only, NO before photos.
+ dict(slug="marco-island-canal-front-putting-green", app="putting-greens", city="Marco Island, FL", dir="../../sean-case-page-2026-11-18",
+      title="Canal-front putting green", when="November 2026",
+      blurb="A backyard putting green with a chipping mat, on a canal-front lot in Marco Beach, finished with fringe and flags and play-tested before handoff.",
+      photos=[("01-green-from-pavers-waterfront.jpg","F"),("02-green-side-angle-yacht.jpg","F"),("03-green-wide-canal-homes.jpg","F"),
+              ("04-green-close-house-side.jpg","F"),("05-green-and-chipping-mat-house.jpg","F"),("06-green-and-chipping-mat-wide.jpg","F")],
+      video=("showcase.mp4", "The finished green")),
  dict(slug="lehigh-acres-backyard-putting-green", app="putting-greens", city="Lehigh Acres, FL", dir="putting-greens/C-14-lehigh-acres-green",
       title="Backyard putting green", when="May 2023",
       blurb="A finished backyard putting green in Lehigh Acres, shot from both ends.",

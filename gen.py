@@ -321,7 +321,7 @@ CITY_FOCUS = {"Marco Island": dict(
    ("Putting greens on <b>Marco Island.</b>",
     "<p>We build new backyard greens and repair the ones already there. On an older green the usual problems are open seams, lifting edges, worn cups and fringe, and matted spots that no longer roll true.</p>"
     "<ul><li><b>New greens.</b> A shaped, compacted base, a putting surface plus a taller fringe, cut and seamed by hand, with cups placed where you want them. <a href='../putting-greens/'>How we build a green</a>.</li>"
-    "<li><b>Green repair.</b> Seams re-cut and re-taped, edges re-secured, low spots rebuilt.</li>"
+    "<li><b>Green repair.</b> Seams re-cut and re-taped, edges re-secured, low spots rebuilt. See a <a href='../work/marco-island-canal-front-putting-green/'>canal-front green we finished in Marco Beach</a>, on video.</li>"
     "<li><b>Repair or resurface.</b> If the base or the turf itself has failed, we'll tell you straight and quote a rebuild instead. <a href='../guide/can-artificial-turf-be-repaired-or-does-it-need-replacing/'>How to tell the difference</a>.</li></ul>"),
    ("Turf repair, <b>whoever installed it.</b>",
     "<p>We fix turf other crews put in, or pull it and do it right. Every repair starts with a free onsite assessment and an exact price, and repairs have no minimum job size.</p>"
@@ -400,7 +400,8 @@ PROFILES = [("Yelp", "https://www.yelp.com/biz/aj-turf-fort-myers"), ("Instagram
             ("Thumbtack", TT_URL), ("Bark", "https://www.bark.com/en/us/company/aj-turf/GRBJeL"),
             ("Manta", "https://www.manta.com/c/m1hdvgq/aj-turf"),
             ("Hotfrog", "https://www.hotfrog.com/company/AaHqnXySc_WpuZN1DYZzfA/aj-turf/fort-myers/lawn-garden"),
-            ("MerchantCircle", "https://www.merchantcircle.com/aj-turf-fort-myers-fl"), ("Cylex", "https://www.cylex.us.com/company/aj-turf-40786360.html")]
+            ("MerchantCircle", "https://www.merchantcircle.com/aj-turf-fort-myers-fl"), ("Cylex", "https://www.cylex.us.com/company/aj-turf-40786360.html"),
+            ("LinkedIn", "https://www.linkedin.com/in/jeremestrange/")]  # Jereme's profile, AJ Turf = Owner (Muse 11/18)
 FIND_US = '<span class="foot-links find-us"><span>Find us on</span>' + "".join(f'<a href="{u}" target="_blank" rel="me noopener">{n}</a>' for n, u in PROFILES) + "</span>"
 def org():
     return {"@type": "HomeAndConstructionBusiness", "@id": BASE + "#business", "name": "AJ Turf", "url": BASE,
@@ -508,7 +509,7 @@ HOOD = [
  dict(city="Marco Island", slug="marco-beach", name="Marco Beach", tier=1, img="green-waterfront",
       local="Marco Beach is the island's canal grid: waterfront lots with docks and pools, salt air and full sun, and plenty of yards with an older lawn or green that's starting to show its age.",
       notes=[("Canal-front <b>yards.</b>", "<p>On a canal lot, turf has to drain fast after a summer storm and hold its edges in sandy island soil. We build on a compacted base that drains and glue the turf to a poured concrete border with no spikes. Florida's turf rule keeps synthetic turf 10 feet back from the water, and we run that setback math on site before design. <a href='../../guide/artificial-turf-near-a-canal-setbacks-and-rules/'>How the setback works</a>.</p>"),
-             ("Work we've <b>done here.</b>", "<p>We've restored a backyard putting green on a canal-front lot in Marco Beach, and we've built a <a href='../../work/marco-island-canal-front-lawn/'>canal-front lawn on Marco Island</a>.</p>")]),
+             ("Work we've <b>done here.</b>", "<p>We've restored a <a href='../../work/marco-island-canal-front-putting-green/'>backyard putting green on a canal-front lot in Marco Beach</a>, video included, and we've built a <a href='../../work/marco-island-canal-front-lawn/'>canal-front lawn on Marco Island</a>.</p>")]),
  dict(city="Naples", slug="old-naples", name="Old Naples", img="courtyard",
       local="Old Naples runs from the beach avenues to the bay, with historic cottages, rebuilt estates and courtyard gardens on tight, walkable lots.",
       notes=[("Small lots, <b>finished edges.</b>", "<p>On a close-set lot, every edge shows. We cut turf tight to pavers, walls and pool decks, glue it to a concrete border, and hide the seams, so a courtyard or side yard looks designed, not patched in. <a href='../../pool-and-paver-turf/'>Turf around pools and pavers</a>.</p>")]),
@@ -538,7 +539,7 @@ HOODS_OF = {}
 for h_ in HOOD: HOODS_OF.setdefault(h_["city"], []).append(h_)
 
 # 6: nearest existing job pages per city (SWFL jobs first), shown as cards above the reviews
-_SW = ["lehigh-acres-backyard-putting-green", "southwest-florida-backyard-lawn", "marco-island-canal-front-lawn"]
+_SW = ["lehigh-acres-backyard-putting-green", "southwest-florida-backyard-lawn", "marco-island-canal-front-lawn", "marco-island-canal-front-putting-green"]
 NEAR = {"Fort Myers": _SW, "Cape Coral": _SW, "Lehigh Acres": _SW, "Sanibel": _SW,
         "Naples": _SW[::-1], "Estero": _SW[::-1], "Bonita Springs": _SW[::-1], "Marco Island": _SW[::-1]}
 for a in AREAS:
