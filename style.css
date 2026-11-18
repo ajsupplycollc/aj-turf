@@ -384,9 +384,9 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
 @media (max-width:560px){.vgrid{grid-template-columns:1fr 1fr;gap:10px}.vgrid figure.vid.wide{grid-column:1/-1}}
 /* knowledge hub (10/13): byline, spec tables, honest-downside + gotcha boxes, FAQ, pillar index */
 .byline{color:var(--stone);margin-bottom:26px;text-transform:none;letter-spacing:.02em;font-size:12px}
-.art-body table{width:100%;border-collapse:collapse;margin:18px 0 28px;font-size:15px}
-.art-body th,.art-body td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid #d6d9d3}
-.art-body th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);font-weight:500}
+.art-body table,.prose table{width:100%;border-collapse:collapse;margin:18px 0 28px;font-size:15px}
+.art-body th,.art-body td,.prose th,.prose td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid #d6d9d3}
+.art-body th,.prose th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);font-weight:500}
 .art-body td:first-child{font-weight:500}
 .art-body ul,.art-body ol{margin:0 0 18px 22px;color:#2f3530;font-size:18px}
 .art-body li{margin-bottom:8px}
@@ -466,3 +466,4 @@ dialog.lb::backdrop{background:rgba(10,12,10,.96)}
   .top-vid{display:block;width:84px;margin:4px 0 0}
   .top-vid figcaption{left:100px;right:auto;top:50%;bottom:auto;transform:translateY(-50%);width:max-content;max-width:220px;font-size:13px;color:var(--white);text-shadow:0 1px 6px rgba(0,0,0,.8)}
 }
+.find-us{align-items:baseline}

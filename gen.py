@@ -215,7 +215,9 @@ METHOD = ("<p>Every AJ Turf install is built the same way. We outline the area w
 
 # Thumbtack reviews, VERBATIM from FROM-MUSE-reviews-2026-10-12.md (all 14 are 5 stars, earned as AJ Supply).
 # Left out on purpose: Darleen S. (Jereme's mother: his call), Lori L. (a deck job), the one-liners.
-TT_URL = "https://www.thumbtack.com/fl/hollywood/artificial-turf-installation/aj-supply-artificial-turf-wholesale-install/service/426865480544509963"
+# Outbound link = the AJ Turf profile (Muse addendum 11/17). The 14 reviews still live on the legacy AJ Supply
+# profile, so the link text must not promise them at the destination.
+TT_URL = "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"
 REVIEWS = [
  ("Patricia C.", "2021", "Jereme and his team were excellent. They were professional and courteous during the original estimate. Jereme was able to answer all of my questions and find a grass and layout that worked for my home. The kids and dogs absolutely love our new fake grass and now I don't have to worry about dirt, mud or bugs!!"),
  ("Melissa H.", "2022", "Jereme Strange was a great help in getting me through this process of leaving my horrible Florida Sod to this amazing stress free Turf. I would 100% recommend anyone who has been thinking about Turf to use AJ Supply. Jereme was so responsive to my needs, he gave very realistic expectations and was straight forward about everything."),
@@ -228,11 +230,11 @@ def reviews_block(n=6):
     cards = "".join(f'<li><p>&ldquo;{html.escape(t)}&rdquo;</p><span class="mono">{who}{" · " + y if y else ""} · Thumbtack</span></li>' for who, y, t in REVIEWS[:n])
     return (f'<section class="reviews" id="reviews"><header><span class="mono" style="color:var(--turf)">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0 on Thumbtack</span>'
             f'<h2 style="margin-top:18px">What clients <b>say.</b></h2></header><ul>{cards}</ul>'
-            f'<p class="rv-note mono">Earned under our former name, AJ Supply. <a href="{TT_URL}" target="_blank" rel="noopener">Read all 14 on Thumbtack &rarr;</a></p></section>')
+            f'<p class="rv-note mono">Earned under our former name, AJ Supply. <a href="{TT_URL}" target="_blank" rel="noopener">See us on Thumbtack &rarr;</a></p></section>')
 
 FAQ_BLOCK = """<details><summary>How do you price a yard?</summary><p>Most installs run $9 to $15 a square foot, depending on the turf and the site. For your yard, we measure and photograph it on site, review it, then follow up with one exact written price. The estimate is free. Turf comes in 15-foot-wide rolls, so every quote includes a standard allowance for cuts around your yard's shape.</p></details>
 <details><summary>How long does an install take?</summary><p>About two days for every 1,000 square feet, depending on the site. Installs are typically scheduled within two weeks, or on your preferred date. New installs start at 1,000 square feet; repairs have no minimum.</p></details>
-<details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us.</p></details>
+<details><summary>How do payments work?</summary><p>30% to put your install on the schedule, 35% on the first day on site, and the last 35% when the job is done and you've walked it with us. We take cash, PayPal, Venmo or card (card payments carry a 3% fee). We don't take Zelle.</p></details>
 <details><summary>Why a concrete border instead of spikes?</summary><p>Spikes driven through a lawn can work loose, hurt bare feet and paws, and tear the turf backing. Gluing the turf edge to a poured concrete border holds it down without anything sticking up, and it lasts longer.</p></details>
 <details><summary>What happens to my sprinklers?</summary><p>Existing sprinkler heads are capped and left in place, not ripped out. That keeps your system intact and the yard reversible. Florida's turf rule bars using in-ground irrigation to water turf areas, so a quick hose rinse is the way to clean and cool it on hot days.</p></details>
 <details><summary>What's the warranty?</summary><p>Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. You'll see the exact warranty for your product before you sign. Every AJ Turf installation includes a 1-year labor warranty. During that first year, if your turf needs attention because of how it was installed — infill settling or running low, turf laying down in high-traffic areas, seams or edges lifting — we come back out, assess it in person, and make it right. That's covered by the warranty, not an extra service call. Routine cleaning and cosmetic upkeep aren't included — but if the install itself isn't performing, that's on us.</p></details>
@@ -263,7 +265,9 @@ SERVICES = [
       # green-course.webp OFF the site 10/9: Jereme — "not my work", origin unknown (maybe a sub's job elsewhere). Never re-add.
       # Strip = Muse's plan set (photo_content.SERVICE); the old copies duplicated those files.
       lede="True-rolling backyard greens with fringe, built off the patio, beside the pool or out by the water.",
-      faq="<details><summary>How much does a backyard putting green cost?</summary><p>Greens are priced at a premium over a standard lawn install, because the base is shaped for a true roll and two turfs, the putting surface and the fringe, are cut and seamed by hand. The exact price comes after a free onsite estimate: we measure and take photos, review it, then follow up with one exact written price. The $9 to $15 a square foot range is for typical lawn installs.</p></details>"
+      # Greens pricing: Jereme 11/18 ruled $9-$15 across the board, greens included (supersedes the 11/16 no-figure call).
+      faq="<details><summary>How much does a backyard putting green cost?</summary><p>Most backyard greens run $9 to $15 a square foot installed, the same range as our lawns. Where yours lands depends on the putting turf, the fringe, and how much the base has to be shaped for a true roll. The exact price comes after a free onsite estimate: we measure and take photos, review it, then follow up with one exact written price.</p></details>"
+          "<details><summary>What's included in that price?</summary><p>The full build: excavation, a shaped and compacted base, the putting surface and a taller fringe cut and seamed by hand, cups placed where you want them, infill, and haul-away. Every green is play-tested before handoff.</p></details>"
           "<details><summary>How fast will it roll?</summary><p>That depends on the turf and how the green is set up, so we don't promise a speed. See the <a href='../guide/how-fast-does-a-turf-putting-green-roll/'>lab-measured speeds and test conditions</a> in the Turf Guide.</p></details>"
           "<details><summary>How do you make sure it putts right?</summary><p>The base is shaped and compacted so the ball rolls true, and we play-test every green before handoff.</p></details>"
           "<details><summary>Where can a green go?</summary><p>Off a lanai, beside a pool, along a canal or tucked into a side yard. Cups and flags go where you want them.</p></details>"
@@ -383,18 +387,27 @@ def close(depth):
       {QF}</div>
   </div>
 </section>
-<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}videos/">Videos</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span>{SOCIAL}</footer>
+<footer class="mono"><span>AJ Turf · Southwest Florida</span><span class="foot-links">{svc}</span><span class="foot-links">{ar}</span><span class="foot-links"><a href="{r}our-work/">Our work</a><a href="{r}videos/">Videos</a><a href="{r}guide/">Turf Guide</a><a href="{r}privacy/">Privacy</a><span>Mon–Sat 9–5</span></span>{FIND_US}{SOCIAL}</footer>
 <script src="{r}site.js?v={ASSET_V}" defer></script>
 <script src="https://ajturf-chat.sam-947.workers.dev/widget.js" defer></script>
 </body>
 </html>'''
 
+# One canonical URL per live profile (Muse 11/10 + 11/17 briefs): feeds schema sameAs AND the footer "Find us on" row.
+PROFILES = [("Yelp", "https://www.yelp.com/biz/aj-turf-fort-myers"), ("Instagram", "https://www.instagram.com/aj.turf"),
+            ("Facebook", "https://www.facebook.com/aj.turf"), ("YouTube", "https://www.youtube.com/@AJTurf"),
+            ("Houzz", "https://www.houzz.com/pro/jereme-strange"), ("Nextdoor", "https://nextdoor.com/page/aj-turf-fort-myers-fl/"),
+            ("Thumbtack", TT_URL), ("Bark", "https://www.bark.com/en/us/company/aj-turf/GRBJeL"),
+            ("Manta", "https://www.manta.com/c/m1hdvgq/aj-turf"),
+            ("Hotfrog", "https://www.hotfrog.com/company/AaHqnXySc_WpuZN1DYZzfA/aj-turf/fort-myers/lawn-garden"),
+            ("MerchantCircle", "https://www.merchantcircle.com/aj-turf-fort-myers-fl"), ("Cylex", "https://www.cylex.us.com/company/aj-turf-40786360.html")]
+FIND_US = '<span class="foot-links find-us"><span>Find us on</span>' + "".join(f'<a href="{u}" target="_blank" rel="me noopener">{n}</a>' for n, u in PROFILES) + "</span>"
 def org():
     return {"@type": "HomeAndConstructionBusiness", "@id": BASE + "#business", "name": "AJ Turf", "url": BASE,
             "telephone": "+1-" + PHONE, "email": EMAIL, "image": BASE + "img/og/home.jpg", "logo": BASE + "img/mark.svg",
             "areaServed": [{"@type": "City", "name": a + ", FL"} for a in AREAS],
             "openingHours": "Mo-Sa 09:00-17:00", "priceRange": "Free onsite estimate",
-            "sameAs": ["https://www.yelp.com/biz/aj-turf-fort-myers", "https://www.instagram.com/aj.turf", "https://www.facebook.com/aj.turf", "https://www.youtube.com/@AJTurf", "https://www.houzz.com/pro/jereme-strange", "https://nextdoor.com/page/aj-turf-fort-myers-fl/", "https://www.thumbtack.com/fl/fort-myers/artificial-turf-installation/aj-turf/service/592250557913456653"]}
+            "sameAs": [u for _, u in PROFILES]}
 
 def crumbs(items):
     return {"@type": "BreadcrumbList", "itemListElement": [
@@ -403,7 +416,8 @@ def crumbs(items):
 import re as _re
 def faq_schema(html):
     qa = _re.findall(r"<summary>(.*?)</summary><p>(.*?)</p>", html)
-    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in qa]}
+    from html import unescape as _unesc; t = lambda s: _unesc(_re.sub(r"<[^>]+>", "", s))  # schema text = the visible text, minus the link markup
+    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": t(q), "acceptedAnswer": {"@type": "Answer", "text": t(a)}} for q, a in qa]}
 
 def page(path, title, desc, kicker, h1, lede, img, sections, schema_extra, related, og_title=None, og_slug="home", photos=(), faq=""):
     faq = faq + FAQ_BLOCK  # page-specific questions first, then the shared set
@@ -445,8 +459,17 @@ SVC_READ = {
     "artificial-turf-installation": ("Straight answers <b>before you buy.</b>", ["how-artificial-turf-is-installed"] + CLUSTER),
     "turf-repair": ("What went wrong, <b>and why.</b>", ["can-artificial-turf-be-repaired-or-does-it-need-replacing",
         "why-is-my-artificial-turf-wrinkling-or-lifting", "why-do-artificial-turf-installs-fail-in-the-first-two-years",
-        "why-did-my-turf-melt", "what-does-a-turf-warranty-cover", "how-artificial-turf-is-installed"]),
+        "why-did-my-turf-melt", "does-artificial-turf-help-or-hurt-yard-drainage", "will-artificial-turf-puddle-or-flood-in-heavy-rain",
+        "does-artificial-turf-get-mold-algae-or-bugs", "why-does-my-artificial-turf-smell", "what-maintenance-does-artificial-turf-need",
+        "what-does-a-turf-warranty-cover", "how-artificial-turf-is-installed"]),
+    "pet-turf": ("Pet turf, <b>answered.</b>", ["best-artificial-turf-for-dogs-in-florida", "what-infill-stops-pet-odor-in-artificial-turf",
+        "why-does-my-artificial-turf-smell", "silica-zeolite-or-coated-sand-which-infill-should-i-use", "how-fast-should-artificial-turf-drain"]),
+    "putting-greens": ("Greens, <b>answered.</b>", ["how-fast-does-a-turf-putting-green-roll", "what-pile-height-is-right-for-lawns-pets-and-putting-greens",
+        "how-much-does-artificial-turf-cost-in-southwest-florida", "can-artificial-turf-be-repaired-or-does-it-need-replacing"]),
 }
+# Repair wedge (Muse 11/18 item 2): these guides each send readers to /turf-repair/ at the end of the article.
+REPAIR_Q = set(SVC_READ["turf-repair"][1]) - {"how-artificial-turf-is-installed", "what-does-a-turf-warranty-cover"} | {
+    "why-do-artificial-turf-installs-fail-in-the-first-two-years", "how-long-does-artificial-turf-last-in-florida", "will-artificial-turf-fade-in-the-florida-sun"}
 def readlist(h, slugs, r): return (h, "<ul>" + "".join(f'<li><a href="{r}guide/{s}/">{gtitle(s)}</a></li>' for s in slugs) + "</ul>")
 
 urls = [""]
@@ -470,6 +493,50 @@ for s in SERVICES:
          [svc, crumbs([("AJ Turf", ""), (s["title"], path)])] + [vobj(v) for v in vids], rel, ogt, s["slug"], list(s.get("photos", ())) + PC.SERVICE.get(s["slug"], []), s.get("faq", ""))
     urls.append(path)
 
+# City FAQ with real numbers (Muse 11/18 item 3): the format winning the money queries. Public facts only.
+def city_faq(a):
+    return (f"<details><summary>How much does artificial turf cost in {a}?</summary><p>Most installs in {a} run $9 to $15 a square foot, installed. "
+            f"New installs start at 1,000 square feet, so a 1,000 square foot yard lands between about $9,000 and $15,000, depending on the turf and what the site needs underneath. "
+            f"The exact price comes after a free onsite estimate: one written number, never a price promised on the spot.</p></details>"
+            f"<details><summary>What does a putting green cost in {a}?</summary><p>The same $9 to $15 a square foot range, greens included. "
+            f"Every green gets a shaped, compacted base, a putting surface plus fringe cut and seamed by hand, and a play test before handoff. <a href='../putting-greens/'>How we build a green</a>.</p></details>"
+            f"<details><summary>Do you repair turf in {a} that someone else installed?</summary><p>Yes. Repairs start with a free onsite assessment and have no minimum job size. <a href='../turf-repair/'>What we fix</a>.</p></details>")
+
+# Neighborhood pages (Muse 11/18 item 4 + addenda). Tier 1 = real proof on file; Tier 2 = service-area only, no job claims.
+# Never print customer names, street addresses, plat details or home values on these pages.
+HOOD = [
+ dict(city="Marco Island", slug="marco-beach", name="Marco Beach", tier=1, img="green-waterfront",
+      local="Marco Beach is the island's canal grid: waterfront lots with docks and pools, salt air and full sun, and plenty of yards with an older lawn or green that's starting to show its age.",
+      notes=[("Canal-front <b>yards.</b>", "<p>On a canal lot, turf has to drain fast after a summer storm and hold its edges in sandy island soil. We build on a compacted base that drains and glue the turf to a poured concrete border with no spikes. Florida's turf rule keeps synthetic turf 10 feet back from the water, and we run that setback math on site before design. <a href='../../guide/artificial-turf-near-a-canal-setbacks-and-rules/'>How the setback works</a>.</p>"),
+             ("Work we've <b>done here.</b>", "<p>We've restored a backyard putting green on a canal-front lot in Marco Beach, and we've built a <a href='../../work/marco-island-canal-front-lawn/'>canal-front lawn on Marco Island</a>.</p>")]),
+ dict(city="Naples", slug="old-naples", name="Old Naples", img="courtyard",
+      local="Old Naples runs from the beach avenues to the bay, with historic cottages, rebuilt estates and courtyard gardens on tight, walkable lots.",
+      notes=[("Small lots, <b>finished edges.</b>", "<p>On a close-set lot, every edge shows. We cut turf tight to pavers, walls and pool decks, glue it to a concrete border, and hide the seams, so a courtyard or side yard looks designed, not patched in. <a href='../../pool-and-paver-turf/'>Turf around pools and pavers</a>.</p>")]),
+ dict(city="Naples", slug="aqualane-shores", name="Aqualane Shores", img="waterfront",
+      local="Aqualane Shores is almost all canal-front: deep-water lots with docks and seawalls, where the back yard runs straight to the water.",
+      notes=[("Turf to the <b>seawall setback.</b>", "<p>Florida's turf rule keeps synthetic turf 10 feet back from the water line, so on a canal lot the design starts with that measurement. We measure it on site, then build a lawn or a green that drains fast and holds up to salt air. <a href='../../guide/artificial-turf-near-a-canal-setbacks-and-rules/'>How the setback works</a>.</p>")]),
+ dict(city="Naples", slug="port-royal", name="Port Royal", img="green-canal",
+      local="Port Royal sits on Naples Bay and the Gulf, and most of its homes are on the water, with estate lots, pools and long views down the canals.",
+      notes=[("Built for <b>estate yards.</b>", "<p>Large waterfront lots are where a backyard putting green and a pool-side lawn earn their keep. We shape the base for a true roll, frame the green with fringe, and keep the turf 10 feet back from the water, as Florida's turf rule requires. If your property has a community review, we prepare the application with the product specs and submit it for you.</p>")]),
+ dict(city="Marco Island", slug="hideaway-beach", name="Hideaway Beach", img="green-waterfront",
+      local="Hideaway Beach is Marco Island's gated enclave at the north end of the island, with Gulf-front and bayfront homes, salt spray and full sun.",
+      notes=[("Gated community, <b>handled.</b>", "<p>In a gated community, the install is as much logistics as turf: access, approvals and working cleanly around neighbors. We prepare the architectural review application with the product specs and install details, and submit it for you. On the beach side, a glued edge with no spikes holds up to salt air and sandy soil.</p>")]),
+ dict(city="Naples", slug="park-shore-moorings", name="Park Shore and The Moorings", img="pool-deck",
+      local="Park Shore and The Moorings are a grid of Gulf-access canals and older homes, and many of them are being remodeled or rebuilt right now, yards included.",
+      notes=[("Remodel or <b>rebuild.</b>", "<p>If the house is being redone, the yard is the last piece. We work after the builder, tear out tired grass, build a compacted base that drains, and finish with turf glued to a concrete border. Canal lots keep the turf 10 feet back from the water under Florida's turf rule.</p>")]),
+ dict(city="Naples", slug="pelican-bay", name="Pelican Bay", img="backyard-green",
+      local="Pelican Bay's single-family neighborhoods, from Bay Colony to The Strand, sit behind the beach and the berm, with landscaped lots, pools and lanais.",
+      notes=[("For the <b>single-family homes.</b>", "<p>We work on single-family yards: lawns, pool surrounds and backyard greens off the lanai. Where an architectural review applies, we prepare the application with the product specs and submit it for you. <a href='../../guide/can-my-hoa-stop-me-from-installing-artificial-turf/'>How HOA rules and Florida law fit together</a>.</p>")]),
+ dict(city="Estero", slug="miromar-lakes", name="Miromar Lakes", img="backyard-wide",
+      local="Miromar Lakes is built around a large freshwater lake and a golf course, so most yards face the water, and a backyard green is a natural fit.",
+      notes=[("Lakefront and <b>golf.</b>", "<p>A lakefront lot needs turf that drains fast and holds its edges, and a golfer's yard needs a green that rolls true. We build both on a compacted base, with the green framed in fringe and play-tested before handoff. Florida's turf rule keeps synthetic turf 10 feet back from the water, and we measure that on site.</p>")]),
+ dict(city="Estero", slug="wildblue", name="WildBlue", img="backyard-green",
+      local="WildBlue is a newer community built around large navigable lakes, and many homeowners there are still finishing their yards.",
+      notes=[("Finishing a <b>new yard.</b>", "<p>New construction often leaves compacted fill and builder sod that can struggle in its first summer. We take it out, build a base that drains, and finish the yard with turf glued to a concrete border. Most new communities need architectural review first, and we prepare the application and submit it for you.</p>")]),
+]
+HOODS_OF = {}
+for h_ in HOOD: HOODS_OF.setdefault(h_["city"], []).append(h_)
+
 # 6: nearest existing job pages per city (SWFL jobs first), shown as cards above the reviews
 _SW = ["lehigh-acres-backyard-putting-green", "southwest-florida-backyard-lawn", "marco-island-canal-front-lawn"]
 NEAR = {"Fort Myers": _SW, "Cape Coral": _SW, "Lehigh Acres": _SW, "Sanibel": _SW,
@@ -478,7 +545,7 @@ for a in AREAS:
     slug, county, img, local = CITY[a]
     path = slug + "/"
     secs = [
-      (f"Turf in <b>{a}.</b>", f"<p>{local}</p><p>AJ Turf installs artificial turf lawns, pet turf, putting greens and turf around pools and pavers for homes in {a} and across {county}. Every job starts with a free onsite estimate: we measure and photograph in person, then follow up with one exact written price.</p>"
+      (f"Turf in <b>{a}.</b>", f"<p>{local}</p><p>AJ Turf installs artificial turf lawns, pet turf, putting greens and turf around pools and pavers for homes in {a} and across {county}. Most installs run $9 to $15 a square foot, greens included. Every job starts with a free onsite estimate: we measure and photograph in person, then follow up with one exact written price.</p>"
          "<ul>" + "".join(f'<li><b><a href="../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>"),
       ("HOAs and <b>Florida law.</b>", "<p>A 2025 Florida law (HB 683) directed the Florida Department of Environmental Protection to set statewide standards for synthetic turf on single-family lots of an acre or less. Those standards (Rule 62-308.100) took effect in May 2026, and local governments can't ban turf that meets them. An HOA can't restrict turf it can't see (§720.3045), but a visible front yard can still need architectural review. We prepare that application with the product specs and install details, and submit it to your HOA for you. <a href='../guide/can-my-hoa-stop-me-from-installing-artificial-turf/'>How the two laws work</a>.</p>"),
       ("Built for <b>this climate.</b>", METHOD + "<p>Turf in full summer sun does get hotter than grass. We'll bring samples and talk through shade, product choice and placement before you decide.</p>"),
@@ -493,13 +560,40 @@ for a in AREAS:
     secs.append(pstrip(PC.CITY[a], "../", link=True))
     near = [p for s_ in NEAR[a] for p in PJ.PROJECTS if p["slug"] == s_ and p not in ps]
     if near: secs.append(cards(near, "../", f"Jobs near <b>{a}.</b>", "Nearby"))
+    if a in HOODS_OF:
+        secs.append((f"Neighborhoods we serve in <b>{a}.</b>", "<ul>" + "".join(f'<li><a href="{h["slug"]}/">Artificial turf in {h["name"]}</a></li>' for h in HOODS_OF[a]) + "</ul>"))
     rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(b, CITY[b][0] + "/") for b in AREAS if b != a]
     biz = dict(org()); biz["@id"] = BASE + path + "#area"; biz["areaServed"] = {"@type": "City", "name": a + ", FL"}
     fx = fx or {}
     page(path, fx.get("title", f"Artificial Turf & Putting Greens, {a} FL | AJ Turf"),
          fx.get("desc", f"Turf lawns, pet turf and putting greens for {a} homes, installed with a glued concrete border and no spikes. Free onsite estimate."),
          a, fx.get("h1", f"Turf in<br><b>{a}.</b>"), fx.get("lede", f"Artificial turf, pet turf and putting greens for {a} homes. Free onsite estimate, then one exact price."),
-         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug)
+         img, secs, [biz, crumbs([("AJ Turf", ""), (a, path)])] + [vobj(v) for v in vids], rel, f"Artificial turf and putting greens in {a}", slug, faq=city_faq(a))
+    urls.append(path)
+
+COST_TABLE = ("<table><thead><tr><th>Project</th><th>Installed price</th><th>Notes</th></tr></thead><tbody>"
+    "<tr><td>Artificial turf lawn</td><td>$9 to $15 / sq ft</td><td>New installs start at 1,000 sq ft</td></tr>"
+    "<tr><td>Backyard putting green</td><td>$9 to $15 / sq ft</td><td>Putting surface plus fringe, play-tested before handoff</td></tr>"
+    "<tr><td>Pet turf</td><td>$9 to $15 / sq ft</td><td>Drainage-first base, pet-friendly infill</td></tr>"
+    "<tr><td>Pool and paver turf</td><td>$9 to $15 / sq ft</td><td>Glued edges, cut tight to the stone</td></tr>"
+    "<tr><td>Turf repair</td><td>Priced per job</td><td>Free onsite assessment, no minimum job size</td></tr>"
+    "</tbody></table><p>The exact price comes after a free onsite estimate: one written number, never a price promised on the spot.</p>")
+for h in HOOD:
+    a = h["city"]; cslug = CITY[a][0]; path = f"{cslug}/{h['slug']}/"; n = h["name"]
+    secs = [(f"Turf in <b>{n}.</b>", f"<p>{h['local']}</p><p>AJ Turf installs artificial turf lawns, backyard putting greens, pet turf and turf around pools and pavers in {n} and across {a}. "
+             "Every job starts with a free onsite estimate: we measure and photograph in person, then follow up with one exact written price.</p>"
+             "<ul>" + "".join(f'<li><b><a href="../../{x["slug"]}/" style="color:inherit">{x["title"]}</a></b></li>' for x in SERVICES) + "</ul>")]
+    secs += h["notes"]
+    secs += [(f"What it <b>costs.</b>", COST_TABLE), ("How we <b>build it.</b>", METHOD)]
+    secs.append(("Keep <b>exploring.</b>", f"<ul><li><a href='../'>Artificial turf in {a}</a></li><li><a href='../../putting-greens/'>Backyard putting greens</a></li>"
+                 "<li><a href='../../pet-turf/'>Pet turf</a></li><li><a href='../../turf-repair/'>Turf repair</a></li>"
+                 "<li><a href='../../guide/how-much-does-artificial-turf-cost-in-southwest-florida/'>What artificial turf costs in Southwest Florida</a></li></ul>"))
+    rel = [(x["nav"], x["slug"] + "/") for x in SERVICES] + [(a, cslug + "/")] + [(o["name"], f"{cslug}/{o['slug']}/") for o in HOODS_OF[a] if o is not h]
+    biz = dict(org()); biz["@id"] = BASE + path + "#area"; biz["areaServed"] = {"@type": "Place", "name": f"{n}, {a}, FL"}
+    page(path, f"Artificial Turf & Putting Greens in {n}, {a} | AJ Turf",
+         f"Turf lawns, putting greens and pet turf for {n} homes in {a}. $9 to $15 a square foot installed, glued concrete border, no spikes. Free onsite estimate.",
+         f'<a href="../../{cslug}/">{a}</a> / {n}', f"Turf in<br><b>{n}.</b>", f"Artificial turf and backyard putting greens for {n} homes. Free onsite estimate, then one exact price.",
+         h["img"], secs, [biz, crumbs([("AJ Turf", ""), (a, cslug + "/"), (n, path)])], rel, f"Artificial turf in {n}, {a}", cslug, faq=city_faq(n).replace("../", "../../"))
     urls.append(path)
 
 # Our Work: the proof hub YouTube descriptions and bios point to. A CTA band follows every 3 cards.
@@ -609,7 +703,13 @@ def BEACH(r):  # Google's chosen install page: link it hard to the service pages
     qs = "".join(f'<li><a href="{r}guide/{s}/">{gtitle(s)}</a></li>' for s in CLUSTER)
     return (f'<h2>Want it built this way?</h2><p>These are the steps behind our <a href="{r}artificial-turf-installation/">artificial turf installation</a> '
             f'in Southwest Florida, from Fort Myers to Naples. Turf already in and failing? See <a href="{r}turf-repair/">turf repair</a>: we fix installs '
-            f'whoever put them in.</p><h2>Common install questions</h2><ul>{qs}</ul>')
+            f'whoever put them in. Most installs run $9 to $15 a square foot, with one exact price after a free onsite estimate.</p>'
+            f'<h2>Where we install</h2><ul>' + "".join(f'<li><a href="{r}{CITY[a][0]}/">Artificial turf installation in {a}</a></li>' for a in AREAS) + '</ul>'
+            f'<h2>Common install questions</h2><ul>{qs}</ul>')
+def REPAIR_CTA(r):
+    return (f'<h2>Seeing this in your yard?</h2><p>That\'s what our <a href="{r}turf-repair/">artificial turf repair</a> service is for: '
+            f'ripples, seams, washouts, drainage and odor problems fixed, whoever installed the turf, or a full re-install when a repair isn\'t worth it. '
+            f'Every repair starts with a free onsite assessment, and repairs have no minimum job size.</p>')
 def article(g):
     path = f"guide/{g['slug']}/"; r = "../../"
     faq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": g["q"], "acceptedAnswer": {"@type": "Answer", "text": g["a"]}}]}
@@ -699,7 +799,7 @@ def question_page(slug):
   <p class="byline mono">By Jereme Strange, AJ Turf · years on the manufacturing side of the turf industry, and years installing and repairing turf in Florida</p>
   <p class="mono" style="color:var(--turf)">The short answer</p>
   <p class="short">{answer}</p>
-  <div class="art-body">{body_html}</div>
+  <div class="art-body">{body_html}{REPAIR_CTA(r) if slug in REPAIR_Q else ""}</div>
   {faq_block}
   <p class="mono" style="margin-top:30px;color:var(--stone)">Updated {TODAY}</p>
 </main>
@@ -793,9 +893,13 @@ open("llms.txt", "w", encoding="utf-8").write(f"""# AJ Turf
 ## Key facts
 - Service: residential artificial turf installation, commercial and event lawns, pet turf, backyard putting greens with fringe, turf around pools and pavers, turf repair and re-installs.
 - Install method: screening-sand base compacted to 95% Standard Proctor (ASTM D698), 6-inch metal or plastic edging, a 3 x 3 x 3 inch poured concrete border inside it, a woven weed barrier over everything, turf glued to the border with 15-year-warrantied glue. No spikes through the turf (spikes only pin the barrier and seam tape underneath).
-- Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site. Free onsite estimate, measured and photographed in person, then one exact written price in a follow-up.
+- Pricing: most installs run $9 to $15 a square foot, depending on the turf and the site, putting greens included. Free onsite estimate, measured and photographed in person, then one exact written price in a follow-up. No exact price is ever promised on the spot.
 - Warranty: Turf carries the manufacturer's warranty for the product you choose (8 to 25 years depending on the product), covering UV stability and strength; installation is covered by AJ Turf's 1-year labor warranty. Quotes include a standard cut allowance because turf comes in 15-foot-wide rolls.
-- Payments: 30% to schedule, 35% on the first day on site, 35% at completion.
+- Payments: 30% to schedule, 35% on the first day on site, 35% at completion. Accepted: cash, PayPal, Venmo, or card (card payments carry a 3% fee). No Zelle.
+- Owner on site: Jereme Strange, the owner, is on site for every job.
+- Background: new to the West Coast, not new to the industry. Years on the manufacturing side of turf, and years installing and repairing turf in Florida.
+- Putting greens: a premium specialty. A shaped, compacted base, a putting surface plus fringe cut and seamed by hand, and every green play-tested before handoff.
+- Maintenance: AJ Turf sells no maintenance or cleaning plans. Year one: the 1-year labor warranty covers install-caused issues (infill settling, matted traffic areas, lifting seams or edges). Damage or failures after that go to turf repair.
 - Timeline: about two days per 1,000 square feet. Installs are typically scheduled within two weeks, or on the client's preferred date. New installs start at 1,000 square feet; repairs have no minimum.
 - Hours: Monday to Saturday, 9 to 5.
 - Contact: {PHONE}, {EMAIL}. Book: {BOOK}
@@ -840,6 +944,8 @@ os.remove("_og.html")
 # home page is hand-built: refresh its reviews block between the markers
 _h = open("index.html", encoding="utf-8").read()
 _h = re.sub(r'(href="style\.css|src="site\.js)(\?v=\w+)?"', lambda m: f'{m.group(1)}?v={ASSET_V}"', _h)
+_h = re.sub(r'"sameAs": \[[^\]]*\]', lambda m: '"sameAs": ' + json.dumps(org()["sameAs"]), _h)
+_h = re.sub(r"<!--FINDUS-->.*?<!--/FINDUS-->", lambda m: "<!--FINDUS-->" + FIND_US + "<!--/FINDUS-->", _h, flags=re.S)
 _h = re.sub(r"<!--REVIEWS-->.*?<!--/REVIEWS-->", lambda m: "<!--REVIEWS-->" + reviews_block(6) + "<!--/REVIEWS-->", _h, flags=re.S)
 open("index.html", "w", encoding="utf-8").write(_h)
 print(len(urls), "urls,", len(cards), "og cards")

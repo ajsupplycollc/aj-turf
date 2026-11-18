@@ -60,6 +60,9 @@ AJ Turf's terms are the ones on this page, with nothing in fine print: 30% to sc
 
 ## FAQ
 
+**What payment methods do you accept?**
+Cash, PayPal, Venmo, or card (card payments carry a 3% fee). We don't take Zelle.
+
 **Why is the deposit non-refundable?**
 Because scheduling commits real costs: your install slot, your crew dates, and turf ordered and cut to your yard's measurements from 15-foot rolls. The term is stated up front, before you sign — and the staged schedule means the deposit is the only money at risk before work visibly starts.
 

@@ -10,6 +10,18 @@ That is an installed price, not a material price. A real install is a constructi
 
 When you see turf advertised online at a low per-square-foot price, you are looking at the grass alone — no excavation, no base, no seams, no border, no drainage design, no haul-away. The gap between a material price and an installed price is not markup games. It is the work that decides whether the yard still looks right in year five.
 
+## What it costs, by type of project
+
+| Project | Installed price | What's included |
+|---|---|---|
+| Artificial turf lawn | $9–$15 per sq ft | Full install; new installs start at 1,000 sq ft |
+| Backyard putting green | $9–$15 per sq ft | Shaped base, putting surface plus fringe, play-tested before handoff |
+| Pet turf | $9–$15 per sq ft | Drainage-first base and pet-friendly infill |
+| Pool and paver turf | $9–$15 per sq ft | Turf cut tight to the stone, glued edges |
+| Turf repair | Priced per job | Free onsite assessment, no minimum job size |
+
+At that range, a 1,000-square-foot lawn — the smallest new install we take — lands between about $9,000 and $15,000. Putting greens sit in the same range as lawns. The range is public; your exact number comes from the free onsite measurement.
+
 ## What moves your price inside the range
 
 **The product you choose.** Turf is not one thing. Products differ in face weight — the weight of yarn above the backing, which is the honest measure of how much grass is actually in the grass — in total weight, pile height, blade shape, and backing type. A denser, heavier product with an engineered backing costs more than a sparse entry product, and in a high-traffic Florida yard that difference is what you are paying for. AJ Turf quotes both the face weight and the total weight on every product, always, so you can compare spec for spec.
@@ -62,6 +74,9 @@ Because the exact price depends on things a photo cannot show: how your lot drai
 
 **How are payments staged, and is the deposit refundable?**
 Payments run 30% to schedule, 35% on the first day on site, and 35% on completion and walkthrough. Deposits are always non-refundable — that is stated up front, before you sign, not buried in the paperwork afterward.
+
+**How much does a backyard putting green cost?**
+Most backyard greens run $9–$15 per square foot installed — the same range as our lawns. Where yours lands depends on the putting turf, the fringe, and how much the base has to be shaped for a true roll. The exact price comes from the free onsite estimate.
 
 **Is there a minimum yard size for an install?**
 Yes — installs start at 1,000 square feet. Repair work is different: repairs start with a free onsite assessment and have no minimum job size.

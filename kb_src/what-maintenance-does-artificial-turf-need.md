@@ -54,6 +54,8 @@ Florida loads every line of the checklist. Rain does your rinsing for months at 
 
 AJ Turf finishes every install with a final groom, rinse, and walkthrough — and the walkthrough is where the routine above gets handed over in plain terms: how to brush, how to rinse, what never touches the turf. Our installs start with infill at the ruled baseline of 1.5–2 lb per square foot, because infill is structural — it's what holds the fibers upright between brushings. Where a product carries antimicrobial protection, it's the built-in kind — mixed into the backing at manufacture, never a reapplication we sell. And when maintenance turns into damage — a tear, a flat lane that won't brush back, infill that has washed out — repairs start with a **free onsite assessment**, with **no minimum job size** for repair work.
 
+AJ Turf doesn't sell maintenance plans or cleaning visits — the routine above is the owner's, and it's simple enough to do yourself. What we stand behind is the install. If we installed it, year-one care is on us: every AJ Turf install carries a 1-year labor warranty, and if the turf needs attention in that first year because of how it was installed — infill settling or running low, turf laying down in high-traffic areas, seams or edges lifting — we come back out, assess it in person, and make it right. Routine cleaning and cosmetic upkeep aren't included. If something is past what brushing and rinsing can fix, see [artificial turf repair](/turf-repair/) or [what a turf warranty covers](/guide/what-does-a-turf-warranty-cover/).
+
 ## Related questions
 
 - Pillar: Ownership Realities (/guide/turf-ownership/)
